@@ -2,8 +2,8 @@
 
 Slides and practical tutorials for the **Introduction to Bioinformatics** course.
 
-- [Slides](https://royfrancis.github.io/rcourse_intro/lecture.html)
-- [Tutorial](https://royfrancis.github.io/rcourse_intro/lab.html)
+- [Slides](lecture.html)
+- [Tutorial](lab.html)
 
 <hr>
 
