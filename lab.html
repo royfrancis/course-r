@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Introduction To R</title>
+
+<script src="lab_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="lab_files/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="lab_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="lab_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="lab_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="lab_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="lab_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="lab_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="lab_files/navigation-1.1/tabsets.js"></script>
+<link href="lab_files/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="lab_files/highlightjs-9.12.0/highlight.js"></script>
+<link href="lab_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="lab_files/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="assets\lab.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Introduction To R</h1>
+
+</div>
+
+
+<h2 class="nauthor">
+<b>Roy Francis</b> | 28-Aug-2018
+</h2>
+<p><img src="assets/logo-color-new.svg" alt="logo" style="height:70px; position:absolute; top:0; right:0; padding-right:40px; margin-top:7px"></p>
+<p><br> <br></p>
+<div id="topics" class="section level1">
+<h1><span class="header-section-number">1</span> Topics</h1>
+<p>This tutorial aims to get you started with R. It roughly covers the following topics:</p>
+<ul>
+<li>Familiarise yourself with R &amp; RStudio environment</li>
+<li>Running code, scripting and sourcing script</li>
+<li>Variables and operators</li>
+<li>Data types &amp; datatype conversion</li>
+<li>Creating and running functions</li>
+<li>Base and grid graphics</li>
+<li>Input &amp; output from R</li>
+</ul>
+</div>
+<div id="what-why-r" class="section level1">
+<h1><span class="header-section-number">2</span> What? Why R?</h1>
+<p>This is the definition provided by <a href="https://www.r-project.org/about.html">R-Project</a>.</p>
+<blockquote>
+<p>R is a language and environment for statistical computing and graphics.</p>
+</blockquote>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Data analysis</li>
+<li>Statistics</li>
+<li>High quality graphics</li>
+<li>Huge number of packages</li>
+<li>R is popular</li>
+<li>Reproducible research</li>
+<li>RStudio IDE</li>
+<li>FREE! Open source</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>Steep learning curve</li>
+<li>Not elegant/consistent</li>
+<li>Slow</li>
+</ul>
+</div>
+<div id="getting-started" class="section level1">
+<h1><span class="header-section-number">3</span> Getting started</h1>
+<p>R can be installed from <a href="https://cloud.r-project.org/">r-project.org</a> for Windows, Mac or Linux operating systems. It is also necessary to install Rtools from <a href="https://cran.r-project.org/bin/">here</a> for building packages from source when installing new packages.</p>
+<p>RStudio is one of the best IDE (Integrated development environment) out there for any language. Download <a href="https://www.rstudio.com/products/rstudio/download/">here</a> for Windows, Mac or Linux. Rstudio provides you with an environment for organising your R projects, files and outputs. You also get debugging tools and GUI interfaces to common basic operations.</p>
+<div class="figure">
+<img src="images/rstudio-ide.png" />
+
+</div>
+<p>R commands are excecuted and results and returned in the <strong>Console</strong>. The <strong>Console</strong> shows a <code>&gt;</code> symbol meaning that it is ready to accept commands. When it is waiting for further information, it shows a <code>+</code> symbol. This can happen when you have pasted in partial command or forgot to close parenthesis etc. Provide the required information, complete the command or press <kbd>Esc</kbd> on the keyboard to exit from the <code>+</code> back to the <code>&gt;</code>.</p>
+<p>Run a command in the R console.</p>
+<pre class="r"><code>getwd()</code></pre>
+<pre><code>## [1] &quot;D:/data/Box Sync/nbis/teaching/2018/r-intro&quot;</code></pre>
+<p>This command prints the current working directory. When you read or write, this is the path that R looks for.</p>
+<p>Commands written in the <strong>Console</strong> are executed and lost. R commands can be saved as a script. To create a new script, go to <strong>File &gt; New File &gt; R Script</strong>. This text file can be saved to the working directory named <strong>script.R</strong>. Now add some R command to the file. For example try;</p>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>## R version 3.5.0 (2018-04-23)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows &gt;= 8 x64 (build 9200)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=English_United Kingdom.1252 
+## [2] LC_CTYPE=English_United Kingdom.1252   
+## [3] LC_MONETARY=English_United Kingdom.1252
+## [4] LC_NUMERIC=C                           
+## [5] LC_TIME=English_United Kingdom.1252    
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] captioner_2.2.3 ggplot2_3.0.0   bookdown_0.7    knitr_1.20     
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.18     highr_0.7        compiler_3.5.0   pillar_1.3.0    
+##  [5] plyr_1.8.4       bindr_0.1.1      tools_3.5.0      digest_0.6.15   
+##  [9] jsonlite_1.5     evaluate_0.11    tibble_1.4.2     gtable_0.2.0    
+## [13] png_0.1-7        pkgconfig_2.0.1  rlang_0.2.2      rstudioapi_0.7  
+## [17] yaml_2.2.0       xfun_0.3         bindrcpp_0.2.2   withr_2.1.2     
+## [21] stringr_1.3.1    dplyr_0.7.6      rprojroot_1.3-2  grid_3.5.0      
+## [25] tidyselect_0.2.4 glue_1.3.0       R6_2.2.2         rmarkdown_1.10  
+## [29] xaringan_0.7     purrr_0.2.5      magrittr_1.5     backports_1.1.2 
+## [33] scales_0.5.0     htmltools_0.3.6  assertthat_0.2.0 colorspace_1.3-2
+## [37] labeling_0.3     stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
+## [41] crayon_1.3.4</code></pre>
+<p>This command gives you a summary of the current system setup including R version, operating system and R packages that are loaded/attached.</p>
+<p>Select the text or place the cursor on that line and click <strong>Run</strong>. Alternatively use keyboard shortcut <kbd>Ctrl</kbd>+<kbd>R</kbd> or <kbd>Ctrl</kbd>+<kbd>Enter</kbd> / <kbd>Command</kbd>+<kbd>Enter</kbd>.</p>
+<p>Now add another command, say, <code>Sys.Date()</code>, which returns the current system date. Then save the file. All commands in the saved <strong>script.R</strong> can be run as a batch either by selecting all the commands followed by <strong>Run</strong> / <kbd>Ctrl</kbd>+<kbd>Enter</kbd>, or directly sourcing the file from the console like this:</p>
+<p><code>source(&quot;script.R&quot;)</code></p>
+</div>
+<div id="variables-operators" class="section level1">
+<h1><span class="header-section-number">4</span> Variables &amp; Operators</h1>
+<div id="basic-operators" class="section level2">
+<h2><span class="header-section-number">4.1</span> Basic Operators</h2>
+<p>Variables are assigned usually using the <code>&lt;-</code> operator. The <code>=</code> operator also works in a similar way for most part.</p>
+<pre class="r"><code>x &lt;- 4
+x = 4
+x</code></pre>
+<pre><code>## [1] 4</code></pre>
+<p>The commonly used arithmetic operators are shown below returning a number.</p>
+<pre class="r"><code>x &lt;- 4
+y &lt;- 2
+
+# add
+x + y
+
+# subtract
+x - y
+
+# multiply
+x * y
+
+# divide
+x / y
+
+# modulus
+x %% y
+
+# power
+x ^ y</code></pre>
+<pre><code>## [1] 6
+## [1] 2
+## [1] 8
+## [1] 2
+## [1] 0
+## [1] 16</code></pre>
+</div>
+<div id="logical-operators" class="section level2">
+<h2><span class="header-section-number">4.2</span> Logical Operators</h2>
+<p>Logical operators return a logical <code>TRUE</code> or <code>FALSE</code>.</p>
+<pre class="r"><code># equal to?
+x == y
+
+# not equal to?
+x != y
+
+# greater than?
+x &gt; y
+
+# less than?
+x &lt; y
+
+# greater than or equal to?
+x &gt;= y
+
+# less than or equal to?
+x &lt;= y</code></pre>
+<pre><code>## [1] FALSE
+## [1] TRUE
+## [1] TRUE
+## [1] FALSE
+## [1] TRUE
+## [1] FALSE</code></pre>
+<p>The OR operator <code>|</code> and the AND operator <code>&amp;</code> is useful when dealing with logical statements.</p>
+<pre class="r"><code>(x &gt; y) | (y &lt; x)
+(x &gt; y) &amp; (y &lt; x)</code></pre>
+<pre><code>## [1] TRUE
+## [1] TRUE</code></pre>
+<p>In case of multiple logicals, <code>any()</code> and <code>all()</code> functions are useful.</p>
+<pre class="r"><code># are any of these true?
+any(c(F,F,F,T,F,F))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># are all of these true?
+all(c(F,F,F,T,F,F))</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>Characters/strings can be assigned to variables in a similar manner.</p>
+<pre class="r"><code>z &lt;- &quot;this&quot;
+z1 &lt;- &quot;that&quot;
+paste(z,z1)</code></pre>
+<pre><code>## [1] &quot;this that&quot;</code></pre>
+<p>The function <code>paste()</code> concatenates strings.</p>
+<p>Variables names must be selected such that they do not conflict with existing variables/functions. For example, variable name <code>c</code> must be avoided as it is an existing function to concatenate R objects. The variable name <code>t</code> must be avoided as it is a function to transpose a matrix. Variable names must not start with a number.</p>
+</div>
+</div>
+<div id="data-types" class="section level1">
+<h1><span class="header-section-number">5</span> Data Types</h1>
+<div id="overview" class="section level2">
+<h2><span class="header-section-number">5.1</span> Overview</h2>
+<p>Overview of data structures in R</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["dimension"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["homogenous"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["heterogenous"],"name":[3],"type":["fctr"],"align":["left"]}],"data":[{"1":"1D","2":"Atomic vector","3":"List"},{"1":"2D","2":"Matrix","3":"Dataframe"},{"1":"nD","2":"Array","3":""}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>R data object that have a single type of data are referred to as homogenous data type. These are also called atomic types. Heterogenous objects have mixed data types.</p>
+</div>
+<div id="homogenous-data" class="section level2">
+<h2><span class="header-section-number">5.2</span> Homogenous data</h2>
+</div>
+<div id="basic" class="section level2">
+<h2><span class="header-section-number">5.3</span> Basic</h2>
+<p>The mode of a variable is inspected using the function <code>mode()</code>. Here we can see some of the basic data objects in R.</p>
+<pre class="r"><code>mode(1.0)
+mode(1L)
+mode(&quot;hello&quot;)
+mode(factor(1))
+mode(T)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;
+## [1] &quot;numeric&quot;
+## [1] &quot;character&quot;
+## [1] &quot;numeric&quot;
+## [1] &quot;logical&quot;</code></pre>
+<p>Factors are explained further below. The type of a variable can be inspected using the function <code>typeof()</code>.</p>
+<pre class="r"><code>typeof(1.0)
+typeof(1L)
+typeof(&quot;hello&quot;)
+typeof(factor(1))
+typeof(T)</code></pre>
+<pre><code>## [1] &quot;double&quot;
+## [1] &quot;integer&quot;
+## [1] &quot;character&quot;
+## [1] &quot;integer&quot;
+## [1] &quot;logical&quot;</code></pre>
+<p>Other useful functions for inspecting R objects.</p>
+<pre class="r"><code>class(x)
+str(x)
+structure(x)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;
+##  num 4
+## [1] 4</code></pre>
+<div id="vectors" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Vectors</h3>
+<p>Vectors store multiple values. Multiple values, variables and vectors are concatenated together using the function <code>c()</code>.</p>
+<pre class="r"><code>x &lt;- c(2,3,4,5,6)
+y &lt;- c(&quot;a&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;)
+x
+y</code></pre>
+<pre><code>## [1] 2 3 4 5 6
+## [1] &quot;a&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</code></pre>
+<p>There are different ways to create vectors. Here are a few:</p>
+<pre class="r"><code>c(2,3,5,6)
+2:8
+seq(2,5,by=0.5)
+rep(1:3,times=2)
+rep(1:3,each=2)</code></pre>
+<pre><code>## [1] 2 3 5 6
+## [1] 2 3 4 5 6 7 8
+## [1] 2.0 2.5 3.0 3.5 4.0 4.5 5.0
+## [1] 1 2 3 1 2 3
+## [1] 1 1 2 2 3 3</code></pre>
+<p>R uses 1-based indexing system and a specific value from a specific location in the vector is accessed using the <code>[]</code> operator.</p>
+<pre class="r"><code>x[1]
+y[3]</code></pre>
+<pre><code>## [1] 2
+## [1] &quot;d&quot;</code></pre>
+<p>The <code>c()</code> function can be used to specify multiple positions.</p>
+<pre class="r"><code>x[c(1,3)]</code></pre>
+<pre><code>## [1] 2 4</code></pre>
+<p>The above vector is 1-dimensional and composed of the same data type (homogenous). Such vectors are referred to as atomic vectors.</p>
+<pre class="r"><code>mode(x)
+mode(y)
+
+str(x)
+str(y)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;
+## [1] &quot;character&quot;
+##  num [1:5] 2 3 4 5 6
+##  chr [1:4] &quot;a&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</code></pre>
+<p>Vectors can be added or concatenated directly. This is referred to as a vectorised operation, a crucial concept in R.</p>
+<pre class="r"><code>x &lt;- c(2,3,4,5)
+y &lt;- c(9,8,7,6)
+x+y
+
+z &lt;- c(&quot;a&quot;,&quot;an&quot;,&quot;a&quot;,&quot;a&quot;)
+k &lt;- c(&quot;boy&quot;,&quot;apple&quot;,&quot;girl&quot;,&quot;mess&quot;)
+paste(z,k)</code></pre>
+<pre><code>## [1] 11 11 11 11
+## [1] &quot;a boy&quot;    &quot;an apple&quot; &quot;a girl&quot;   &quot;a mess&quot;</code></pre>
+<p>Verify if an R object is atomic (contains a single data type).</p>
+<pre class="r"><code>is.atomic(x)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.numeric(x)
+is.character(z)</code></pre>
+<pre><code>## [1] TRUE
+## [1] TRUE</code></pre>
+<p>A vector of logical type is called a logical vector.</p>
+<pre class="r"><code>x &lt;- c(T,F,T,T)
+is.logical(x)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Vectorised logical operations can be performed on logical vectors.</p>
+<pre class="r"><code>c(F,T,F,F) | c(F,F,F,F)
+c(F,T,F,F) &amp; c(F,F,F,F)</code></pre>
+<pre><code>## [1] FALSE  TRUE FALSE FALSE
+## [1] FALSE FALSE FALSE FALSE</code></pre>
+<p>Vectors can be named if required.</p>
+<pre class="r"><code>x &lt;- c(&quot;a&quot;=2,&quot;b&quot;=3,&quot;c&quot;=8)
+x</code></pre>
+<pre><code>## a b c 
+## 2 3 8</code></pre>
+<p>Named vectors can be subsetted using the name.</p>
+<pre class="r"><code>x[&quot;c&quot;]</code></pre>
+<pre><code>## c 
+## 8</code></pre>
+</div>
+<div id="factors" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Factors</h3>
+<p>Factors are vectors that store categorical data.</p>
+<pre class="r"><code>x &lt;- factor(c(&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;))
+class(x)
+str(x)</code></pre>
+<pre><code>## [1] &quot;factor&quot;
+##  Factor w/ 3 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;: 1 2 2 3 3</code></pre>
+<p>Factor ‘x’ has 3 categories or in R speak; 3 levels.</p>
+<pre class="r"><code>levels(x)</code></pre>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<p>Verify if an R object is a factor.</p>
+<pre class="r"><code>is.factor(x)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="matrix" class="section level3">
+<h3><span class="header-section-number">5.3.3</span> Matrix</h3>
+<p>Vectors can be assembled into a matrix data structure.</p>
+<pre class="r"><code>x &lt;- matrix(c(2,3,4,5,6,7))
+x</code></pre>
+<pre><code>##      [,1]
+## [1,]    2
+## [2,]    3
+## [3,]    4
+## [4,]    5
+## [5,]    6
+## [6,]    7</code></pre>
+<p>A matrix is a 2D data structure with rows and columns.</p>
+<pre class="r"><code># dimensions
+dim(x)
+
+# number of rows
+nrow(x)
+
+# number of columns
+ncol(x)</code></pre>
+<pre><code>## [1] 6 1
+## [1] 6
+## [1] 1</code></pre>
+<p>The number of rows and columns can be specified when building the matrix. The matrix can be filled up row-wise (<code>byrow=T</code>) or colum-wise (<code>byrow=F</code>).</p>
+<pre class="r"><code>x &lt;- matrix(c(2,3,4,5,6,7),nrow=3,ncol=2,byrow=TRUE)
+x</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    2    3
+## [2,]    4    5
+## [3,]    6    7</code></pre>
+<pre class="r"><code>str(x)</code></pre>
+<pre><code>##  num [1:3, 1:2] 2 4 6 3 5 7</code></pre>
+<p>Verify if an R object is a matrix.</p>
+<pre class="r"><code>is.matrix(x)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Matrix positions can be accessed using the <code>[]</code> operator by specifying the row and column <code>[row,col]</code>.</p>
+<pre class="r"><code>x[2,2]</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>A whole row or a column can be accessed by <code>[row,]</code> or <code>[,col]</code>.</p>
+<pre class="r"><code>x[1,]
+x[,2]</code></pre>
+<pre><code>## [1] 2 3
+## [1] 3 5 7</code></pre>
+<p>Notice that this automatically creates a vector. The matrix data type can be retained by specifying <code>drop=FALSE</code>.</p>
+<pre class="r"><code>x[1,,drop=F]
+x[,2,drop=F]</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    2    3
+##      [,1]
+## [1,]    3
+## [2,]    5
+## [3,]    7</code></pre>
+<p>Column names and row names can be added to matrices.</p>
+<pre class="r"><code>rownames(x) &lt;- c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;)
+colnames(x) &lt;- c(&quot;k&quot;,&quot;p&quot;)</code></pre>
+<p>Then the matrix can be accessed using these labels.</p>
+<pre class="r"><code>x[&quot;b&quot;,]
+x[,&quot;p&quot;]</code></pre>
+<pre><code>## k p 
+## 4 5 
+## a b c 
+## 3 5 7</code></pre>
+</div>
+</div>
+<div id="heterogenous-data" class="section level2">
+<h2><span class="header-section-number">5.4</span> Heterogenous data</h2>
+<div id="lists" class="section level3">
+<h3><span class="header-section-number">5.4.1</span> Lists</h3>
+<p>List elements can be mixed data type and is built using <code>list()</code> rather than <code>c()</code>.</p>
+<pre class="r"><code>x &lt;- list(c(2,3,4,5),c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;),factor(c(&quot;a&quot;,&quot;a&quot;,&quot;b&quot;)),
+          matrix(c(3,2,3,5,6,7),ncol=2))
+x</code></pre>
+<pre><code>## [[1]]
+## [1] 2 3 4 5
+## 
+## [[2]]
+## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;
+## 
+## [[3]]
+## [1] a a b
+## Levels: a b
+## 
+## [[4]]
+##      [,1] [,2]
+## [1,]    3    5
+## [2,]    2    6
+## [3,]    3    7</code></pre>
+<pre class="r"><code>typeof(x)
+class(x)</code></pre>
+<pre><code>## [1] &quot;list&quot;
+## [1] &quot;list&quot;</code></pre>
+<pre class="r"><code>str(x)</code></pre>
+<pre><code>## List of 4
+##  $ : num [1:4] 2 3 4 5
+##  $ : chr [1:4] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;
+##  $ : Factor w/ 2 levels &quot;a&quot;,&quot;b&quot;: 1 1 2
+##  $ : num [1:3, 1:2] 3 2 3 5 6 7</code></pre>
+<p>Lists are recursive as there can be lists inside lists.</p>
+<pre class="r"><code>str(list(list(list(list()))))</code></pre>
+<pre><code>## List of 1
+##  $ :List of 1
+##   ..$ :List of 1
+##   .. ..$ : list()</code></pre>
+<p>Verify if an R object is a list.</p>
+<pre class="r"><code>is.list(x)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>List are accessed using <code>[]</code> and <code>[[]]</code>. <code>[]</code> returns a list while <code>[[]]</code> returns the object inside the list.</p>
+<pre class="r"><code>x[1]</code></pre>
+<pre><code>## [[1]]
+## [1] 2 3 4 5</code></pre>
+<pre class="r"><code>x[1:2]
+class(x[1:2])</code></pre>
+<pre><code>## [[1]]
+## [1] 2 3 4 5
+## 
+## [[2]]
+## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;
+## 
+## [1] &quot;list&quot;</code></pre>
+<pre class="r"><code>x[[4]]
+class(x[[4]])</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    3    5
+## [2,]    2    6
+## [3,]    3    7
+## [1] &quot;matrix&quot;</code></pre>
+<p>List items can also be named. Let’s add a list into our list.</p>
+<pre class="r"><code>x$newlist &lt;- list(c(500,600,700))
+x</code></pre>
+<pre><code>## [[1]]
+## [1] 2 3 4 5
+## 
+## [[2]]
+## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;
+## 
+## [[3]]
+## [1] a a b
+## Levels: a b
+## 
+## [[4]]
+##      [,1] [,2]
+## [1,]    3    5
+## [2,]    2    6
+## [3,]    3    7
+## 
+## $newlist
+## $newlist[[1]]
+## [1] 500 600 700</code></pre>
+<p>Lists can be accessed by the name.</p>
+<pre class="r"><code>x$newlist</code></pre>
+<pre><code>## [[1]]
+## [1] 500 600 700</code></pre>
+<p>Use <code>unlist()</code> to remove the list structure.</p>
+<pre class="r"><code>unlist(x$newlist)</code></pre>
+<pre><code>## [1] 500 600 700</code></pre>
+</div>
+<div id="data.frame" class="section level3">
+<h3><span class="header-section-number">5.4.2</span> <code>data.frame</code></h3>
+<p><code>data.frame</code>s are the most common way to store data in R. <code>data.frame</code>s are basically lists of equal-length vectors. Like matrices, dataframe 2D with rows and columns. <code>data.frame</code>s are created using the function <code>data.frame()</code>.</p>
+<pre class="r"><code>dfr &lt;- data.frame(x = 1:3, y = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))
+print(dfr)</code></pre>
+<pre><code>##   x y
+## 1 1 a
+## 2 2 b
+## 3 3 c</code></pre>
+<p>Notice that we have named the columns as ‘x’ and ‘y’.</p>
+<pre class="r"><code>str(dfr)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    3 obs. of  2 variables:
+##  $ x: int  1 2 3
+##  $ y: Factor w/ 3 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;: 1 2 3</code></pre>
+<p>Notice that column ‘y’ has been automatically converted to a factor. This is the root of a lot of issues for new R users. It is best to avoid the automatic conversion by setting <code>stringsAsFactors=FALSE</code>.</p>
+<pre class="r"><code>dfr &lt;- data.frame(x = 1:3, y = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), stringsAsFactors = F)
+str(dfr)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    3 obs. of  2 variables:
+##  $ x: int  1 2 3
+##  $ y: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<p>Verify if an R object is a ‘data.frame’.</p>
+<pre class="r"><code>is.data.frame(dfr)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Accessing positions in a data.frame is similar to matrices. In addition, the <code>$</code> operator is also commonly used to access a column.</p>
+<pre class="r"><code>dfr$x
+dfr$y</code></pre>
+<pre><code>## [1] 1 2 3
+## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<p>Subset a <code>data.frame()</code> conditionally.</p>
+<pre class="r"><code>subset(dfr,dfr$y==&quot;a&quot;)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"a","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="type-conversion" class="section level2">
+<h2><span class="header-section-number">5.5</span> Type conversion</h2>
+<p>Several functions are available to convert R objects from one type to another.</p>
+<pre class="r"><code>x &lt;- c(1,2,3)
+str(x)</code></pre>
+<pre><code>##  num [1:3] 1 2 3</code></pre>
+<pre class="r"><code>y &lt;- as.character(x)
+str(y)</code></pre>
+<pre><code>##  chr [1:3] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
+<p>The numeric vector has been converted to a character vector. Similarly, character can be coerced (if possible) into numbers.</p>
+<pre class="r"><code>x &lt;- c(&quot;1&quot;,&quot;2&quot;,&quot;hello&quot;)
+str(x)</code></pre>
+<pre><code>##  chr [1:3] &quot;1&quot; &quot;2&quot; &quot;hello&quot;</code></pre>
+<pre class="r"><code>str(as.numeric(x))</code></pre>
+<pre><code>##  num [1:3] 1 2 NA</code></pre>
+<p>Notice that characters that cannot be converted to a valid number is converted to NA along with a warning message.</p>
+</div>
+</div>
+<div id="functions" class="section level1">
+<h1><span class="header-section-number">6</span> Functions</h1>
+<p>Functions are chunks of code packaged into reusable units. We have used many functions in the previous sections such as <code>c()</code>, <code>str()</code>, <code>is.list()</code> etc.</p>
+<div id="built-in" class="section level2">
+<h2><span class="header-section-number">6.1</span> Built-In</h2>
+<p>Functions that come with the base R installation are referred to as built-in functions or base functions. R has loads of built-in functions for various applications such as data analysis, programming, math, plotting etc. Additional functions can be made available by installing external packages.</p>
+<p>Below are some functions that can be applied to numeric data:</p>
+<pre class="r"><code># generate 10 random numbers between 1 and 200
+x &lt;- sample(x=1:200,10)
+
+# length
+length(x)
+
+# sum
+sum(x)
+
+# mean
+mean(x)
+
+# median
+median(x)
+
+# min
+min(x)
+
+# log
+log(x)
+
+# exponent
+exp(x)
+
+# square-root
+sqrt(x)
+
+# round
+round(x)
+
+# sort
+sort(x)</code></pre>
+<pre><code>## [1] 10
+## [1] 629
+## [1] 62.9
+## [1] 71.5
+## [1] 7
+##  [1] 4.174387 4.521789 4.691348 3.970292 4.605170 4.644391 2.564949
+##  [8] 1.945910 2.079442 4.356709
+##  [1] 1.694889e+28 9.017628e+39 2.178204e+47 1.041376e+23 2.688117e+43
+##  [6] 1.467662e+45 4.424134e+05 1.096633e+03 2.980958e+03 7.498417e+33
+##  [1]  8.062258  9.591663 10.440307  7.280110 10.000000 10.198039  3.605551
+##  [8]  2.645751  2.828427  8.831761
+##  [1]  65  92 109  53 100 104  13   7   8  78
+##  [1]   7   8  13  53  65  78  92 100 104 109</code></pre>
+<p>Some useful string functions.</p>
+<pre class="r"><code>a &lt;- &quot;sunny&quot;
+b &lt;- &quot;day&quot;
+
+# join
+paste(a, b)
+
+# find a pattern
+grep(&quot;sun&quot;, a)
+
+# number of characters
+nchar(&quot;sunny&quot;)
+
+# to uppercase
+toupper(&quot;sunny&quot;)
+
+# to lowercase
+tolower(&quot;SUNNY&quot;)
+
+# replace pattern
+sub(&quot;sun&quot;, &quot;fun&quot;, &quot;sunny&quot;)
+
+# substring
+substr(&quot;sunny&quot;, start=1, stop=3)</code></pre>
+<pre><code>## [1] &quot;sunny day&quot;
+## [1] 1
+## [1] 5
+## [1] &quot;SUNNY&quot;
+## [1] &quot;sunny&quot;
+## [1] &quot;funny&quot;
+## [1] &quot;sun&quot;</code></pre>
+<p>Some general functions</p>
+<pre class="r"><code>print(&quot;hello&quot;)
+print(&quot;world&quot;)
+cat(&quot;hello&quot;)
+cat(&quot; world&quot;)
+cat(&quot;\nhello\nworld&quot;)</code></pre>
+<pre><code>## [1] &quot;hello&quot;
+## [1] &quot;world&quot;
+## hello world
+## hello
+## world</code></pre>
+</div>
+<div id="custom" class="section level2">
+<h2><span class="header-section-number">6.2</span> Custom</h2>
+<p>If you see yourself copy-pasting a chunk of R code many times, then it is probably a good idea to create a function out of it.</p>
+<p>Let’s say you have two vectors that you would like to perform a series of operations on and then output a result.</p>
+<pre class="r"><code>a &lt;- 1:6
+b &lt;- 8:10
+
+d &lt;- a*b
+e &lt;- log(d)
+f &lt;- sqrt(e)
+f</code></pre>
+<pre><code>## [1] 1.442027 1.700109 1.844234 1.861649 1.951067 2.023449</code></pre>
+<p>You can modify this code block into a function as follows:</p>
+<pre class="r"><code>my_function &lt;- function(a, b){
+  d &lt;- a*b
+  e &lt;- log(d)
+  f &lt;- sqrt(e)
+  return(f)
+}</code></pre>
+<p>Once defined, you can use this wherever needed.</p>
+<pre class="r"><code>my_function(a=2:4, b=6:8)</code></pre>
+<pre><code>## [1] 1.576359 1.744856 1.861649</code></pre>
+<p><strong>a</strong> and <strong>b</strong> are called arguments or parameters to the function. If they are explicity written, then the position defines which parameter they are.</p>
+<pre class="r"><code># this
+my_function(a=2:4, b=6:8)
+# is the same as this
+my_function(b=2:4, a=6:8)
+# and the same as this
+my_function(2:4, 6:8)</code></pre>
+<pre><code>## [1] 1.576359 1.744856 1.861649
+## [1] 1.576359 1.744856 1.861649
+## [1] 1.576359 1.744856 1.861649</code></pre>
+<p>In this case <code>my_function(2:4,6:8)</code>, argument <strong>a</strong> is <code>2:4</code> and argument <strong>b</strong> is <code>6:8</code>. In this case <code>my_function(6:8,2:4)</code>, argument <strong>a</strong> is <code>6:8</code> and argument <strong>b</strong> is <code>2:4</code>.</p>
+<p>Variables defined within a function are only available within that function and not available outside that function unless returned.</p>
+<pre class="r"><code>my_new_function &lt;- function(a) {
+  varz &lt;- a + 2
+  return(varz)
+}
+
+my_new_function(5)
+
+print(varz)</code></pre>
+<pre><code>## Error in print(varz): object &#39;varz&#39; not found</code></pre>
+<pre><code>## [1] 7</code></pre>
+<p>In the above function, variable <code>varz</code> created inside the function is not available outside of that function.</p>
+<p>But the reverse is possible.</p>
+<pre class="r"><code>my_new_function &lt;- function() {
+  varz &lt;- foo + 2
+  return(varz)
+}
+
+foo &lt;- 55
+my_new_function()</code></pre>
+<pre><code>## [1] 57</code></pre>
+<p>In the example above, variable <code>foo</code> used inside the function is not supplied to the function through an argument, yet it still manages to find it. When a function doesn’t find a variable inside a function, it searches outside the function.</p>
+</div>
+</div>
+<div id="control-structures" class="section level1">
+<h1><span class="header-section-number">7</span> Control Structures</h1>
+<p>Conditional statements are written using <code>if()</code>.</p>
+<pre class="r"><code>a &lt;- 2
+b &lt;- 5
+
+if(a &lt; b) print(paste(a,&quot;is smaller than&quot;,b))</code></pre>
+<pre><code>## [1] &quot;2 is smaller than 5&quot;</code></pre>
+<p><code>else</code> is used to add an alternative output.</p>
+<pre class="r"><code>a &lt;- 2
+b &lt;- 5
+
+if(a &lt; b) {
+  print(paste(a,&quot;is smaller than&quot;,b))
+}else{
+  print(paste(b,&quot;is smaller than&quot;,a))
+}
+
+a &lt;- 60
+b &lt;- 10
+
+if(a &lt; b) {
+  print(paste(a,&quot;is smaller than&quot;,b))
+}else{
+  print(paste(b,&quot;is smaller than&quot;,a))
+}</code></pre>
+<pre><code>## [1] &quot;2 is smaller than 5&quot;
+## [1] &quot;10 is smaller than 60&quot;</code></pre>
+<p><code>if else</code> statements can be chained together:</p>
+<pre class="r"><code>grade &lt;- &quot;B&quot;
+
+if(grade == &quot;A&quot;){
+  print(&quot;Grade is Excellent!&quot;)
+}else if(grade == &quot;B&quot;){
+  print(&quot;Grade is Good.&quot;)
+} else if (grade == &quot;C&quot;) {
+  print(&quot;Grade is Alright.&quot;)
+}</code></pre>
+<pre><code>## [1] &quot;Grade is Good.&quot;</code></pre>
+<p>The <code>for()</code> loop is useful to run commands repeatedly over a known number of iterations.</p>
+<pre class="r"><code>for (i in 1:5){
+  print(i)
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5</code></pre>
+<p>The <code>while()</code> loop is useful to run commands repeatedly for an unknown number of iterations until a condition is satisfied.</p>
+<pre class="r"><code>i &lt;- 1
+while(i &lt; 5){
+  print(i)
+  i &lt;- i+1
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4</code></pre>
+</div>
+<div id="r-packages" class="section level1">
+<h1><span class="header-section-number">8</span> R packages</h1>
+<p>R packages extend the functionality of base R. R packages are stored in repositories of which the most commonly used is called <a href="https://cran.r-project.org/">CRAN</a> (The Comprehensive R Archive Network).</p>
+<p>Packages are installed using the function <code>install.packages()</code>. Let’s install the graphics and plotting package <code>ggplot2</code> which will be useful in later sections.</p>
+<pre class="r"><code>install.packages(&quot;ggplot2&quot;,dependencies=TRUE)</code></pre>
+<p>Packages can also be installed from a local zipped file by providing a local path ans setting <code>type=&quot;source&quot;</code>.</p>
+<pre class="r"><code>install.packages(&quot;./dir/package.zip&quot;,type=&quot;source&quot;)</code></pre>
+<p>Inside RStudio, installing packages is much easier. Go to the <strong>Packages</strong> tab and click <strong>Install</strong>. In the window that opens up, you can find your package by typing into the <strong>Packages</strong> field and clicking <strong>Install</strong>.</p>
+<div class="figure">
+<img src="images/install-packages.png" />
+
+</div>
+<p>Packages on GitHub can be installed using the function <code>install_github()</code> from package <code>devtools</code>.</p>
+</div>
+<div id="graphics" class="section level1">
+<h1><span class="header-section-number">9</span> Graphics</h1>
+<div id="base-graphics" class="section level2">
+<h2><span class="header-section-number">9.1</span> Base graphics</h2>
+<p>R is an excellent tool for creating graphs and plots. The graphic capabilities and functions provided by the base R installation is called the base R graphics. Numerous packages exist to extend the functionality of base graphics.</p>
+<p>We can try out plotting a few of the common plot types. Let’s start with a scatterplot. First we create a <code>data.frame</code> as this is the most commonly used data object.</p>
+<pre class="r"><code>dfr &lt;- data.frame(a=sample(1:100,10),b=sample(1:100,10))</code></pre>
+<p>Now we have a dataframe with two continuous variables that can be plotted against each other.</p>
+<pre class="r"><code>plot(dfr$a,dfr$b)</code></pre>
+<p><img src="lab_files/figure-html/unnamed-chunk-79-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>This is probably the simplest and most basic plots. We can modify the x and y axis labels.</p>
+<pre class="r"><code>plot(dfr$a,dfr$b,xlab=&quot;Variable a&quot;,ylab=&quot;Variable b&quot;)</code></pre>
+<p><img src="lab_files/figure-html/unnamed-chunk-80-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>We can change the point to a line.</p>
+<pre class="r"><code>plot(dfr$a,dfr$b,xlab=&quot;Variable a&quot;,ylab=&quot;Variable b&quot;,type=&quot;b&quot;)</code></pre>
+<p><img src="lab_files/figure-html/unnamed-chunk-81-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>Let’s add a categorical column to our dataframe.</p>
+<pre class="r"><code>dfr$cat &lt;- rep(c(&quot;C1&quot;,&quot;C2&quot;),each=5)</code></pre>
+<p>And then colour the points by category.</p>
+<pre class="r"><code># subset data
+dfr_c1 &lt;- subset(dfr,dfr$cat == &quot;C1&quot;)
+dfr_c2 &lt;- subset(dfr,dfr$cat == &quot;C2&quot;)
+
+plot(dfr_c1$a,dfr_c1$b,xlab=&quot;Variable a&quot;,ylab=&quot;Variable b&quot;,col=&quot;red&quot;,pch=1)
+points(dfr_c2$a,dfr_c2$b,col=&quot;blue&quot;,pch=2)
+
+legend(x=&quot;topright&quot;,legend=c(&quot;C1&quot;,&quot;C2&quot;),
+       col=c(&quot;red&quot;,&quot;blue&quot;),pch=c(1,2))</code></pre>
+<p><img src="lab_files/figure-html/unnamed-chunk-83-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>Let’s create a barplot.</p>
+<pre class="r"><code>ldr &lt;- data.frame(a=letters[1:10],b=sample(1:50,10))
+barplot(ldr$b,names.arg=ldr$a)</code></pre>
+<p><img src="lab_files/figure-html/unnamed-chunk-84-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+</div>
+<div id="grid-graphics" class="section level2">
+<h2><span class="header-section-number">9.2</span> Grid graphics</h2>
+<p>Grid graphics have a completely different underlying framework compared to base graphics. Generally, base graphics and grid graphics cannot be plotted together. The most popular grid-graphics based plotting library is <strong>ggplot2</strong>.</p>
+<p>Let’s create the same plot are before using <strong>ggplot2</strong>. Make sure you have the package installed.</p>
+<pre class="r"><code>library(ggplot2)
+
+ggplot(dfr,aes(x=a,y=b,colour=cat))+
+  geom_point()+
+  labs(x=&quot;Variable a&quot;,y=&quot;Variable b&quot;)</code></pre>
+<p><img src="lab_files/figure-html/unnamed-chunk-85-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p>It is generally easier and more consistent to create plots using the ggplot2 package compared to the base graphics.</p>
+<p>Let’s create a barplot as well.</p>
+<pre class="r"><code>ggplot(ldr,aes(x=a,y=b))+
+  geom_bar(stat=&quot;identity&quot;)</code></pre>
+<p><img src="lab_files/figure-html/unnamed-chunk-86-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+</div>
+</div>
+<div id="inputoutput" class="section level1">
+<h1><span class="header-section-number">10</span> Input/Output</h1>
+<p>Input and output of data and images is an important aspect with data analysis.</p>
+<div id="text" class="section level2">
+<h2><span class="header-section-number">10.1</span> Text</h2>
+<p>Data can come in a variety of formats which needs to be read into R and converted to an R data type.</p>
+<p>Text files are the most commonly used input. Text files can be read in using the function <code>read.table</code>. We have a sample file to use: <strong>iris.txt</strong>.</p>
+<pre class="r"><code>dfr &lt;- read.table(&quot;iris.txt&quot;,header=TRUE,stringsAsFactors=F)</code></pre>
+<p>This reads in a tab-delimited text file with a header. The argument <code>sep='\t'</code> is set by default to specify that the delimiter is a tab. <code>stringsAsFactors=F</code> setting ensures that character columns are not automatically converted to factors.</p>
+<p>It’s always a good idea to check the data after import.</p>
+<pre class="r"><code>head(dfr)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Sepal.Length"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Sepal.Width"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Petal.Length"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Petal.Width"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Species"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"5.1","2":"3.5","3":"1.4","4":"0.2","5":"setosa","_rn_":"1"},{"1":"4.9","2":"3.0","3":"1.4","4":"0.2","5":"setosa","_rn_":"2"},{"1":"4.7","2":"3.2","3":"1.3","4":"0.2","5":"setosa","_rn_":"3"},{"1":"4.6","2":"3.1","3":"1.5","4":"0.2","5":"setosa","_rn_":"4"},{"1":"5.0","2":"3.6","3":"1.4","4":"0.2","5":"setosa","_rn_":"5"},{"1":"5.4","2":"3.9","3":"1.7","4":"0.4","5":"setosa","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>str(dfr)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : chr  &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; ...</code></pre>
+<p>Check <code>?read.table</code> for other wrapper functions to read in text files.</p>
+<p>Let’s filter this data.frame and create a new dataset.</p>
+<pre class="r"><code>dfr1 &lt;- dfr[dfr$Species == &quot;setosa&quot;,]</code></pre>
+<p>And we can write this as a text file.</p>
+<pre class="r"><code>write.table(dfr1,&quot;iris-setosa.txt&quot;,sep=&quot;\t&quot;,row.names=F,
+            quote=F)</code></pre>
+<p><code>sep=&quot;\t&quot;</code> sets the delimiter to tab. <code>row.names=F</code> denotes that rownames should not be written. <code>quote=F</code> specifies that doubles must not be placed around strings.</p>
+</div>
+<div id="images" class="section level2">
+<h2><span class="header-section-number">10.2</span> Images</h2>
+<p>Let’s take a look at saving figures.</p>
+<div id="base" class="section level3">
+<h3><span class="header-section-number">10.2.1</span> Base</h3>
+<p>The general idea for saving plots is open a graphics device, create the plot and then close the device. We will use <strong>png</strong> here. Check out <code>?png</code> for the arguments and other devices.</p>
+<pre class="r"><code>dfr &lt;- data.frame(a=sample(1:100,10),b=sample(1:100,10))
+
+png(filename=&quot;plot-base.png&quot;)
+plot(dfr$a,dfr$b)
+dev.off()</code></pre>
+</div>
+<div id="ggplot2" class="section level3">
+<h3><span class="header-section-number">10.2.2</span> ggplot2</h3>
+<p>The same idea can be applied to ggplot2, but in a slightly different way. First save the file to a variable, and then export the plot.</p>
+<pre class="r"><code>p &lt;- ggplot(dfr,aes(a,b)) + geom_point()
+
+png(filename=&quot;plot-ggplot-1.png&quot;)
+print(p)
+dev.off()</code></pre>
+<p><strong>ggplot2</strong> also has another easier helper function to export images.</p>
+<pre class="r"><code>ggsave(filename=&quot;plot-ggplot-2.png&quot;,plot=p)</code></pre>
+</div>
+</div>
+</div>
+<div id="help" class="section level1">
+<h1><span class="header-section-number">11</span> Help</h1>
+<p><img src="images/help.png" style="padding:15px; max-width:200px"></p>
+<ul>
+<li>Use <code>?function</code> to get function documentation</li>
+<li>Use <code>??name</code> to search for a function</li>
+<li>Use <code>args(function)</code> to get the arguments to a function</li>
+<li>Go to the package CRAN page/webpage for vignettes</li>
+<li><a href="https://www.r-bloggers.com/">R bloggers</a>: Great blog to follow to keep updated with the latest in the R world as well as tutorials.</li>
+<li><a href="https://stackoverflow.com/">Stackoverflow</a>: Online community to find solutions to your problems.</li>
+</ul>
+</div>
+<div id="learning-r" class="section level1">
+<h1><span class="header-section-number">12</span> Learning R</h1>
+<p><img src="images/boy-reads.png" style="padding:15px; max-width:300px"></p>
+<p>There are lots of resources for getting help in R.</p>
+<div id="reference" class="section level2">
+<h2><span class="header-section-number">12.1</span> Reference</h2>
+<ul>
+<li><a href="http://www.cookbook-r.com/">R Cookbook</a>: General purpose reference.</li>
+<li><a href="https://www.statmethods.net/">Quick R</a>: General purpose reference.</li>
+<li><a href="https://awesome-r.com/">Awesome R</a>: Curated list of useful R packages.</li>
+<li><a href="https://www.rstudio.com/resources/cheatsheets/">RStudio cheatsheets</a>: Useful cheatsheets.</li>
+<li><a href="http://adv-r.had.co.nz">Advanced R</a> by Hadley Wickham (Medium to advanced content)</li>
+</ul>
+</div>
+<div id="tutorials" class="section level2">
+<h2><span class="header-section-number">12.2</span> Tutorials</h2>
+<ul>
+<li><a href="https://www.datacamp.com/courses/free-introduction-to-r">Introduction to R</a>: Tutorial by Datacamp with excellent tutorials.</li>
+<li><a href="https://www.youtube.com/watch?v=s3FozVfd7q4">R programming tutorial</a>: Youtube video tutorial by Derek Banas.</li>
+<li><a href="http://r4ds.had.co.nz/">R for data science</a> Data science tutorial by Hadley wickham.</li>
+<li><a href="https://datacarpentry.org/R-ecology-lesson/">Data carpentry</a> Data carpentry R workshop</li>
+</ul>
+</div>
+<div id="links" class="section level2">
+<h2><span class="header-section-number">12.3</span> Links</h2>
+<ul>
+<li><a href="https://www.computerworld.com/article/2497464/business-intelligence/top-r-language-resources-to-improve-your-data-skills.html?page=2">Tutorialspoint List</a>: Good list of resources.</li>
+</ul>
+</div>
+</div>
+<div id="useful-packages" class="section level1">
+<h1><span class="header-section-number">13</span> Useful packages</h1>
+<p>These are some useful packages when starting with data analysis in R.</p>
+<ul>
+<li><a href="https://dplyr.tidyverse.org/">dplyr</a>, <a href="https://tidyr.tidyverse.org/">tidyr</a>: Data manipulation</li>
+<li><a href="https://ggplot2.tidyverse.org/">ggplot2</a>: Data visualisation</li>
+<li><a href="https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html">stringr</a>: String manipulation</li>
+<li><a href="https://lubridate.tidyverse.org/">lubridate</a>: Date/time manipulation</li>
+<li><a href="https://rmarkdown.rstudio.com/">rmarkdown</a>: Reproducible research and report generation</li>
+</ul>
+<p><a href="http://hexb.in/"><img src="images/rlibs.jpg" /></a></p>
+<p style="text-align: left; font-size: small;">
+Built on : <i class='fa fa-calendar' aria-hidden='true'></i> 28-Aug-2018 at <i class='fa fa-clock-o' aria-hidden='true'></i> 20:04:09. Graphics from <img src="images/freepik.jpg" style="max-height:20px; vertical-align:middle;">
+</p>
+<hr>
+<p><b>2018</b> | Roy Francis | <a href="https://www.scilifelab.se/">SciLifeLab</a> | <a href="https://nbis.se/">NBIS</a></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

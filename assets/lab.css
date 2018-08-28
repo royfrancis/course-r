@@ -1,0 +1,104 @@
+/*
+* CSS Bootstrap custom style for SciLifeLab
+* Uses Bootswatch united theme
+*/
+
+/* define font */
+/*@import url("https://fonts.googleapis.com/css?family=Roboto");*/
+
+/* heading sizes */
+h1, .h1 {
+  font-size: 2.7rem;
+}
+
+h2, .h2 {
+  font-size: 2.4rem;
+}
+
+h3, .h3 {
+  font-size: 2.1rem;
+}
+
+h4, .h4 {
+  font-size: 1.8rem;
+}
+
+h5, .h5 {
+  font-size: 1.5rem;
+}
+
+h6, .h6 {
+  font-size: 1.2rem;
+}
+
+/* report title style */
+.title {
+  margin-bottom: 10px;
+  font-size: 3.5rem;
+}
+
+/* report subtitle style */
+.subtitle {
+  font-size: 3rem;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  color: grey;
+}
+
+/* author */
+.nauthor {
+  font-size: 2rem;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+/* date */
+.date {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+/* link colour: scilife */
+a {
+  color: #95C11E;
+}
+
+a:hover {
+  color: #95C11E;
+  text-decoration: underline;
+}
+
+/* floating bar highlight: use scilife green */
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+  background-color: #95C11E;
+  border-color: #375D81;
+}
+
+/* code style */
+code {
+  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 14px;
+}
+
+pre {
+    background-color: #F2F2F2;
+}
+
+/* table even shading colour */
+.even {
+    background-color: #F2F2F2;
+}
+
+/* abstract paragraph style */
+.abstract {
+    line-height: 160%;
+}
+
+/* hover effect footer icons */
+.footericon:hover {
+  opacity: 10;
+}
+
+.figure {
+ margin-bottom: 12px; 
+}

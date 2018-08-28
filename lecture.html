@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction To R</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Roy Francis | 28-Aug-2018" />
+    <meta name="keywords" content="rnaseq, bioinformatics, course" />
+    <link href="libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+    <script src="libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+    <script src="libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+    <link rel="stylesheet" href="assets\lecture.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction To R
+## Introduction to Bioinformatics
+### <b>Roy Francis</b> | 28-Aug-2018
+
+---
+
+name: contents
+class: spaced
+
+
+
+
+
+name: contents
+class: spaced
+
+## Contents
+
+- [Getting Started](#getting-started-install)
+- [Variables &amp; Operators](#basic-operators)
+- [Data Types](#datatype-overview)
+- [Datatype Conversion](#datatype-conversion)
+- [Functions](#functions-built-in-math)
+- [Control Structures](#control-structure-if)
+- [R Packages](#package)
+- [Base Graphics](#graphics-base-1)
+- [Grid Graphics](#graphics-ggplot-1)
+- [Input/Output](#io-text)
+- [Help &amp; Learning R](#help)
+
+---
+name: topics
+class: spaced
+
+## Topics
+
+- Familiarise with R &amp; RStudio environment
+- Running code, scripting, sourcing script
+- Variables and operators
+- Data types &amp; datatype conversion
+- Creating and running functions
+- Base and grid graphics
+- Input &amp; output from R
+
+---
+name: why-r
+
+## What? Why R?
+
+&gt; R is a language and environment for statistical computing and graphics.
+
+- Command line interface
+
+.pull-left-50[
+**Pros**
+
+- Data analysis
+- Statistics
+- High quality graphics
+- Huge number of packages
+- R is popular
+- Reproducible research
+- RStudio IDE
+- FREE! Open source
+
+**Cons**
+
+- Steep learning curve
+- Not elegant/consistent
+- Slow
+]
+
+.pull-right-50[
+.size-70[![](images/r_logo.svg)]
+]
+
+---
+name: getting-started-install
+class: spaced
+
+## Getting Started | Installation
+
+- Install R from [r-project.org](https://cloud.r-project.org/).
+- Install Rtools from [https://cran.r-project.org/bin/](https://cran.r-project.org/bin/)
+- Install [RStudio IDE](https://www.rstudio.com/products/rstudio/download/)
+- Code editor, highlighting, navigation, projects, version control, package building, debugger, profiler
+
+.size-65[.center[![](images/rstudio-ide.png)]]
+
+---
+name: getting-started-interact
+class: spaced
+
+## Getting Started | Interaction
+
+- Execute commands directly in Console
+- Ready console shows `&gt;`
+- Console shows `+` when waiting for information
+- Press &lt;kbd&gt;Esc&lt;/kbd&gt; to escape from `+` to `&gt;`
+- Save commands by writing scripts
+- Run lines using .kbd[Ctrl]+.kbd[Enter]
+- Run entire script using .kbd[Ctrl]+.kbd[Shift]+.kbd[Enter]
+
+---
+name: basic-operators
+
+## Variables &amp; Operators
+
+.pull-left-50[
+- Assign variables using `&lt;-` or `=`
+
+
+```r
+x &lt;- 4
+x = 4
+x
+```
+
+```
+## [1] 4
+```
+
+- Arithmetic operators
+
+
+```r
+x &lt;- 4; y &lt;- 2;
+
+x + y # add
+x - y # subtract
+x * y # multiply
+x / y # divide
+x %% y # modulus
+x ^ y # power
+```
+
+```
+## [1] 6
+## [1] 2
+## [1] 8
+## [1] 2
+## [1] 0
+## [1] 16
+```
+]
+
+.pull-right-50[
+
+- Logical operators return `TRUE` or `FALSE`
+
+
+```r
+x == y # equal to?
+x != y # not equal to?
+x &gt; y # greater than?
+x &lt; y # less than?
+x &gt;= y # greater than or equal to?
+x &lt;= y # less than or equal to?
+```
+
+```
+## [1] FALSE
+## [1] TRUE
+## [1] TRUE
+## [1] FALSE
+## [1] TRUE
+## [1] FALSE
+```
+
+
+```r
+T | F # OR
+T &amp; F # AND
+```
+
+```
+## [1] TRUE
+## [1] FALSE
+```
+
+- `any()`, `all` for logical vectors
+
+]
+
+---
+name: strings
+
+## Variables &amp; Operators
+
+- The function `paste()` concatenates strings
+
+
+```r
+z &lt;- "Look!"
+z1 &lt;- "Cat"
+paste(z,z1)
+```
+
+```
+## [1] "Look! Cat"
+```
+
+- Avoid conflicting variable names like `c`, `t` etc
+- Variable names cannot start with a number
+
+---
+name: datatype-overview
+
+## Data Type | Overview
+
+
+```
+##   dimension    homogenous heterogenous
+## 1        1D Atomic vector         List
+## 2        2D        Matrix    Dataframe
+## 3        nD         Array
+```
+
+- Use `typeof()` to find type of a variable
+
+
+```r
+x &lt;- 4; typeof(x)
+```
+
+```
+## [1] "double"
+```
+
+
+```r
+y &lt;- "this"; typeof(y)
+```
+
+```
+## [1] "character"
+```
+
+
+```r
+mode(x)
+class(x)
+str(x)
+structure(x)
+```
+
+```
+## [1] "numeric"
+## [1] "numeric"
+##  num 4
+## [1] 4
+```
+
+---
+name: datatype-basic
+
+## Data Type | Basic
+
+- Mode
+
+
+```r
+mode(1.0)
+mode(1L)
+mode("hello")
+mode(factor(1))
+mode(T)
+```
+
+```
+## [1] "numeric"
+## [1] "numeric"
+## [1] "character"
+## [1] "numeric"
+## [1] "logical"
+```
+
+- Type
+
+
+```r
+typeof(1.0)
+typeof(1L)
+typeof("hello")
+typeof(factor(1))
+typeof(T)
+```
+
+```
+## [1] "double"
+## [1] "integer"
+## [1] "character"
+## [1] "integer"
+## [1] "logical"
+```
+
+---
+name: datatype-vector-create
+
+## Data Type | Vector | Create
+
+- Vector stores multiple values
+- Concatenate variables, values and vectors using the function `c()`
+
+
+```r
+x &lt;- c(2,3,4,5,6)
+y &lt;- c("a","c","d","e")
+x
+y
+```
+
+```
+## [1] 2 3 4 5 6
+## [1] "a" "c" "d" "e"
+```
+
+- Few different ways to create vectors.
+
+
+```r
+c(2,3,5,6)
+2:8
+seq(2,5,by=0.5)
+rep(1:3,times=2)
+```
+
+```
+## [1] 2 3 5 6
+## [1] 2 3 4 5 6 7 8
+## [1] 2.0 2.5 3.0 3.5 4.0 4.5 5.0
+## [1] 1 2 3 1 2 3
+```
+
+---
+name: datatype-vector-access
+
+## Data Type | Vector | Access
+
+- Access vectors using the `[]` operator.
+
+
+```r
+x[1]; y[3]
+```
+
+```
+## [1] 2
+## [1] "d"
+```
+
+- Function `c()` to specify multiple positions.
+
+
+```r
+x[c(1,3)]
+```
+
+```
+## [1] 2 4
+```
+
+- Vectorised operation
+
+
+```r
+x &lt;- c(2,3,4,5); y &lt;- c(9,8,7,6)
+x+y
+
+z &lt;- c("a","an","a","a"); k &lt;- c("boy","apple","girl","mess")
+paste(z,k)
+```
+
+```
+## [1] 11 11 11 11
+## [1] "a boy"    "an apple" "a girl"   "a mess"
+```
+
+---
+name: datatype-vector-verify
+
+## Data Type | Vector
+
+- Verify data type
+
+
+```r
+x &lt;- c(2,3,4,5)
+z &lt;- c("a","an","a","a")
+
+mode(x)
+mode(z)
+str(x)
+str(z)
+```
+
+```
+## [1] "numeric"
+## [1] "character"
+##  num [1:4] 2 3 4 5
+##  chr [1:4] "a" "an" "a" "a"
+```
+
+
+```r
+is.atomic(x)
+is.numeric(x)
+is.character(z)
+```
+
+```
+## [1] TRUE
+## [1] TRUE
+## [1] TRUE
+```
+
+---
+name: datatype-factor
+
+## Data Type | Factor
+
+- Factors store categorical data
+
+
+```r
+x &lt;- factor(c("a","b","b","c","c"))
+class(x)
+str(x)
+```
+
+```
+## [1] "factor"
+##  Factor w/ 3 levels "a","b","c": 1 2 2 3 3
+```
+
+- Factor `x` has 3 categories (3 levels)
+
+
+```r
+levels(x)
+```
+
+```
+## [1] "a" "b" "c"
+```
+
+- Verify if an R object is a factor
+
+
+```r
+is.factor(x)
+```
+
+```
+## [1] TRUE
+```
+
+---
+name: datatype-matrix-create
+
+## Data Type | Matrix | Create
+
+.pull-left-50[
+- Create a matrix from vector
+
+
+```r
+x &lt;- matrix(c(2,3,4,5,6,7))
+x
+```
+
+```
+##      [,1]
+## [1,]    2
+## [2,]    3
+## [3,]    4
+## [4,]    5
+## [5,]    6
+## [6,]    7
+```
+
+- Matrix has rows and columns
+
+
+```r
+dim(x) # dimensions
+nrow(x) # number of rows
+ncol(x) # number of columns
+```
+
+```
+## [1] 6 1
+## [1] 6
+## [1] 1
+```
+]
+
+.pull-right-50[
+- Specify rows and columns
+
+
+```r
+x &lt;- matrix(c(2,3,4,5,6,7),nrow=3,
+            ncol=2,byrow=TRUE)
+x
+```
+
+```
+##      [,1] [,2]
+## [1,]    2    3
+## [2,]    4    5
+## [3,]    6    7
+```
+
+
+```r
+str(x)
+```
+
+```
+##  num [1:3, 1:2] 2 4 6 3 5 7
+```
+
+- Verify if an R object is a matrix
+
+
+```r
+is.matrix(x)
+```
+
+```
+## [1] TRUE
+```
+]
+
+---
+name: datatype-matrix-access
+
+## Data Type | Matrix | Access
+
+- Access matrix using `[]` operator as `[row,col]`
+
+
+```r
+x[2,2]
+```
+
+```
+## [1] 5
+```
+
+- Get whole row/col using `[row,]` or `[,col]`
+
+
+```r
+x[1,]
+x[,2]
+```
+
+```
+## [1] 2 3
+## [1] 3 5 7
+```
+
+- Use `drop=FALSE` to retain a matrix as `[row,col,drop=FALSE]`
+
+
+```r
+x[1,,drop=F]
+x[,2,drop=F]
+```
+
+```
+##      [,1] [,2]
+## [1,]    2    3
+##      [,1]
+## [1,]    3
+## [2,]    5
+## [3,]    7
+```
+
+---
+name: datatype-matrix-label
+
+## Data Type | Matrix | Label
+
+- Add row/column names
+
+
+```r
+rownames(x) &lt;- c("a","b","c")
+colnames(x) &lt;- c("k","p")
+x
+```
+
+```
+##   k p
+## a 2 3
+## b 4 5
+## c 6 7
+```
+
+- Access using labels
+
+
+```r
+x["b",]
+x[,"p"]
+```
+
+```
+## k p 
+## 4 5 
+## a b c 
+## 3 5 7
+```
+
+---
+name: datatype-list-create
+
+## Data Type | List
+
+.pull-left-50[
+- Create using `list()`.
+
+
+```r
+x &lt;- list(c(2,3,4,5),c("a","b","c","d"),
+          factor(c("a","a","b")),
+          matrix(c(3,2,3,5,6,7),ncol=2))
+x
+```
+
+```
+## [[1]]
+## [1] 2 3 4 5
+## 
+## [[2]]
+## [1] "a" "b" "c" "d"
+## 
+## [[3]]
+## [1] a a b
+## Levels: a b
+## 
+## [[4]]
+##      [,1] [,2]
+## [1,]    3    5
+## [2,]    2    6
+## [3,]    3    7
+```
+]
+
+.pull-right-50[
+
+```r
+typeof(x); class(x);
+```
+
+```
+## [1] "list"
+## [1] "list"
+```
+
+- Access lists using `[]` and `[[]]`
+
+
+```r
+x[1]
+```
+
+```
+## [[1]]
+## [1] 2 3 4 5
+```
+
+- Lists are recursive
+
+
+```r
+x &lt;- list(list(list(list())))
+str(x)
+```
+
+```
+## List of 1
+##  $ :List of 1
+##   ..$ :List of 1
+##   .. ..$ : list()
+```
+]
+
+---
+name: dataframe-create
+
+## Data Type | `data.frame` | Create
+
+
+```r
+dfr &lt;- data.frame(x = 1:3, y = c("a", "b", "c"))
+dfr
+```
+
+```
+##   x y
+## 1 1 a
+## 2 2 b
+## 3 3 c
+```
+
+
+```r
+str(dfr)
+```
+
+```
+## 'data.frame':	3 obs. of  2 variables:
+##  $ x: int  1 2 3
+##  $ y: Factor w/ 3 levels "a","b","c": 1 2 3
+```
+
+- Use `stringsAsFactors=FALSE` to avoid auto factor conversion
+
+
+```r
+dfr &lt;- data.frame(x = 1:3, y = c("a", "b", "c"), stringsAsFactors = F)
+str(dfr)
+is.data.frame(dfr)
+```
+
+```
+## 'data.frame':	3 obs. of  2 variables:
+##  $ x: int  1 2 3
+##  $ y: chr  "a" "b" "c"
+## [1] TRUE
+```
+
+---
+name: dataframe-access
+
+## Data Type | `data.frame` | Access
+
+- Access using `[]` or `$` operator
+
+
+```r
+dfr$x
+dfr$y
+```
+
+```
+## [1] 1 2 3
+## [1] "a" "b" "c"
+```
+
+- `head()`/`tail()` functions show first/last six lines
+- Subset a `data.frame` using `subset()`
+
+
+```r
+subset(dfr,dfr$y=="a")
+```
+
+```
+##   x y
+## 1 1 a
+```
+
+---
+name: datatype-conversion
+
+## Data Type | Conversion
+
+
+```r
+x &lt;- c(1,2,3); str(x)
+```
+
+```
+##  num [1:3] 1 2 3
+```
+
+- Convert to character
+
+
+```r
+y &lt;- as.character(x); str(y)
+```
+
+```
+##  chr [1:3] "1" "2" "3"
+```
+
+- Character coerced (if possible) to number
+
+
+```r
+x &lt;- c("1","2","hello"); str(x)
+```
+
+```
+##  chr [1:3] "1" "2" "hello"
+```
+
+
+```r
+str(as.numeric(x))
+```
+
+```
+##  num [1:3] 1 2 NA
+```
+
+- Few other conversion functions
+
+`as.matrix()`, `as.data.frame()`, `as.integer()`, `as.Date()`
+
+---
+name: functions-built-in-math
+
+## Functions | Built-In | Math
+
+
+```r
+# generate 10 random numbers between 1 and 200
+x &lt;- sample(x=1:200,10); x;
+```
+
+```
+##  [1] 106  92 162  90 139  61  57 117  67 127
+```
+
+
+```r
+sum(x) # sum
+mean(x) # mean
+median(x) # median
+min(x) # min
+log(x) # log
+exp(x) # exponent
+sqrt(x) # square-root
+round(x) # round
+sort(x) # sort
+```
+
+```
+## [1] 1018
+## [1] 101.8
+## [1] 99
+## [1] 57
+##  [1] 4.663439 4.521789 5.087596 4.499810 4.934474 4.110874 4.043051
+##  [8] 4.762174 4.204693 4.844187
+##  [1] 1.084464e+46 9.017628e+39 2.268329e+70 1.220403e+39 2.327732e+60
+##  [6] 3.104298e+26 5.685720e+24 6.493134e+50 1.252363e+29 1.430208e+55
+##  [1] 10.295630  9.591663 12.727922  9.486833 11.789826  7.810250  7.549834
+##  [8] 10.816654  8.185353 11.269428
+##  [1] 106  92 162  90 139  61  57 117  67 127
+##  [1]  57  61  67  90  92 106 117 127 139 162
+```
+
+---
+name: functions-built-in-string
+
+## Functions | Built-In | String
+
+
+```r
+a &lt;- "sunny"; b &lt;- "day"
+
+paste(a,b) # join
+grep("sun",a) # find a pattern
+nchar("sunny") # number of characters
+toupper("sunny") # to uppercase
+tolower("SUNNY") # to lowercase
+sub("sun","fun","sunny") # replace pattern
+substr("sunny",start=1,stop=3) # substring
+```
+
+```
+## [1] "sunny day"
+## [1] 1
+## [1] 5
+## [1] "SUNNY"
+## [1] "sunny"
+## [1] "funny"
+## [1] "sun"
+```
+
+---
+name: functions-custom
+
+## Functions | Custom
+
+
+```r
+a &lt;- 1:6; b &lt;- 8:10
+
+d &lt;- a*b
+e &lt;- log(d)
+f &lt;- sqrt(e)
+f
+```
+
+```
+## [1] 1.442027 1.700109 1.844234 1.861649 1.951067 2.023449
+```
+
+- Custom function definition
+
+
+```r
+my_function &lt;- function(a,b){
+  d &lt;- a*b
+  e &lt;- log(d)
+  f &lt;- sqrt(e)
+  return(f)
+}
+```
+
+- Re-use function
+
+
+```r
+my_function(a=2:4,b=6:8)
+```
+
+```
+## [1] 1.576359 1.744856 1.861649
+```
+
+- Function names must not start with number
+
+---
+name: control-structure-if
+
+## Control Structure | `if`
+
+- Conditional statements using `if()`
+
+
+```r
+a &lt;- 2; b &lt;- 5;
+if(a &lt; b) print(paste(a,"is smaller than",b))
+```
+
+```
+## [1] "2 is smaller than 5"
+```
+
+.pull-left-50[
+- Use `else` for alternative output
+
+
+```r
+if(a &lt; b) {
+  print(paste(a,"is smaller than",b))
+}else{
+  print(paste(b,"is smaller than",a))
+}
+```
+
+```
+## [1] "2 is smaller than 5"
+```
+]
+
+.pull-right-50[
+- Chain `if else` statements
+
+
+```r
+grade &lt;- "B"
+
+if(grade == "A"){
+  print("Grade is Excellent!")
+}else if(grade == "B"){
+  print("Grade is Good.")
+} else if (grade == "C") {
+  print("Grade is Alright.")
+}
+```
+
+```
+## [1] "Grade is Good."
+```
+]
+
+---
+name: control-structure-for
+
+## Control Structure | `for`
+
+- Use `for()` loop for known iterations
+
+
+```r
+for (i in 1:5){
+  print(i)
+}
+```
+
+```
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+```
+
+- Use `while()` loop for unknown number of iterations
+
+
+```r
+i &lt;- 1
+while(i &lt; 5){
+  print(i)
+  i &lt;- i+1
+}
+```
+
+```
+## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+```
+
+---
+name: package
+
+## R Packages
+
+- [CRAN](https://cran.r-project.org/) (The Comprehensive R Archive Network)
+- Use `install.packages()`
+
+
+```r
+install.packages("ggplot2",dependencies=TRUE)
+```
+
+- For local packages, use `type="source"`
+
+
+```r
+install.packages(path="./dir/package.zip",type="source")
+```
+
+- Use `install_github()` from package `devtools` to install from GitHub
+
+.size-60[![](images/install-packages.png)]
+
+---
+name: graphics-base-1
+
+## Graphics | Base
+
+
+```r
+dfr &lt;- data.frame(a=sample(1:100,10),b=sample(1:100,10))
+plot(dfr$a,dfr$b)
+```
+
+&lt;img src="lecture_files/figure-html/unnamed-chunk-61-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+
+- Add axes labels etc
+
+
+```r
+plot(dfr$a,dfr$b,xlab="Variable a",ylab="Variable b")
+plot(dfr$a,dfr$b,xlab="Variable a",ylab="Variable b",type="b")
+```
+
+---
+name: graphics-base-2
+
+## Graphics | Base
+
+
+```r
+dfr$cat &lt;- rep(c("C1","C2"),each=5) # add category
+
+# subset data
+dfr_c1 &lt;- subset(dfr,dfr$cat == "C1")
+dfr_c2 &lt;- subset(dfr,dfr$cat == "C2")
+
+plot(dfr_c1$a,dfr_c1$b,xlab="Variable a",ylab="Variable b",col="red",pch=1)
+points(dfr_c2$a,dfr_c2$b,col="blue",pch=2)
+legend(x="topright",legend=c("C1","C2"),
+       col=c("red","blue"),pch=c(1,2))
+```
+
+&lt;img src="lecture_files/figure-html/unnamed-chunk-63-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+name: graphics-base-3
+
+## Graphics | Base
+
+- Barplot
+
+
+```r
+ldr &lt;- data.frame(a=letters[1:10],b=sample(1:50,10))
+barplot(ldr$b,names.arg=ldr$a)
+```
+
+&lt;img src="lecture_files/figure-html/unnamed-chunk-64-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+name: graphics-ggplot-1
+
+## Graphics | `ggplot2`
+
+
+```r
+library(ggplot2)
+
+ggplot(dfr,aes(x=a,y=b,colour=cat))+
+  geom_point()+
+  labs(x="Variable a",y="Variable b")
+```
+
+&lt;img src="lecture_files/figure-html/unnamed-chunk-65-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+name: graphics-ggplot-2
+
+## Graphics | `ggplot2`
+
+- Barplot
+
+
+```r
+ggplot(ldr,aes(x=a,y=b))+
+  geom_bar(stat="identity")
+```
+
+&lt;img src="lecture_files/figure-html/unnamed-chunk-66-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+name: io-text
+
+## Input/Output | Text
+
+
+```r
+dfr &lt;- read.table("iris.txt",header=TRUE,stringsAsFactors=F)
+head(dfr)
+```
+
+```
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+```
+
+
+```r
+str(dfr)
+```
+
+```
+## 'data.frame':	150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : chr  "setosa" "setosa" "setosa" "setosa" ...
+```
+
+
+```r
+dfr1 &lt;- dfr[dfr$Species == "setosa",]
+write.table(dfr1,"iris-setosa.txt",sep="\t",row.names=F,quote=F)
+```
+
+`sep="\t"` sets tab delimiter, `row.names=F` avoids printing rownames, `quote=F` avoids quotes around strings.
+
+---
+name: io-image
+
+## Input/Output | Image
+
+- Create data
+
+
+```r
+dfr &lt;- data.frame(a=sample(1:100,10),b=sample(1:100,10))
+```
+
+- Base plot
+
+
+```r
+png(filename="plot-base.png")
+plot(dfr$a,dfr$b)
+dev.off()
+```
+
+- ggplot method 1
+
+
+```r
+p &lt;- ggplot(dfr,aes(a,b)) + geom_point()
+
+png(filename="plot-ggplot-1.png")
+print(p)
+dev.off()
+```
+
+- ggplot method 2
+
+
+```r
+ggsave(filename="plot-ggplot-2.png",plot=p)
+```
+
+---
+name: help
+class: spaced
+
+## Help
+
+- Use `?function` to get function documentation
+- Use `??name` to search for a function
+- Use `args(function)` to get the arguments to a function
+- Go to the package CRAN page/webpage for vignettes
+- [R bloggers](https://www.r-bloggers.com/): Great blog to follow to keep updated with the latest in the R world as well as tutorials.
+- [Stackoverflow](https://stackoverflow.com/): Online community to find solutions to your problems.
+
+.help[![](images/help.png)]
+
+---
+name: learning-r
+class: spaced
+
+## Learning R
+
+There are lots of resources for getting help in R.
+
+### Tutorials
+
+- [Introduction to R](https://www.datacamp.com/courses/free-introduction-to-r): Tutorial by Datacamp with excellent tutorials.
+- [R programming tutorial](https://www.youtube.com/watch?v=s3FozVfd7q4): Youtube video tutorial by Derek Banas.
+- [R for data science](http://r4ds.had.co.nz/) Data science tutorial by Hadley wickham.
+- [Data carpentry](https://datacarpentry.org/R-ecology-lesson/) Data carpentry R workshop (Medium-Advanced)
+
+### Reference
+
+- [R Cookbook](http://www.cookbook-r.com/): General purpose reference.
+- [Quick R](https://www.statmethods.net/): General purpose reference.
+- [Awesome R](https://awesome-r.com/): Curated list of useful R packages.
+- [RStudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/): Useful cheatsheets.
+- [Advanced R](http://adv-r.had.co.nz) by Hadley Wickham (Medium-Advanced)
+
+### Links
+
+- [Tutorialspoint List](https://www.computerworld.com/article/2497464/business-intelligence/top-r-language-resources-to-improve-your-data-skills.html?page=2): Good list of resources.
+
+.learning[![](images/boy-reads.png)]
+
+---
+name: useful-packages
+class: spaced
+
+## Useful packages
+
+These are some useful packages when starting with data analysis in R.
+
+- [dplyr](https://dplyr.tidyverse.org/), [tidyr](https://tidyr.tidyverse.org/): Data manipulation
+- [ggplot2](https://ggplot2.tidyverse.org/): Data visualisation
+- [stringr](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html): String manipulation
+- [lubridate](https://lubridate.tidyverse.org/): Date/time manipulation
+- [rmarkdown](https://rmarkdown.rstudio.com/): Reproducible research and report generation
+
+[.size-45[![](images/rlibs.jpg)]](http://hexb.in/)
+
+---
+name: end-slide
+class: end-slide
+
+# Thank you
+
+
+
+&lt;p style="text-align: left; font-size: small;"&gt;
+Built on : &lt;i class='fa fa-calendar' aria-hidden='true'&gt;&lt;/i&gt; 28-Aug-2018 at &lt;i class='fa fa-clock-o' aria-hidden='true'&gt;&lt;/i&gt; 19:57:05. Graphics from &lt;img src="./images/freepik.jpg" style="max-height:20px; vertical-align:middle;"&gt;
+&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;b&gt;2018&lt;/b&gt; | Roy Francis | [SciLifeLab](https://www.scilifelab.se/) | [NBIS](https://nbis.se/)
+    </textarea>
+<script src="assets/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "4:3",
+"highlightLanguage": "r",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "<div class=\"progress-bar-container\">   <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">   </div> </div>` "
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
