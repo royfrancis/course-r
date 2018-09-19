@@ -12,7 +12,11 @@
 
 /* FONTS -------------------------------------------------------------------- */
 
-@import url('https://fonts.googleapis.com/css?family=Lato|Roboto');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Roboto:400,700');
+
+@font-face {
+font-family: 'Lato', 'Roboto', 'DIN', 'Helvetica', sanserif;
+}
 
 /* body font family 90% black */
 body,p,h1,h2,h3,h4,h5,h6 { 

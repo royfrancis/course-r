@@ -226,8 +226,9 @@ div.tocify {
 </div>
 
 
+<p><link href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto:400,700" rel="stylesheet"></p>
 <h2 class="nauthor">
-<b>Roy Francis</b> | 28-Aug-2018
+<b>Roy Francis</b> | 19-Sep-2018
 </h2>
 <p><img src="assets/logo-color-new.svg" alt="logo" style="height:70px; position:absolute; top:0; right:0; padding-right:40px; margin-top:7px"></p>
 <p><br> <br></p>
@@ -279,11 +280,11 @@ div.tocify {
 <p>R commands are excecuted and results and returned in the <strong>Console</strong>. The <strong>Console</strong> shows a <code>&gt;</code> symbol meaning that it is ready to accept commands. When it is waiting for further information, it shows a <code>+</code> symbol. This can happen when you have pasted in partial command or forgot to close parenthesis etc. Provide the required information, complete the command or press <kbd>Esc</kbd> on the keyboard to exit from the <code>+</code> back to the <code>&gt;</code>.</p>
 <p>Run a command in the R console.</p>
 <pre class="r"><code>getwd()</code></pre>
-<pre><code>## [1] &quot;D:/data/Box Sync/nbis/teaching/2018/r-intro&quot;</code></pre>
+<pre><code>## [1] &quot;D:/Box Sync/nbis/teaching/2018/r-intro&quot;</code></pre>
 <p>This command prints the current working directory. When you read or write, this is the path that R looks for.</p>
 <p>Commands written in the <strong>Console</strong> are executed and lost. R commands can be saved as a script. To create a new script, go to <strong>File &gt; New File &gt; R Script</strong>. This text file can be saved to the working directory named <strong>script.R</strong>. Now add some R command to the file. For example try;</p>
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>## R version 3.5.0 (2018-04-23)
+<pre><code>## R version 3.5.1 (2018-07-02)
 ## Platform: x86_64-w64-mingw32/x64 (64-bit)
 ## Running under: Windows &gt;= 8 x64 (build 9200)
 ## 
@@ -300,20 +301,20 @@ div.tocify {
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] captioner_2.2.3 ggplot2_3.0.0   bookdown_0.7    knitr_1.20     
+## [1] captioner_2.2.3    ggplot2_3.0.0.9000 bookdown_0.7      
+## [4] knitr_1.20        
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.18     highr_0.7        compiler_3.5.0   pillar_1.3.0    
-##  [5] plyr_1.8.4       bindr_0.1.1      tools_3.5.0      digest_0.6.15   
-##  [9] jsonlite_1.5     evaluate_0.11    tibble_1.4.2     gtable_0.2.0    
-## [13] png_0.1-7        pkgconfig_2.0.1  rlang_0.2.2      rstudioapi_0.7  
-## [17] yaml_2.2.0       xfun_0.3         bindrcpp_0.2.2   withr_2.1.2     
-## [21] stringr_1.3.1    dplyr_0.7.6      rprojroot_1.3-2  grid_3.5.0      
-## [25] tidyselect_0.2.4 glue_1.3.0       R6_2.2.2         rmarkdown_1.10  
-## [29] xaringan_0.7     purrr_0.2.5      magrittr_1.5     backports_1.1.2 
-## [33] scales_0.5.0     htmltools_0.3.6  assertthat_0.2.0 colorspace_1.3-2
-## [37] labeling_0.3     stringi_1.2.4    lazyeval_0.2.1   munsell_0.5.0   
-## [41] crayon_1.3.4</code></pre>
+##  [1] Rcpp_0.12.18     pillar_1.3.0     compiler_3.5.1   plyr_1.8.4      
+##  [5] bindr_0.1.1      tools_3.5.1      digest_0.6.17    jsonlite_1.5    
+##  [9] evaluate_0.11    tibble_1.4.2     gtable_0.2.0     pkgconfig_2.0.2 
+## [13] rlang_0.2.2      yaml_2.2.0       xfun_0.3         bindrcpp_0.2.2  
+## [17] withr_2.1.2      stringr_1.3.1    dplyr_0.7.6      rprojroot_1.3-2 
+## [21] grid_3.5.1       tidyselect_0.2.4 glue_1.3.0       R6_2.2.2        
+## [25] rmarkdown_1.10   xaringan_0.7     purrr_0.2.5      magrittr_1.5    
+## [29] backports_1.1.2  scales_1.0.0     htmltools_0.3.6  assertthat_0.2.0
+## [33] colorspace_1.3-2 labeling_0.3     stringi_1.2.4    lazyeval_0.2.1  
+## [37] munsell_0.5.0    crayon_1.3.4</code></pre>
 <p>This command gives you a summary of the current system setup including R version, operating system and R packages that are loaded/attached.</p>
 <p>Select the text or place the cursor on that line and click <strong>Run</strong>. Alternatively use keyboard shortcut <kbd>Ctrl</kbd>+<kbd>R</kbd> or <kbd>Ctrl</kbd>+<kbd>Enter</kbd> / <kbd>Command</kbd>+<kbd>Enter</kbd>.</p>
 <p>Now add another command, say, <code>Sys.Date()</code>, which returns the current system date. Then save the file. All commands in the saved <strong>script.R</strong> can be run as a batch either by selecting all the commands followed by <strong>Run</strong> / <kbd>Ctrl</kbd>+<kbd>Enter</kbd>, or directly sourcing the file from the console like this:</p>
@@ -724,12 +725,15 @@ dfr$y</code></pre>
 <pre><code>## [1] 1 2 3
 ## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
 <p>Subset a <code>data.frame()</code> conditionally.</p>
-<pre class="r"><code>subset(dfr,dfr$y==&quot;a&quot;)</code></pre>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["x"],"name":[1],"type":["int"],"align":["right"]},{"label":["y"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"a","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
+<pre class="r"><code>print(subset(dfr,dfr$y==&quot;a&quot;))</code></pre>
+<pre><code>##   x y
+## 1 1 a</code></pre>
+<p>Ordering a dataframe by one column in decreasing order.</p>
+<pre class="r"><code>print(dfr[order(dfr$y,decreasing=T),])</code></pre>
+<pre><code>##   x y
+## 3 3 c
+## 2 2 b
+## 1 1 a</code></pre>
 </div>
 </div>
 <div id="type-conversion" class="section level2">
@@ -790,18 +794,18 @@ round(x)
 # sort
 sort(x)</code></pre>
 <pre><code>## [1] 10
-## [1] 1053
-## [1] 105.3
-## [1] 106.5
-## [1] 9
-##  [1] 4.644391 3.178054 5.062595 4.574711 4.691348 5.273000 5.164786
-##  [8] 3.465736 5.010635 2.197225
-##  [1] 1.467662e+45 2.648912e+10 4.154590e+68 1.338335e+42 2.178204e+47
-##  [6] 4.868823e+84 1.003539e+76 7.896296e+13 1.393710e+65 8.103084e+03
-##  [1] 10.198039  4.898979 12.569805  9.848858 10.440307 13.964240 13.228757
-##  [8]  5.656854 12.247449  3.000000
-##  [1] 104  24 158  97 109 195 175  32 150   9
-##  [1]   9  24  32  97 104 109 150 158 175 195</code></pre>
+## [1] 873
+## [1] 87.3
+## [1] 86.5
+## [1] 11
+##  [1] 4.290459 5.204007 4.997212 2.397895 4.605170 4.927254 3.465736
+##  [8] 2.484907 2.564949 5.099866
+##  [1] 5.052394e+31 1.100514e+79 1.886181e+64 5.987414e+04 2.688117e+43
+##  [6] 8.563248e+59 7.896296e+13 1.627548e+05 4.424134e+05 1.676081e+71
+##  [1]  8.544004 13.490738 12.165525  3.316625 10.000000 11.747340  5.656854
+##  [8]  3.464102  3.605551 12.806248
+##  [1]  73 182 148  11 100 138  32  12  13 164
+##  [1]  11  12  13  32  73 100 138 148 164 182</code></pre>
 <p>Some useful string functions.</p>
 <pre class="r"><code>a &lt;- &quot;sunny&quot;
 b &lt;- &quot;day&quot;
@@ -900,6 +904,16 @@ foo &lt;- 55
 my_new_function()</code></pre>
 <pre><code>## [1] 57</code></pre>
 <p>In the example above, variable <code>foo</code> used inside the function is not supplied to the function through an argument, yet it still manages to find it. When a function doesn’t find a variable inside a function, it searches outside the function.</p>
+<p>Let’s create a useful function for coefficient of variation. R doesn’t have a function for it. The formula is simple: standard-deviation/mean.</p>
+<pre class="r"><code>covfefe &lt;- function(x) sd(x)/mean(x)
+
+val &lt;- c(4,7,2,3,5,4,3)
+sd(val)
+mean(val)
+covfefe(val)</code></pre>
+<pre><code>## [1] 1.632993
+## [1] 4
+## [1] 0.4082483</code></pre>
 </div>
 </div>
 <div id="control-structures" class="section level1">
@@ -984,13 +998,13 @@ while(i &lt; 5){
 <pre class="r"><code>dfr &lt;- data.frame(a=sample(1:100,10),b=sample(1:100,10))</code></pre>
 <p>Now we have a dataframe with two continuous variables that can be plotted against each other.</p>
 <pre class="r"><code>plot(dfr$a,dfr$b)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-79-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-85-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 <p>This is probably the simplest and most basic plots. We can modify the x and y axis labels.</p>
 <pre class="r"><code>plot(dfr$a,dfr$b,xlab=&quot;Variable a&quot;,ylab=&quot;Variable b&quot;)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-80-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-86-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 <p>We can change the point to a line.</p>
 <pre class="r"><code>plot(dfr$a,dfr$b,xlab=&quot;Variable a&quot;,ylab=&quot;Variable b&quot;,type=&quot;b&quot;)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-81-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-87-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Let’s add a categorical column to our dataframe.</p>
 <pre class="r"><code>dfr$cat &lt;- rep(c(&quot;C1&quot;,&quot;C2&quot;),each=5)</code></pre>
 <p>And then colour the points by category.</p>
@@ -1003,11 +1017,11 @@ points(dfr_c2$a,dfr_c2$b,col=&quot;blue&quot;,pch=2)
 
 legend(x=&quot;topright&quot;,legend=c(&quot;C1&quot;,&quot;C2&quot;),
        col=c(&quot;red&quot;,&quot;blue&quot;),pch=c(1,2))</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-83-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-89-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Let’s create a barplot.</p>
 <pre class="r"><code>ldr &lt;- data.frame(a=letters[1:10],b=sample(1:50,10))
 barplot(ldr$b,names.arg=ldr$a)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-84-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-90-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 </div>
 <div id="grid-graphics" class="section level2">
 <h2><span class="header-section-number">9.2</span> Grid graphics</h2>
@@ -1018,12 +1032,12 @@ barplot(ldr$b,names.arg=ldr$a)</code></pre>
 ggplot(dfr,aes(x=a,y=b,colour=cat))+
   geom_point()+
   labs(x=&quot;Variable a&quot;,y=&quot;Variable b&quot;)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-85-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-91-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 <p>It is generally easier and more consistent to create plots using the ggplot2 package compared to the base graphics.</p>
 <p>Let’s create a barplot as well.</p>
 <pre class="r"><code>ggplot(ldr,aes(x=a,y=b))+
   geom_bar(stat=&quot;identity&quot;)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-86-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-92-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 </div>
 </div>
 <div id="inputoutput" class="section level1">
@@ -1136,7 +1150,7 @@ dev.off()</code></pre>
 </ul>
 <p><a href="http://hexb.in/"><img src="images/rlibs.jpg" /></a></p>
 <p style="text-align: left; font-size: small;">
-Built on : <i class='fa fa-calendar' aria-hidden='true'></i> 28-Aug-2018 at <i class='fa fa-clock-o' aria-hidden='true'></i> 20:15:39. Graphics from <img src="images/freepik.jpg" style="max-height:20px; vertical-align:middle;">
+Built on : <i class='fa fa-calendar' aria-hidden='true'></i> 19-Sep-2018 at <i class='fa fa-clock-o' aria-hidden='true'></i> 11:01:30. Graphics from <img src="images/freepik.jpg" style="max-height:20px; vertical-align:middle;">
 </p>
 <hr>
 <p><b>2018</b> | Roy Francis | <a href="https://www.scilifelab.se/">SciLifeLab</a> | <a href="https://nbis.se/">NBIS</a></p>
