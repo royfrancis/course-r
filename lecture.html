@@ -270,10 +270,8 @@ y &lt;- "this"; typeof(y)
 
 
 ```r
-mode(x)
-class(x)
-str(x)
-structure(x)
+mode(x); class(x)
+str(x); structure(x)
 ```
 
 ```
@@ -860,7 +858,7 @@ x &lt;- sample(x=1:200,10); x;
 ```
 
 ```
-##  [1]  30  47 116  35  55  42  13  86 123 101
+##  [1] 189  21 117 182  90  47 165 164 150 124
 ```
 
 
@@ -877,18 +875,18 @@ sort(x) # sort
 ```
 
 ```
-## [1] 648
-## [1] 64.8
-## [1] 51
-## [1] 13
-##  [1] 3.401197 3.850148 4.753590 3.555348 4.007333 3.737670 2.564949
-##  [8] 4.454347 4.812184 4.615121
-##  [1] 1.068647e+13 2.581313e+20 2.388691e+50 1.586013e+15 7.694785e+23
-##  [6] 1.739275e+18 4.424134e+05 2.235247e+37 2.619517e+53 7.307060e+43
-##  [1]  5.477226  6.855655 10.770330  5.916080  7.416198  6.480741  3.605551
-##  [8]  9.273618 11.090537 10.049876
-##  [1]  30  47 116  35  55  42  13  86 123 101
-##  [1]  13  30  35  42  47  55  86 101 116 123
+## [1] 1249
+## [1] 124.9
+## [1] 137
+## [1] 21
+##  [1] 5.241747 3.044522 4.762174 5.204007 4.499810 3.850148 5.105945
+##  [8] 5.099866 5.010635 4.820282
+##  [1] 1.206861e+82 1.318816e+09 6.493134e+50 1.100514e+79 1.220403e+39
+##  [6] 2.581313e+20 4.556061e+71 1.676081e+71 1.393710e+65 7.120586e+53
+##  [1] 13.747727  4.582576 10.816654 13.490738  9.486833  6.855655 12.845233
+##  [8] 12.806248 12.247449 11.135529
+##  [1] 189  21 117 182  90  47 165 164 150 124
+##  [1]  21  47  90 117 124 150 164 165 182 189
 ```
 
 ---
@@ -1329,7 +1327,7 @@ class: end-slide
 
 
 &lt;p style="text-align: left; font-size: small;"&gt;
-Built on : &lt;i class='fa fa-calendar' aria-hidden='true'&gt;&lt;/i&gt; 19-Sep-2018 at &lt;i class='fa fa-clock-o' aria-hidden='true'&gt;&lt;/i&gt; 10:35:08. Graphics from &lt;img src="./images/freepik.jpg" style="max-height:20px; vertical-align:middle;"&gt;
+Built on : &lt;i class='fa fa-calendar' aria-hidden='true'&gt;&lt;/i&gt; 19-Sep-2018 at &lt;i class='fa fa-clock-o' aria-hidden='true'&gt;&lt;/i&gt; 11:09:42. Graphics from &lt;img src="./images/freepik.jpg" style="max-height:20px; vertical-align:middle;"&gt;
 &lt;/p&gt;
 
 &lt;hr&gt;
@@ -1343,7 +1341,7 @@ Built on : &lt;i class='fa fa-calendar' aria-hidden='true'&gt;&lt;/i&gt; 19-Sep-
 "highlightStyle": "github",
 "highlightLines": true,
 "countIncrementalSlides": false,
-"slideNumberFormat": "<div class=\"progress-bar-container\">   <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">   </div> </div>`"
+"slideNumberFormat": "%current%/%total%"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
