@@ -1,101 +1,166 @@
-/*
-* CSS Bootstrap custom style for SciLifeLab
-* Uses Bootswatch united theme
-*/
+/* css style for r-intro lab */
+/* xaringen, remark.js       */
+/* 2019 Roy Francis          */
+
+:root {
+  --color-primary: #95C11E;
+  --color-border: #e8e8e8;
+  --color-text: #1A1A1A;
+  --color-code-bg: #f9f9f9;
+  --color-code-inline: #d72b3f;
+  --font-base: 'Source Sans Pro';
+  --font-highlight: 'Source Sans Pro';
+  --font-code: 'Ubuntu Mono';
+}
+
+/* FONTS -------------------------------------------------------------------- */
 
 /* define font */
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Roboto:400,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro:300,400,600|Ubuntu+Mono&subset=latin-ext');
 
-@font-face {
-font-family: 'Lato', 'Roboto', 'DIN', 'Helvetica', sanserif;
+/* body font family */
+body,p,h1,h2,h3,h4,h5,h6 {
+  font-family: var(--font-base, 'Roboto', 'DIN', 'Helvetica', sans-serif);
+  color: var(--color-text);
+  font-weight: 400;
+  font-size: 13pt;
 }
 
-/* heading sizes */
-h1, .h1 {
-  font-size: 2.7rem;
+/* title font family, weight and size */
+h1,h2 {
+  font-family: var(--font-highlight, 'Roboto', 'DIN', 'Helvetica', sans-serif);
+  color: var(--color-text);
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
-h2, .h2 {
-  font-size: 2.4rem;
+h1 {
+  font-size: 1.802em !important;
+  color: var(--color-text);
+  margin-top: 0.9em;
+  margin-bottom: 0.8em;
 }
 
-h3, .h3 {
-  font-size: 2.1rem;
+h2 {
+  font-size: 1.602em !important;
+  color: var(--color-text);
+  margin-top: 0.2em;
+  margin-bottom: 0.6em;
+  /* border-left: var(--color-primary) 6px solid; */
+  /* padding-left: 0.5em; */
 }
 
-h4, .h4 {
-  font-size: 1.8rem;
+h3 {
+  font-size: 1.424em !important;
+  margin-top: 0.6em;
+  margin-bottom: 0.4em;
 }
 
-h5, .h5 {
-  font-size: 1.5rem;
+h4 {
+  font-size: 1.266em !important;
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
 }
 
-h6, .h6 {
-  font-size: 1.2rem;
+h5 {
+  font-size: 1.266em !important;
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+h6 {
+  font-size: 1.125em !important;
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+/* code style */
+code {
+  font-family: "Ubuntu Mono", "Consolas","Liberation Mono", "Courier New", monospace;
+  font-size: 1em;
+  color: var(--color-code-inline);
+  background-color: var(--color-code-bg);
+}
+
+pre {
+    font-family: "Ubuntu Mono", "Consolas","Liberation Mono", "Courier New", monospace;
+    background-color: var(--color-code-bg) !important;
+    font-size: 1em;
 }
 
 /* report title style */
 .title {
+  margin-top: 25px;
   margin-bottom: 10px;
-  font-size: 3.5rem;
+  margin-right: 70px;
+  font-size: 1.9em;
 }
 
 /* report subtitle style */
 .subtitle {
-  font-size: 3rem;
-  margin-top: 0px;
-  margin-bottom: 10px;
-  color: grey;
-}
-
-/* author */
-.nauthor {
-  font-size: 2rem;
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom: 5px;
+  font-size: 1.7em;
 }
 
-/* date */
+/* report author style */
+.author {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-weight: 400;
+}
+
+/* report date style */
 .date {
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
-/* link colour: scilife */
+/* abstract size */
+.abstract {
+  font-size: 1.2em;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 15px;
+  border-left: 5px solid var(--color-primary);
+  display: inline-block;
+}
+
+/* new font size classes */
+.largest { font-size: 2.488em; }
+.larger { font-size: 2.074em; }
+.large { font-size: 1.44em;}
+.small { font-size: 0.833em; }
+.smaller { font-size: 0.694em; }
+.smallest{ font-size: 0.579em; }
+
+blockquote {
+  border-left: 5px solid var(--color-primary);
+  background: var(--color-code-bg);
+  padding: 10px;
+  padding-left: 12px;
+  margin-left: 16px;
+  margin-right: 0;
+  border-radius: 0px 4px 4px 0px;
+}
+
+/* link colour */
 a {
-  color: #95C11E;
+  color: var(--color-primary);
+  text-decoration: none;
 }
 
 a:hover {
-  color: #95C11E;
+  color: var(--color-primary);
+  opacity: 0.6;
   text-decoration: underline;
 }
+
 
 /* floating bar highlight: use scilife green */
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
   background-color: #95C11E;
   border-color: #375D81;
-}
-
-/* code style */
-code {
-  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 14px;
-}
-
-pre {
-    background-color: #F2F2F2;
-}
-
-/* table even shading colour */
-.even {
-    background-color: #F2F2F2;
-}
-
-/* abstract paragraph style */
-.abstract {
-    line-height: 160%;
 }
 
 /* hover effect footer icons */
@@ -106,3 +171,236 @@ pre {
 .figure {
  margin-bottom: 12px; 
 }
+
+/* TABLES ------------------------------------------------------------------- */
+
+/* table even shading colour */
+.even {
+    background-color: var(--color-code-bg);
+}
+
+/* IMAGES ------------------------------------------------------------------- */
+
+/* image styling */
+img {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.fancyimage {
+  box-shadow: 1px 1px 5px grey;
+  border-radius: 2px;
+}
+
+.trlogo {
+  position:absolute;
+  /*height:70px;*/
+  /*top:2.5em; with code folding*/
+  top:1em;
+  right:0;
+  padding-right:40px;
+  margin-top:7px;
+}
+
+/* LAYOUT ------------------------------------------------------------------- */
+
+/* floating bar highlight */
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+  background-color: var(--color-primary);
+  border-color: var(--color-border);
+}
+
+/* button */
+.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-border);
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+/* button active states */
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary:active:focus, .open>.dropdown-toggle.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-border);
+    opacity: 0.8;
+}
+
+/* COLUMNS ------------------------------------------------------------------- */
+
+.pull-center{
+  width: 100%;
+}
+
+/* float 50%-50% width */
+.pull-right-50 {
+  width: 49%;
+  float: right;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+.pull-left-50 {
+  width: 49%;
+  float: left;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+
+/* float 30% 70% width */
+.pull-right-30 {
+  width: 29%;
+  float: right;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+.pull-right-70 {
+  width: 69%;
+  float: right;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+.pull-left-30 {
+  width: 29%;
+  float: left;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+.pull-left-70 {
+  width: 69%;
+  float: left;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+
+/* float 40% 60% width */
+.pull-right-40 {
+  width: 39%;
+  float: right;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+.pull-right-60 {
+  width: 59%;
+  float: right;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+.pull-left-40 {
+  width: 39%;
+  float: left;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+.pull-left-60 {
+  width: 59%;
+  float: left;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
+}
+
+/* special */
+hr {
+  border: 2px solid var(--color-code-bg);
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.code-folding-btn {
+  margin-right: 0;
+}
+
+.sourceCode {
+  margin-bottom: 0.2em;
+}
+
+/* DIV STYLES --------------------------------------------------------------- */
+
+/** div style for instrauctions **/
+.instruction {
+ font-size: 18px;
+ border: 1px solid var(--color-primary);
+ border-left: 6px solid var(--color-primary);
+ border-radius: 4px 4px 4px 4px;
+ padding: 10px 10px 10px 10px;
+ margin: 20px 0px 10px 0px;
+}
+
+.optional {
+ border: 1px solid #EF7C00;
+ border-left: 6px solid #EF7C00;
+ border-radius: 4px 4px 4px 4px;
+ padding: 10px 10px 0px 10px;
+ margin: 20px 0px 10px 0px;
+}
+
+/** top title code **/
+div.block-title {
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: var(--color-border);
+  border-top: 1px solid var(--color-border);
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 2px 2px 2px 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: white;
+}
+
+/* ACCORDION ---------------------------------------------------------------- */
+
+button.btn-collapse {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+button.btn-collapse-normal {
+  color: white;
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+}
+
+button.btn-collapse-normal:hover {
+    background-color: white;
+    color: var(--color-primary);
+    border-color: white;
+    box-shadow: 0px 3px 40px -9px var(--color-primary);
+    -webkit-box-shadow: 0px 3px 40px -9px var(--color-primary);
+    -moz-box-shadow: 0px 3px 40px -9px var(--color-primary);
+}
+
+button.btn-collapse-optional {
+  color: white;
+  border-color: #EF7C00;
+  background-color: #EF7C00;
+}
+
+button.btn-collapse-optional:hover {
+    background-color: white;
+    color: #EF7C00;
+    border-color: white;
+    box-shadow: 0px 3px 30px -9px #EF7C00;
+    -webkit-box-shadow: 0px 3px 30px -9px #EF7C00;
+    -moz-box-shadow: 0px 3px 30px -9px #EF7C00;
+}
+
+button.btn.collapsed:before
+{
+    content: '+' ;
+    display: block;
+    width: 15px;
+    font-size: 120%;
+    font-weight: bold;
+}
+
+button.btn:before
+{
+    content: '-' ;
+    display: block;
+    width: 15px;
+    font-size: 120%;
+    font-weight: bold;
+}
+

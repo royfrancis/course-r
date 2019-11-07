@@ -1,114 +1,109 @@
-/* CSS style for RNASeq presentation */
-/* Xaringen, remark.js                  */
-/* 2018 Roy Francis                     */
+/* css style for r-intro presentation */
+/* xaringen, remark.js                */
+/* 2019 Roy Francis                   */
 
 :root {
-  --primary-color: #95C11E;
-  --border-color: #e8e8e8;
-  --text-color: #1A1A1A;
-  --code-bg-color: #f4f4f4;
-  --code-inline-color: #d72b3f;
+  --color-primary: #95C11E;
+  --color-border: #e8e8e8;
+  --color-text: #1A1A1A;
+  --color-code-bg: #f9f9f9;
+  --color-code-inline: #d72b3f;
+  --font-base: 'Source Sans Pro';
+  --font-highlight: 'Source Sans Pro';
+  --font-code: 'Ubuntu Mono';
 }
 
 /* FONTS -------------------------------------------------------------------- */
 
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700|Roboto:400,700');
+/* define font */
+@import url('https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro:300,400,600|Ubuntu+Mono&subset=latin-ext');
 
-@font-face {
-font-family: 'Lato', 'Roboto', 'DIN', 'Helvetica', sanserif;
+/* body font family */
+body,p,h1,h2,h3,h4,h5,h6 {
+  font-family: var(--font-base, 'Roboto', 'DIN', 'Helvetica', sans-serif);
+  color: var(--color-text);
+  font-weight: 400;
+  font-size: 16pt;
 }
 
-/* body font family 90% black */
-body,p,h1,h2,h3,h4,h5,h6 { 
-  font-family: 'Lato', 'Roboto', 'DIN', 'Helvetica', sanserif;
-  color: var(--text-color);
-}
-
-/* title font family, weight and size 60% black*/
-h1 {
-  font-weight: 800;
-  font-size: 200% !important;
-  margin-top: 0.9em;
-  margin-bottom: 0.9em;
-}
-
-h2 {
+/* title font family, weight and size */
+h1,h2 {
+  font-family: var(--font-highlight, 'Roboto', 'DIN', 'Helvetica', sans-serif);
+  color: var(--color-text);
   font-weight: 600;
-  font-size: 150% !important;
-  color: var(--primary-color);
-  margin-top: 0.7em;
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  font-size: 1.802em !important;
+  color: var(--color-text);
+  margin-top: 0.9em;
   margin-bottom: 0.8em;
 }
 
-h3 {
-  font-weight: 600;
-  font-size: 125% !important;
-  margin-top: 0.7em;
+h2 {
+  font-size: 1.602em !important;
+  color: var(--color-text);
+  margin-top: 0.2em;
   margin-bottom: 0.6em;
+  /* border-left: var(--color-primary) 6px solid; */
+  /* padding-left: 0.5em; */
+}
+
+h3 {
+  font-size: 1.424em !important;
+  margin-top: 0.6em;
+  margin-bottom: 0.4em;
 }
 
 h4 {
-  font-weight: 600;
-  font-size: 100% !important;
-  margin-top: 0.7em;
-  margin-bottom: 0.5em;
+  font-size: 1.266em !important;
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
 }
 
 h5 {
-  font-weight: 600;
-  font-size: 90% !important;
-  margin-top: 0.6em;
-  margin-bottom: 0.4em;
+  font-size: 1.266em !important;
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
 }
 
 h6 {
-  font-weight: 600;
-  font-size: 80% !important;
-  margin-top: 0.6em;
-  margin-bottom: 0.4em;
+  font-size: 1.125em !important;
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
 }
 
-/* code font*/
-.remark-code{
-  font-size: 80% !important;
+/* code font size */
+.remark-code {
+  font-size: 76% !important;
   border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-}
-
-/* block code */
-.hljs-github .hljs {
-  background: var(--code-bg-color);
+  line-height: 1.1em;
 }
 
 /* code inline */
-.remark-inline-code{
-  background: var(--code-bg-color);
-  border: 1px solid var(--border-color);
+.remark-inline-code {
+  background: var(--color-code-bg);
+  border: 1px solid var(--color-border);
   border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
   margin-right: 2px;
   padding: 2px 3px 1px;
   font-size: 80% !important;
-  color: var(--code-inline-color);
+  color: var(--color-code-inline);
 }
 
-/* new font classes */
-.vlarge { font-size: 200% }
-.large { font-size: 130% }
-.medium { font-size: 85% }
-.small { font-size: 70% }
-.vsmall { font-size: 50% }
-.highlight {color: var(--primary-color);}
-.altcol {color: #a8b0bb;}
-.citation {
-  font-size: 50%;
-  line-height: 15px;
-  position: fixed;
-  bottom: 5px;
-  margin-right: 6em;
+/* code font family */
+.remark-code, .remark-inline-code {
+  font-family: var(--font-code);
 }
+
+/* new font size classes */
+.largest { font-size: 2.488em; }
+.larger { font-size: 2.074em; }
+.large { font-size: 1.44em;}
+.small { font-size: 0.833em; }
+.smaller { font-size: 0.694em; }
+.smallest{ font-size: 0.579em; }
 
 /* spaced para style */
 .spaced {
@@ -117,21 +112,24 @@ h6 {
 
 /* links */
 a {
-  color: var(--primary-color);
+  color: var(--color-primary);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--primary-color);
+  color: var(--color-primary);
   opacity: 0.6;
   text-decoration: underline;
 }
 
 /* block quote */
 blockquote {
-  border-left: 5px solid var(--primary-color);
-  margin-left: 20px;
-  padding-left: 10px;
+  border-left: 5px solid var(--color-primary);
+  background: var(--color-code-bg);
+  padding-top: 0.01em;
+  padding-bottom: 0.01em;
+  padding-left: 1em;
+  border-radius: 0px 4px 4px 0px;
 }
 
 /* keyboard */
@@ -148,6 +146,14 @@ blockquote {
   font-size: 1rem;
 }
 /* MARGINS ------------------------------------------------------------------ */
+
+/* slide margin */
+.remark-slide-content {
+  padding-top: 1.8em;
+  padding-left: 2.5em;
+  padding-right: 2.5em;
+  padding-bottom: 1.8em;
+}
 
 /* list margin */
 ul {
@@ -173,7 +179,7 @@ p {
 .title-slide {
   background-image: url(cover.jpg);
   background-size: cover;
-  vertical-align: bottom !important; 
+  vertical-align: bottom !important;
   text-align: left !important;
   padding-bottom: 3em;
 }
@@ -182,7 +188,7 @@ p {
 .end-slide {
   background-image: url(end.jpg);
   background-size: cover;
-  vertical-align: bottom !important; 
+  vertical-align: bottom !important;
   text-align: left !important;
   padding-bottom: 3.5em;
 }
@@ -190,10 +196,9 @@ p {
 /* cover logo right */
 .title-slide.remark-slide-content:before{
   position: absolute;
-  content:url(logo-color-new.svg);
-  margin-right: 5%;
-  width:300px;
-  padding-top: 0px;
+  content:url(logo.svg);
+  margin-right: 50px;
+  margin-top: 40px;
   /* -webkit-filter: drop-shadow(1px 1px 3px grey); */
   /* filter: drop-shadow(1px 1px 3px grey); */
 }
@@ -207,10 +212,10 @@ p {
   text-align: left;
   font-weight: 600;
   border-bottom-style: solid;
-  border-bottom-color: var(--primary-color);
+  border-bottom-color: var(--color-primary);
   padding-bottom: 0.3em;
   margin-bottom: 0.3em;
-  color: var(--primary-color);
+  color: var(--color-primary);
 }
 
 .title-slide h2 {
@@ -242,14 +247,17 @@ p {
 /* reduce size of slide number */
 .remark-slide-number {
   font-size: 50%;
+  position: fixed;
+  right: 50px;
+  bottom: 5px;
 }
 
 /* IMAGES ------------------------------------------------------------------- */
 
 /* set images to 100% width */
 img, video, iframe {
-  max-width: 99%;
-  max-height: 99%;
+  max-width: 100%;
+  max-height: 100%;
   /* margin: 8px; */
 }
 
@@ -263,12 +271,11 @@ img, video, iframe {
 
 /* logo every slide top right */
 .remark-slide-content:before {
-  content: url(logo-color-new.svg);
-  width: 180px;
+  content: url(logo.svg);
   float: right;
   right: 0px;
   top: 0px;
-  padding-top: 12px;
+  padding-top: 10px;
 }
 
 /* image size classes */
@@ -381,7 +388,7 @@ img, video, iframe {
 }
 
 /* SLIDE PROGRESS BAR -------------------------------------------------------- */
-
+/*
 .remark-slide-number {
   position: inherit;
 }
@@ -397,10 +404,58 @@ img, video, iframe {
 
 .remark-slide-number .progress-bar {
   height: 100%;
-  background-color: var(--primary-color);
+  background-color: var(--color-primary);
+}
+*/
+/* OTHER ------------------------------------------------------- */
+
+/* special */
+/* limit vertical size of a code chunk */
+
+.limity100 {
+  max-height: 100px;
+  overflow-y: auto;
 }
 
-/* OTHER ------------------------------------------------------- */
+.limity150 {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.limity200 {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.limity250 {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.limity300 {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.limity350 {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.limity400 {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.limity450 {
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.limity500 {
+  max-height: 500px;
+  overflow-y: auto;
+}
 
 /* help image */
 .help {
@@ -419,4 +474,8 @@ img, video, iframe {
   max-width: 23%;
   margin-right: 4em;
   margin-bottom: 8px;
+}
+
+hr {
+  border: 2px solid var(--color-code-bg);
 }

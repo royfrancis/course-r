@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -27,6 +28,9 @@
 <script src="lab_files/highlightjs-9.12.0/highlight.js"></script>
 <link href="lab_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="lab_files/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="lab_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="lab_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link id="font-awesome-1-attachment" rel="attachment" href="lab_files/font-awesome-5.1.0/fonts/fontawesome-webfont.ttf"/>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -73,11 +77,9 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="assets\lab.css" type="text/css" />
+<link rel="stylesheet" href="assets/lab.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -91,7 +93,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -102,50 +103,72 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
-
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -194,8 +217,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -204,6 +225,16 @@ div.tocify {
 
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -226,12 +257,13 @@ div.tocify {
 </div>
 
 
-<p><link href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto:400,700" rel="stylesheet"></p>
-<h2 class="nauthor">
-<b>Roy Francis</b> | 19-Sep-2018
+<p><link href="https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro:300,400,600|Ubuntu+Mono&amp;subset=latin-ext" rel="stylesheet"></p>
+<h2 class="author">
+<b>Roy Francis</b> • 07-Nov-2019
 </h2>
-<p><img src="assets/logo-color-new.svg" alt="logo" style="height:70px; position:absolute; top:0; right:0; padding-right:40px; margin-top:7px"></p>
-<p><br> <br></p>
+<p><img src="assets/logo.svg" alt="logo" class="trlogo"></p>
+<p><br>
+<br></p>
 <div id="topics" class="section level1">
 <h1><span class="header-section-number">1</span> Topics</h1>
 <p>This tutorial aims to get you started with R. It roughly covers the following topics:</p>
@@ -243,6 +275,7 @@ div.tocify {
 <li>Creating and running functions</li>
 <li>Base and grid graphics</li>
 <li>Input &amp; output from R</li>
+<li>Brief intro to Rmarkdown and Tidyverse</li>
 </ul>
 </div>
 <div id="what-why-r" class="section level1">
@@ -273,51 +306,17 @@ div.tocify {
 <h1><span class="header-section-number">3</span> Getting started</h1>
 <p>R can be installed from <a href="https://cloud.r-project.org/">r-project.org</a> for Windows, Mac or Linux operating systems. It is also necessary to install Rtools from <a href="https://cran.r-project.org/bin/">here</a> for building packages from source when installing new packages.</p>
 <p>RStudio is one of the best IDE (Integrated development environment) out there for any language. Download <a href="https://www.rstudio.com/products/rstudio/download/">here</a> for Windows, Mac or Linux. Rstudio provides you with an environment for organising your R projects, files and outputs. You also get debugging tools and GUI interfaces to common basic operations.</p>
-<div class="figure">
-<img src="images/rstudio-ide.png" />
-
-</div>
+<p><img src="images/rstudio-ide.png" /></p>
 <p>R commands are excecuted and results and returned in the <strong>Console</strong>. The <strong>Console</strong> shows a <code>&gt;</code> symbol meaning that it is ready to accept commands. When it is waiting for further information, it shows a <code>+</code> symbol. This can happen when you have pasted in partial command or forgot to close parenthesis etc. Provide the required information, complete the command or press <kbd>Esc</kbd> on the keyboard to exit from the <code>+</code> back to the <code>&gt;</code>.</p>
 <p>Run a command in the R console.</p>
 <pre class="r"><code>getwd()</code></pre>
-<pre><code>## [1] &quot;D:/Box Sync/nbis/teaching/2018/r-intro&quot;</code></pre>
 <p>This command prints the current working directory. When you read or write, this is the path that R looks for.</p>
 <p>Commands written in the <strong>Console</strong> are executed and lost. R commands can be saved as a script. To create a new script, go to <strong>File &gt; New File &gt; R Script</strong>. This text file can be saved to the working directory named <strong>script.R</strong>. Now add some R command to the file. For example try;</p>
-<pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>## R version 3.5.1 (2018-07-02)
-## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows &gt;= 8 x64 (build 9200)
-## 
-## Matrix products: default
-## 
-## locale:
-## [1] LC_COLLATE=English_United Kingdom.1252 
-## [2] LC_CTYPE=English_United Kingdom.1252   
-## [3] LC_MONETARY=English_United Kingdom.1252
-## [4] LC_NUMERIC=C                           
-## [5] LC_TIME=English_United Kingdom.1252    
-## 
-## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
-## 
-## other attached packages:
-## [1] captioner_2.2.3    ggplot2_3.0.0.9000 bookdown_0.7      
-## [4] knitr_1.20        
-## 
-## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.18     pillar_1.3.0     compiler_3.5.1   plyr_1.8.4      
-##  [5] bindr_0.1.1      tools_3.5.1      digest_0.6.17    jsonlite_1.5    
-##  [9] evaluate_0.11    tibble_1.4.2     gtable_0.2.0     pkgconfig_2.0.2 
-## [13] rlang_0.2.2      yaml_2.2.0       xfun_0.3         bindrcpp_0.2.2  
-## [17] withr_2.1.2      stringr_1.3.1    dplyr_0.7.6      rprojroot_1.3-2 
-## [21] grid_3.5.1       tidyselect_0.2.4 glue_1.3.0       R6_2.2.2        
-## [25] rmarkdown_1.10   xaringan_0.7     purrr_0.2.5      magrittr_1.5    
-## [29] backports_1.1.2  scales_1.0.0     htmltools_0.3.6  assertthat_0.2.0
-## [33] colorspace_1.3-2 labeling_0.3     stringi_1.2.4    lazyeval_0.2.1  
-## [37] munsell_0.5.0    crayon_1.3.4</code></pre>
-<p>This command gives you a summary of the current system setup including R version, operating system and R packages that are loaded/attached.</p>
-<p>Select the text or place the cursor on that line and click <strong>Run</strong>. Alternatively use keyboard shortcut <kbd>Ctrl</kbd>+<kbd>R</kbd> or <kbd>Ctrl</kbd>+<kbd>Enter</kbd> / <kbd>Command</kbd>+<kbd>Enter</kbd>.</p>
-<p>Now add another command, say, <code>Sys.Date()</code>, which returns the current system date. Then save the file. All commands in the saved <strong>script.R</strong> can be run as a batch either by selecting all the commands followed by <strong>Run</strong> / <kbd>Ctrl</kbd>+<kbd>Enter</kbd>, or directly sourcing the file from the console like this:</p>
+<pre class="r"><code>date()</code></pre>
+<pre><code>## [1] &quot;Thu Nov  7 20:44:22 2019&quot;</code></pre>
+<p>While in an R script, select the text or place the cursor on that line and click <strong>Run</strong>. Alternatively use keyboard shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> / <kbd>Command</kbd>+<kbd>Enter</kbd>.</p>
+<p><code>date()</code> prints the current system date. Or you could try <code>SessionInfo()</code> which gives you a summary of the current system setup including R version, operating system and R packages that are loaded/attached.</p>
+<p>Then save the file as, for example <strong>script.R</strong>. All commands in the saved <strong>script.R</strong> can be run as a batch either by selecting all the commands followed by <strong>Run</strong> / <kbd>Ctrl</kbd>+<kbd>Enter</kbd>, or directly sourcing the file from the console like this:</p>
 <p><code>source(&quot;script.R&quot;)</code></p>
 </div>
 <div id="variables-operators" class="section level1">
@@ -342,10 +341,10 @@ x - y
 # multiply
 x * y
 
-# divide
+# divide (get quotient after division)
 x / y
 
-# modulus
+# modulus (get reminder after division)
 x %% y
 
 # power
@@ -388,7 +387,24 @@ x &lt;= y</code></pre>
 (x &gt; y) &amp; (y &lt; x)</code></pre>
 <pre><code>## [1] TRUE
 ## [1] TRUE</code></pre>
-<p>In case of multiple logicals, <code>any()</code> and <code>all()</code> functions are useful.</p>
+<p><code>|</code> and <code>&amp;</code> are vectorised which means it can be applied to two logical vectors. Each pair is compared and a result is produced for each element. The result is a vector.</p>
+<pre class="r"><code>c(F,F,F,T,F,F) | c(F,F,F,F,F,F)</code></pre>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<p>Now, there are also two variants <code>||</code> and <code>&amp;&amp;</code>. These operators compare left to right element-wise and stop after the first element. Consider the same example above replacing <code>|</code> with <code>||</code>. The result is one element and not a vector.</p>
+<pre class="r"><code>c(F,F,F,T,F,F) || c(F,F,F,F,F,F)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>The <code>||</code> operator may not be always desirable as it only compares the first element in both vectors to return the result.</p>
+<pre class="r"><code>c(F,F,F,T,F,F) | c(F,F,F,F,NA,F)
+c(F,F,F,T,F,F) || c(F,F,F,F,NA,F)</code></pre>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE    NA FALSE
+## [1] FALSE</code></pre>
+<p>The longer operators also only evaluate as many terms as needed (short-circuiting). A positive side-effect of this is that if some of elements are <code>NULL</code>, it still returns a result.</p>
+<pre class="r"><code>T | NULL
+T || NULL</code></pre>
+<pre><code>## logical(0)
+## [1] TRUE</code></pre>
+<p>In the second case, the first part was <code>TRUE</code>, so it did not evaluate the second part which is a <code>NULL</code>. But if <code>&amp;&amp;</code> was used, it will have to evaluate both sides and that would return an error.</p>
+<p>In practice, the long operators are not commonly used. A better practice is to use <code>any()</code> and <code>all()</code> to evaluate logical vectors to a single logical.</p>
 <pre class="r"><code># are any of these true?
 any(c(F,F,F,T,F,F))</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -402,6 +418,49 @@ paste(z,z1)</code></pre>
 <pre><code>## [1] &quot;this that&quot;</code></pre>
 <p>The function <code>paste()</code> concatenates strings.</p>
 <p>Variables names must be selected such that they do not conflict with existing variables/functions. For example, variable name <code>c</code> must be avoided as it is an existing function to concatenate R objects. The variable name <code>t</code> must be avoided as it is a function to transpose a matrix. Variable names must not start with a number.</p>
+</div>
+<div id="other-operators" class="section level2">
+<h2><span class="header-section-number">4.3</span> Other Operators</h2>
+<p>Here are some other commonly used operators. <code>:</code> is used generate a sequence.</p>
+<pre class="r"><code>1:10</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<p><code>%in%</code> is a set operator. <code>&quot;a&quot; %in% c(&quot;x&quot;,&quot;p&quot;,&quot;a&quot;,&quot;c&quot;)</code> checks if <code>a</code> is a member of the set <code>x,p,a,c</code>.</p>
+<pre class="r"><code>&quot;a&quot; %in% c(&quot;x&quot;,&quot;p&quot;,&quot;a&quot;,&quot;c&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>The reverse would also work, but the number of returned elemnts are now different.</p>
+<pre class="r"><code>c(&quot;x&quot;,&quot;p&quot;,&quot;a&quot;,&quot;c&quot;) %in% &quot;a&quot;</code></pre>
+<pre><code>## [1] FALSE FALSE  TRUE FALSE</code></pre>
+<p>And here are some operators that are not so commonly used.</p>
+<p><code>::</code> is used to access a function explicitly from a specific package. When you normally call a function, say <code>sum()</code>, R searches the namespace and finds it. In case, there is a function <code>sum()</code> from another package, the last loaded package overrides the previous function. In cases like this or to be absolutely sure that you are using the correct function from the correct package, you can use <code>package::function()</code> to call a function. For example; <code>base::sum()</code>. <code>:::</code> is used to call functions from a package that are not “exported”. This is rarely used.</p>
+<p><code>%*%</code> is used for matrix multiplication.</p>
+<pre class="r"><code>matrix(c(2,2,3,3),nrow=2) %*% matrix(c(4,2,5,3),nrow=2)
+matrix(c(2,2,3,3),nrow=2) %*% c(6,6)</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]   14   19
+## [2,]   14   19
+##      [,1]
+## [1,]   30
+## [2,]   30</code></pre>
+<div class="instruction">
+<p><b><i class="fas fa-clipboard-list"></i> Challenge</b></p>
+<p>Can you write the code to find and print even numbers from a vector of numbers, say 1 to 10? The output being <code>2 4 6 8 10</code>. <em>Click below to reveal the code.</em></p>
+<p>
+<button class="btn btn-sm btn-primary btn-collapse btn-collapse-normal collapsed" type="button" data-toggle="collapse" data-target="#task-operators" aria-expanded="false" aria-controls="task-operators">
+</button>
+</p>
+<div id="task-operators" class="collapse">
+<div class="card card-body">
+<pre class="r"><code>x &lt;- c(1:10)
+y &lt;- x %% 2
+z &lt;- y==0
+x[z]</code></pre>
+<pre><code>## [1]  2  4  6  8 10</code></pre>
+<p><i class="fas fa-lightbulb"></i> More explanation?</p>
+<p><code>c(1:10)</code>creates a vectors of numbers 1 to 10. <code>x %% 2</code> gets the modulus of these numbers (ie; divide by 2 and get the reminder). <code>y==0</code> checks if the reminders are zero. Returns a <code>TRUE</code> if it’s zero or a <code>FALSE</code> if not. <code>z</code> is now a logical vector. <code>z</code> can be used to index <code>x</code>. <code>x[z]</code> returns values of x that are true.</p>
+<p>This can all be written in one line as well <code>c(1:10)[c(c(1:10) %% 2)==0]</code>.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="data-types" class="section level1">
@@ -418,9 +477,8 @@ paste(z,z1)</code></pre>
 </div>
 <div id="homogenous-data" class="section level2">
 <h2><span class="header-section-number">5.2</span> Homogenous data</h2>
-</div>
-<div id="basic" class="section level2">
-<h2><span class="header-section-number">5.3</span> Basic</h2>
+<div id="basic" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Basic</h3>
 <p>The mode of a variable is inspected using the function <code>mode()</code>. Here we can see some of the basic data objects in R.</p>
 <pre class="r"><code>mode(1.0)
 mode(1L)
@@ -447,11 +505,12 @@ typeof(T)</code></pre>
 <pre class="r"><code>class(x)
 str(x)
 structure(x)</code></pre>
-<pre><code>## [1] &quot;numeric&quot;
-##  num 4
-## [1] 4</code></pre>
+<pre><code>## [1] &quot;integer&quot;
+##  int [1:10] 1 2 3 4 5 6 7 8 9 10
+##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
 <div id="vectors" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> Vectors</h3>
+<h3><span class="header-section-number">5.2.2</span> Vectors</h3>
 <p>Vectors store multiple values. Multiple values, variables and vectors are concatenated together using the function <code>c()</code>.</p>
 <pre class="r"><code>x &lt;- c(2,3,4,5,6)
 y &lt;- c(&quot;a&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;)
@@ -525,22 +584,29 @@ x</code></pre>
 ## 8</code></pre>
 </div>
 <div id="factors" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> Factors</h3>
+<h3><span class="header-section-number">5.2.3</span> Factors</h3>
 <p>Factors are vectors that store categorical data.</p>
 <pre class="r"><code>x &lt;- factor(c(&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;))
+x
 class(x)
 str(x)</code></pre>
-<pre><code>## [1] &quot;factor&quot;
+<pre><code>## [1] a b b c c
+## Levels: a b c
+## [1] &quot;factor&quot;
 ##  Factor w/ 3 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;: 1 2 2 3 3</code></pre>
 <p>Factor ‘x’ has 3 categories or in R speak; 3 levels.</p>
 <pre class="r"><code>levels(x)</code></pre>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<p>The levels are ordered automatically in alphabetical order as seen above. The order can be manually set.</p>
+<pre class="r"><code>factor(c(&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;),levels=c(&quot;b&quot;,&quot;a&quot;,&quot;c&quot;))</code></pre>
+<pre><code>## [1] a b b c c
+## Levels: b a c</code></pre>
 <p>Verify if an R object is a factor.</p>
 <pre class="r"><code>is.factor(x)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="matrix" class="section level3">
-<h3><span class="header-section-number">5.3.3</span> Matrix</h3>
+<h3><span class="header-section-number">5.2.4</span> Matrix</h3>
 <p>Vectors can be assembled into a matrix data structure.</p>
 <pre class="r"><code>x &lt;- matrix(c(2,3,4,5,6,7))
 x</code></pre>
@@ -602,12 +668,56 @@ x[,&quot;p&quot;]</code></pre>
 ## 4 5 
 ## a b c 
 ## 3 5 7</code></pre>
+<div class="instruction">
+<p><b><i class="fas fa-clipboard-list"></i> Challenge</b></p>
+<p>If I create a vector as follows <code>x &lt;-c(5,3,9,&quot;6&quot;)</code>, what is the “type” of the element in the third position? Is it a number?</p>
+<p>
+<button class="btn btn-sm btn-primary btn-collapse btn-collapse-normal collapsed" type="button" data-toggle="collapse" data-target="#task-vectors" aria-expanded="false" aria-controls="task-vectors">
+</button>
+</p>
+<div id="task-vectors" class="collapse">
+<div class="card card-body">
+<pre class="r"><code>x &lt;-c(5,3,9,&quot;6&quot;)
+typeof(x[3])</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p><i class="fas fa-lightbulb"></i> The third position is not a number, it’s a character. In fact, all elements in this vector are characters. If there is a character in a numeric vector, all elements are converted to characters (<code>typeof(x)</code>).</p>
+</div>
+</div>
+</div>
+<div class="instruction">
+<p><b><i class="fas fa-clipboard-list"></i> Challenge</b></p>
+<p>Create the matrix shown below and extract the third column as a vector.</p>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    3    4
+## [2,]    5    2    7
+## [3,]    6    6    6</code></pre>
+<p>
+<button class="btn btn-sm btn-primary btn-collapse btn-collapse-normal collapsed" type="button" data-toggle="collapse" data-target="#task-matrix" aria-expanded="false" aria-controls="task-matrix">
+</button>
+</p>
+<div id="task-matrix" class="collapse">
+<div class="card card-body">
+<pre class="r"><code># either this
+x &lt;- matrix(c(2,3,4,5,2,7,6,6,6),nrow=3,byrow=T)
+# or this
+x &lt;- matrix(c(2,5,6,3,2,6,4,7,6),nrow=3,byrow=F)
+x</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    3    4
+## [2,]    5    2    7
+## [3,]    6    6    6</code></pre>
+<pre class="r"><code># access third column
+x[,3]</code></pre>
+<pre><code>## [1] 4 7 6</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="heterogenous-data" class="section level2">
-<h2><span class="header-section-number">5.4</span> Heterogenous data</h2>
+<h2><span class="header-section-number">5.3</span> Heterogenous data</h2>
 <div id="lists" class="section level3">
-<h3><span class="header-section-number">5.4.1</span> Lists</h3>
+<h3><span class="header-section-number">5.3.1</span> Lists</h3>
 <p>List elements can be mixed data type and is built using <code>list()</code> rather than <code>c()</code>.</p>
 <pre class="r"><code>x &lt;- list(c(2,3,4,5),c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;),factor(c(&quot;a&quot;,&quot;a&quot;,&quot;b&quot;)),
           matrix(c(3,2,3,5,6,7),ncol=2))
@@ -697,14 +807,10 @@ x</code></pre>
 <pre><code>## [1] 500 600 700</code></pre>
 </div>
 <div id="data.frame" class="section level3">
-<h3><span class="header-section-number">5.4.2</span> <code>data.frame</code></h3>
-<p><code>data.frame</code>s are the most common way to store data in R. <code>data.frame</code>s are basically lists of equal-length vectors. Like matrices, dataframe 2D with rows and columns. <code>data.frame</code>s are created using the function <code>data.frame()</code>.</p>
+<h3><span class="header-section-number">5.3.2</span> data.frame</h3>
+<p>data.frames are the most common way to store data in R. dataframes are basically lists of equal-length vectors. Like matrices, dataframe 2D with rows and columns. data.frames are created using the function <code>data.frame()</code>. The most important difference between a matrix and a data.frame is that matrices are atomic (contains data of one type) while data.frames can contain a mix of numeric columns, characters, factors, logicals etc.</p>
 <pre class="r"><code>dfr &lt;- data.frame(x = 1:3, y = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))
 print(dfr)</code></pre>
-<pre><code>##   x y
-## 1 1 a
-## 2 2 b
-## 3 3 c</code></pre>
 <p>Notice that we have named the columns as ‘x’ and ‘y’.</p>
 <pre class="r"><code>str(dfr)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    3 obs. of  2 variables:
@@ -726,18 +832,17 @@ dfr$y</code></pre>
 ## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
 <p>Subset a <code>data.frame()</code> conditionally.</p>
 <pre class="r"><code>print(subset(dfr,dfr$y==&quot;a&quot;))</code></pre>
-<pre><code>##   x y
-## 1 1 a</code></pre>
+<p>Get column names and row names of a data.frame</p>
+<pre class="r"><code>colnames(dfr)
+rownames(dfr)</code></pre>
+<pre><code>## [1] &quot;x&quot; &quot;y&quot;
+## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
 <p>Ordering a dataframe by one column in decreasing order.</p>
 <pre class="r"><code>print(dfr[order(dfr$y,decreasing=T),])</code></pre>
-<pre><code>##   x y
-## 3 3 c
-## 2 2 b
-## 1 1 a</code></pre>
 </div>
 </div>
 <div id="type-conversion" class="section level2">
-<h2><span class="header-section-number">5.5</span> Type conversion</h2>
+<h2><span class="header-section-number">5.4</span> Type conversion</h2>
 <p>Several functions are available to convert R objects from one type to another.</p>
 <pre class="r"><code>x &lt;- c(1,2,3)
 str(x)</code></pre>
@@ -752,11 +857,41 @@ str(x)</code></pre>
 <pre class="r"><code>str(as.numeric(x))</code></pre>
 <pre><code>##  num [1:3] 1 2 NA</code></pre>
 <p>Notice that characters that cannot be converted to a valid number is converted to NA along with a warning message.</p>
+<div class="instruction">
+<p><b><i class="fas fa-clipboard-list"></i> Challenge</b></p>
+<p>Here is a data.frame inside a list which is inside a list. How do you extract the <em>Species</em> column as a vector?</p>
+<pre><code>## List of 1
+##  $ :List of 1
+##   ..$ :&#39;data.frame&#39;: 6 obs. of  5 variables:
+##   .. ..$ Sepal.Length: num [1:6] 5.1 4.9 4.7 4.6 5 5.4
+##   .. ..$ Sepal.Width : num [1:6] 3.5 3 3.2 3.1 3.6 3.9
+##   .. ..$ Petal.Length: num [1:6] 1.4 1.4 1.3 1.5 1.4 1.7
+##   .. ..$ Petal.Width : num [1:6] 0.2 0.2 0.2 0.2 0.2 0.4
+##   .. ..$ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1</code></pre>
+<p>
+<button class="btn btn-sm btn-primary btn-collapse btn-collapse-normal collapsed" type="button" data-toggle="collapse" data-target="#task-dfr" aria-expanded="false" aria-controls="task-dfr">
+</button>
+</p>
+<div id="task-dfr" class="collapse">
+<div class="card card-body">
+<pre class="r"><code>x &lt;- list(list(head(iris)))
+# either this
+x[[1]][[1]]$Species
+# or this
+x[[1]][[1]][,5]</code></pre>
+<pre><code>## [1] setosa setosa setosa setosa setosa setosa
+## Levels: setosa versicolor virginica
+## [1] setosa setosa setosa setosa setosa setosa
+## Levels: setosa versicolor virginica</code></pre>
+<p><code>[]</code> access a list but still returns a list. <code>[[]]</code> returns the object inside a list.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="functions" class="section level1">
 <h1><span class="header-section-number">6</span> Functions</h1>
-<p>Functions are chunks of code packaged into reusable units. We have used many functions in the previous sections such as <code>c()</code>, <code>str()</code>, <code>is.list()</code> etc.</p>
+<p>Functions are chunks of code packaged into reusable units. We have used many functions in the previous sections such as <code>c()</code>, <code>str()</code>, <code>is.list()</code>, <code>typeof()</code> etc.</p>
 <div id="built-in" class="section level2">
 <h2><span class="header-section-number">6.1</span> Built-In</h2>
 <p>Functions that come with the base R installation are referred to as built-in functions or base functions. R has loads of built-in functions for various applications such as data analysis, programming, math, plotting etc. Additional functions can be made available by installing external packages.</p>
@@ -794,18 +929,18 @@ round(x)
 # sort
 sort(x)</code></pre>
 <pre><code>## [1] 10
-## [1] 873
-## [1] 87.3
-## [1] 86.5
-## [1] 11
-##  [1] 4.290459 5.204007 4.997212 2.397895 4.605170 4.927254 3.465736
-##  [8] 2.484907 2.564949 5.099866
-##  [1] 5.052394e+31 1.100514e+79 1.886181e+64 5.987414e+04 2.688117e+43
-##  [6] 8.563248e+59 7.896296e+13 1.627548e+05 4.424134e+05 1.676081e+71
-##  [1]  8.544004 13.490738 12.165525  3.316625 10.000000 11.747340  5.656854
-##  [8]  3.464102  3.605551 12.806248
-##  [1]  73 182 148  11 100 138  32  12  13 164
-##  [1]  11  12  13  32  73 100 138 148 164 182</code></pre>
+## [1] 964
+## [1] 96.4
+## [1] 91
+## [1] 10
+##  [1] 5.241747 4.882802 3.912023 3.637586 5.262690 4.343805 4.709530
+##  [8] 4.077537 4.653960 2.302585
+##  [1] 1.206861e+82 2.122617e+57 5.184706e+21 3.185593e+16 6.589235e+83
+##  [6] 2.758513e+33 1.609487e+48 4.201210e+25 3.989520e+45 2.202647e+04
+##  [1] 13.747727 11.489125  7.071068  6.164414 13.892444  8.774964 10.535654
+##  [8]  7.681146 10.246951  3.162278
+##  [1] 189 132  50  38 193  77 111  59 105  10
+##  [1]  10  38  50  59  77 105 111 132 189 193</code></pre>
 <p>Some useful string functions.</p>
 <pre class="r"><code>a &lt;- &quot;sunny&quot;
 b &lt;- &quot;day&quot;
@@ -904,16 +1039,21 @@ foo &lt;- 55
 my_new_function()</code></pre>
 <pre><code>## [1] 57</code></pre>
 <p>In the example above, variable <code>foo</code> used inside the function is not supplied to the function through an argument, yet it still manages to find it. When a function doesn’t find a variable inside a function, it searches outside the function.</p>
-<p>Let’s create a useful function for coefficient of variation. R doesn’t have a function for it. The formula is simple: standard-deviation/mean.</p>
+<div class="instruction">
+<p><b><i class="fas fa-clipboard-list"></i> Challenge</b></p>
+<p>R lacks a function to compute coefficient of variation (COV). Create a function to compute the COV. And use the function to compute the COV of these set of values: <code>c(4,7,2,3,5,4,3)</code>. The formula for COV is <code>cov=sd/mean</code>. Remember to NOT use <code>cov</code> as the function name because it already exists (<code>?cov</code>). It stands for covariance. So, use another function name.</p>
+<p>
+<button class="btn btn-sm btn-primary btn-collapse btn-collapse-normal collapsed" type="button" data-toggle="collapse" data-target="#task-cov" aria-expanded="false" aria-controls="task-cov">
+</button>
+</p>
+<div id="task-cov" class="collapse">
+<div class="card card-body">
 <pre class="r"><code>covfefe &lt;- function(x) sd(x)/mean(x)
-
-val &lt;- c(4,7,2,3,5,4,3)
-sd(val)
-mean(val)
-covfefe(val)</code></pre>
-<pre><code>## [1] 1.632993
-## [1] 4
-## [1] 0.4082483</code></pre>
+covfefe(c(4,7,2,3,5,4,3))</code></pre>
+<pre><code>## [1] 0.4082483</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="control-structures" class="section level1">
@@ -955,6 +1095,10 @@ if(grade == &quot;A&quot;){
   print(&quot;Grade is Alright.&quot;)
 }</code></pre>
 <pre><code>## [1] &quot;Grade is Good.&quot;</code></pre>
+<p>This is not to be confused with a function called <code>ifelse()</code>. This is also used for conditional selection and takes the form <code>ifelse(test, return-if-yes, return-if-no)</code>, and this is vectorised. So, for example, here are some ages of persons. Classify them as adults or juveniles.</p>
+<pre class="r"><code>x &lt;- c(6,23,12,10,56,44)
+ifelse(x&gt;18,&quot;Adult&quot;,&quot;Juvenile&quot;)</code></pre>
+<pre><code>## [1] &quot;Juvenile&quot; &quot;Adult&quot;    &quot;Juvenile&quot; &quot;Juvenile&quot; &quot;Adult&quot;    &quot;Adult&quot;</code></pre>
 <p>The <code>for()</code> loop is useful to run commands repeatedly over a known number of iterations.</p>
 <pre class="r"><code>for (i in 1:5){
   print(i)
@@ -974,6 +1118,39 @@ while(i &lt; 5){
 ## [1] 2
 ## [1] 3
 ## [1] 4</code></pre>
+<div class="instruction">
+<p><b><i class="fas fa-clipboard-list"></i> Challenge</b></p>
+<p>Below is a <a href="https://en.wikipedia.org/wiki/Floyd%27s_triangle">Floyd’s triangle</a>. This is right-angled triangle where the number of elements in each row is the same as the row number. And the numbers increase consecutively top to bottom. For a given number of rows, can you write the code using control structures to generate this result?</p>
+<p><i class="fas fa-lightbulb"></i> The function <code>cat()</code> can be used to print text without a new line (ie; in the same line). <code>cat(&quot;\n&quot;)</code> adds a new line.</p>
+<pre><code>1 
+2 3 
+4 5 6 
+7 8 9 10 
+11 12 13 14 15 </code></pre>
+<p>
+<button class="btn btn-sm btn-primary btn-collapse btn-collapse-normal collapsed" type="button" data-toggle="collapse" data-target="#task-control" aria-expanded="false" aria-controls="task-control">
+</button>
+</p>
+<div id="task-control" class="collapse">
+<div class="card card-body">
+<pre class="r"><code>rows &lt;- 5
+n &lt;- 1
+for(i in 1:rows) {
+  for(j in 1:i) {
+    cat(paste0(n,&quot; &quot;))
+    n &lt;- n+1
+  }
+  cat(&quot;\n&quot;)
+}</code></pre>
+<pre><code>## 1 
+## 2 3 
+## 4 5 6 
+## 7 8 9 10 
+## 11 12 13 14 15</code></pre>
+<p>This is one way to do it. This is called a nested for-loop. The variable <code>n</code> carries the actual value to be printed. It is incremented everytime it is printed (<code>n &lt;- n+1</code>). Variable <code>i</code> keeps track of rows. Variable <code>j</code> keeps track of elements on each row. After all elements on a row has been printed, control exits the <code>j</code> loop and <code>cat(&quot;\n&quot;)</code> creates a new line.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="r-packages" class="section level1">
 <h1><span class="header-section-number">8</span> R packages</h1>
@@ -983,10 +1160,7 @@ while(i &lt; 5){
 <p>Packages can also be installed from a local zipped file by providing a local path ans setting <code>type=&quot;source&quot;</code>.</p>
 <pre class="r"><code>install.packages(&quot;./dir/package.zip&quot;,type=&quot;source&quot;)</code></pre>
 <p>Inside RStudio, installing packages is much easier. Go to the <strong>Packages</strong> tab and click <strong>Install</strong>. In the window that opens up, you can find your package by typing into the <strong>Packages</strong> field and clicking <strong>Install</strong>.</p>
-<div class="figure">
-<img src="images/install-packages.png" />
-
-</div>
+<p><img src="images/install-packages.png" /></p>
 <p>Packages on GitHub can be installed using the function <code>install_github()</code> from package <code>devtools</code>.</p>
 </div>
 <div id="graphics" class="section level1">
@@ -998,13 +1172,13 @@ while(i &lt; 5){
 <pre class="r"><code>dfr &lt;- data.frame(a=sample(1:100,10),b=sample(1:100,10))</code></pre>
 <p>Now we have a dataframe with two continuous variables that can be plotted against each other.</p>
 <pre class="r"><code>plot(dfr$a,dfr$b)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-85-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-103-1.svg" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 <p>This is probably the simplest and most basic plots. We can modify the x and y axis labels.</p>
 <pre class="r"><code>plot(dfr$a,dfr$b,xlab=&quot;Variable a&quot;,ylab=&quot;Variable b&quot;)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-86-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-104-1.svg" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 <p>We can change the point to a line.</p>
 <pre class="r"><code>plot(dfr$a,dfr$b,xlab=&quot;Variable a&quot;,ylab=&quot;Variable b&quot;,type=&quot;b&quot;)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-87-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-105-1.svg" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Let’s add a categorical column to our dataframe.</p>
 <pre class="r"><code>dfr$cat &lt;- rep(c(&quot;C1&quot;,&quot;C2&quot;),each=5)</code></pre>
 <p>And then colour the points by category.</p>
@@ -1017,11 +1191,11 @@ points(dfr_c2$a,dfr_c2$b,col=&quot;blue&quot;,pch=2)
 
 legend(x=&quot;topright&quot;,legend=c(&quot;C1&quot;,&quot;C2&quot;),
        col=c(&quot;red&quot;,&quot;blue&quot;),pch=c(1,2))</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-89-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-107-1.svg" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Let’s create a barplot.</p>
 <pre class="r"><code>ldr &lt;- data.frame(a=letters[1:10],b=sample(1:50,10))
 barplot(ldr$b,names.arg=ldr$a)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-90-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-108-1.svg" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 </div>
 <div id="grid-graphics" class="section level2">
 <h2><span class="header-section-number">9.2</span> Grid graphics</h2>
@@ -1032,12 +1206,12 @@ barplot(ldr$b,names.arg=ldr$a)</code></pre>
 ggplot(dfr,aes(x=a,y=b,colour=cat))+
   geom_point()+
   labs(x=&quot;Variable a&quot;,y=&quot;Variable b&quot;)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-91-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-109-1.svg" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 <p>It is generally easier and more consistent to create plots using the ggplot2 package compared to the base graphics.</p>
 <p>Let’s create a barplot as well.</p>
 <pre class="r"><code>ggplot(ldr,aes(x=a,y=b))+
   geom_bar(stat=&quot;identity&quot;)</code></pre>
-<p><img src="lab_files/figure-html/unnamed-chunk-92-1.png" width="672" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="lab_files/figure-html/unnamed-chunk-110-1.svg" width="672" style="display: block; margin: auto auto auto 0;" /></p>
 </div>
 </div>
 <div id="inputoutput" class="section level1">
@@ -1063,12 +1237,11 @@ ggplot(dfr,aes(x=a,y=b,colour=cat))+
 ##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
 ##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
 ##  $ Species     : chr  &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; ...</code></pre>
-<p>Check <code>?read.table</code> for other wrapper functions to read in text files.</p>
+<p>Read the table by setting <code>stringsAsFactors=F</code> and then by setting <code>stringsAsFactors=T</code>. Check what is the difference using <code>str(dfr)</code>. Check <code>?read.table</code> for other wrapper functions to read in text files.</p>
 <p>Let’s filter this data.frame and create a new dataset.</p>
 <pre class="r"><code>dfr1 &lt;- dfr[dfr$Species == &quot;setosa&quot;,]</code></pre>
 <p>And we can write this as a text file.</p>
-<pre class="r"><code>write.table(dfr1,&quot;iris-setosa.txt&quot;,sep=&quot;\t&quot;,row.names=F,
-            quote=F)</code></pre>
+<pre class="r"><code>write.table(dfr1,&quot;iris-setosa.txt&quot;,sep=&quot;\t&quot;,row.names=F,quote=F)</code></pre>
 <p><code>sep=&quot;\t&quot;</code> sets the delimiter to tab. <code>row.names=F</code> denotes that rownames should not be written. <code>quote=F</code> specifies that doubles must not be placed around strings.</p>
 </div>
 <div id="images" class="section level2">
@@ -1095,9 +1268,307 @@ dev.off()</code></pre>
 <pre class="r"><code>ggsave(filename=&quot;plot-ggplot-2.png&quot;,plot=p)</code></pre>
 </div>
 </div>
+<div id="r-objects" class="section level2">
+<h2><span class="header-section-number">10.3</span> R objects</h2>
+<p>Objects in R can also be as native R objects. This has pros and cons. The files are compressed, small in size and quickly read into R. It cannot be read into any other program.</p>
+<p>For example, let’s create a data.frame and save it using the <code>saveRDS()</code> function. The file extension used is usually <code>.Rds</code>.</p>
+<pre class="r"><code>dfr &lt;- data.frame(a=sample(1:100,10),b=sample(1:100,10))
+saveRDS(dfr,&quot;data.Rds&quot;)</code></pre>
+<p>This file can be read back into R and assigned to a new variable if needed.</p>
+<pre class="r"><code>dfr &lt;- readRDS(&quot;data.Rds&quot;)</code></pre>
+<p>A different way to save is using the <code>save()</code> function. This can be used to save one or multiple objects. The file extension used is usually <code>.Rda</code> or <code>.Rdata</code>.</p>
+<pre class="r"><code>dfr1 &lt;- data.frame(a=sample(1:100,10),b=sample(1:100,10))
+dfr2 &lt;- data.frame(a=sample(1:100,20),b=sample(1:100,20))
+save(dfr1,dfr2,&quot;data.Rdata&quot;)</code></pre>
+<p>This file can be read back into R using <code>load()</code>. In this case, the variable names remain the same and cannot be changed on the fly.</p>
+<pre class="r"><code>load(&quot;data.Rdata&quot;)</code></pre>
+<p>The last approach is save all objects in the environment. This is referred to as saving the workspace.</p>
+<pre class="r"><code>save.image(file=&quot;workspace.Rdata&quot;)
+load(&quot;workspace.Rdata&quot;)</code></pre>
+</div>
+</div>
+<div id="rmarkdown" class="section level1">
+<h1><span class="header-section-number">11</span> Rmarkdown</h1>
+<p>When carrying out data analyses in R, it is desirable to add textual descriptions and/or explanations for the various steps carried out. A convenient way to do this in the RStudio ecosystem is using Rmarkdown in R notebooks.</p>
+<p>Markdown (md) is a human readable and simplified notation for formatting text. Markdown can be mixed with regular text. The text can then be run through a compiler that understands markdown to apply the formatting. The end product can be an HTML document, a PDF document etc. Rmarkdown (Rmd) combines text, markdown and R code. The R code embedded in R chunks are executed/evaluated and the results are included in the output document.</p>
+<p>An Rmd is converted to a md using the command <code>knit()</code> from package <code>knitr</code> and this is usually called knitting. The markdown file can then be converted to any other endpoint formats such as HTML, PDF etc using the command <code>render()</code> from package <code>rmarkdown()</code>. This step is usually called rendering. The knitting and rendering can also be done interactively by clicking the <strong>Knit</strong> button in RStudio. This whole process is visualised in the figure below.</p>
+<p><img src="images/knit.png" /></p>
+<p>A new Rmd file can be opened in RStudio by going to <code>File &gt; New File &gt; R Markdown</code>. An Rmarkdown file ends in the <code>.Rmd</code> or <code>Rmarkdown</code> extension in contrast to the R script file which ends in a <code>.R</code> extension.</p>
+<p>An Rmd file starts with a block of code at the top that looks like this.</p>
+<pre><code>---
+title: &quot;My analyses&quot;
+subtitle: &quot;A subtitle goes here&quot;
+author: &quot;Me, myself and I&quot;
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    theme: united
+    highlight: textmate
+---</code></pre>
+<p>This is called the YAML matter. These are name-value pairs described in the YAML format. Many useful arguments can be specified here.</p>
+<p>The title, subtitle, author and date is displayed at the top of the rendered document. Argument <code>output</code> is used to specify output document type and related arguments. <code>html_document</code> is commonly used to specify the standard HTML output. <code>pdf_document</code> is used to specify the standard PDF output. This then takes further arguments. Sub arguments differ depending on the output document type.</p>
+<p>Above are some of the arguments that can be supplied to the HTML document type. <code>theme</code> is used to specify the document style such as the font and layout. <code>highlight</code> is used to specify the code highlighting style. <code>toc</code> specifies that a table of contents must be included. <code>number_sections</code> specifies if the headings/sections must be automatically numbered. Use <code>?rmarkdown::html_document</code> for description of all the various options.</p>
+<div id="text-1" class="section level2">
+<h2><span class="header-section-number">11.1</span> Text</h2>
+<p>The above level 2 heading was created by specifying <code>## Text</code>. Other headings can be specified similarily.</p>
+<pre><code>## Level 2 heading  
+### Level 3 heading  
+#### Level 4 heading  
+##### Level 5 heading  
+###### Level 6 heading </code></pre>
+<p>Bullet points are usually specified using <code>*</code> or <code>+</code> or <code>-</code>.</p>
+<pre><code>+ Point one
++ Point two</code></pre>
+<ul>
+<li>Point one</li>
+<li>Point two</li>
+</ul>
+<p>Here are a few more common text formattings.</p>
+<ul>
+<li><code>*This is italic text*</code> or <code>_This is italic text_</code> renders as <em>This is italic text</em><br />
+</li>
+<li><code>**This is italic text**</code> or <code>__This is italic text__</code> renders as <strong>This is bold text</strong><br />
+</li>
+<li>Subscript <code>H~2~O</code> renders as H<sub>2</sub>O</li>
+<li>Superscript <code>2^10^</code> renders as 2<sup>10</sup></li>
+</ul>
+<p>Block quotes can be specified using <code>&gt;</code>.</p>
+<pre><code>&gt; This is a block quote. This
+&gt; paragraph has two lines.</code></pre>
+<blockquote>
+<p>This is a block quote. This
+paragraph has two lines.</p>
+</blockquote>
+<p>Lists can also be created inside block quotes.</p>
+<pre><code>&gt; 1. This is a list inside a block quote.
+&gt; 2. Second item.</code></pre>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>This is a list inside a block quote.</li>
+<li>Second item.</li>
+</ol>
+</blockquote>
+<p>Links can be created using <code>[this](https://rmarkdown.rstudio.com/)</code> like <a href="https://rmarkdown.rstudio.com/">this</a>.</p>
+</div>
+<div id="images-1" class="section level2">
+<h2><span class="header-section-number">11.2</span> Images</h2>
+<p>Images can be displayed from a relative local location using <code>![This is a caption](images/uu.jpg)</code>. When rendered, this looks like:</p>
+<div class="figure">
+<img src="images/uu.jpg" alt="This is a caption" />
+<p class="caption">This is a caption</p>
+</div>
+<p>By default, the image is displayed at full scale or until it fills the display width. The image dimension can be adjusted <code>![This is a caption](images/uu.jpg){width=20%}</code>. This is not a universal markdown formatting and may not always work.</p>
+<div class="figure">
+<img src="images/uu.jpg" alt="This is a caption" style="width:20.0%" />
+<p class="caption">This is a caption</p>
+</div>
+<p>For finer control, raw HTML can be used. For example;</p>
+<pre><code>&lt;img src=&quot;images/uu.jpg&quot; width=&quot;150px&quot;&gt;</code></pre>
+<p><img src="images/uu.jpg" width="150px"></p>
+<p>Images can also be displayed using R code. Chunks option <code>out.width</code> in RMarkdown can be used to control image display size.</p>
+<p>This image is displayed at a size of 150 pixels.</p>
+<pre><code>```{r,out.width=150}
+knitr::include_graphics(&#39;images/uu.jpg&#39;)
+``` </code></pre>
+<p><img src="images/uu.jpg" width="150" style="display: block; margin: auto auto auto 0;" /></p>
+</div>
+<div id="code" class="section level2">
+<h2><span class="header-section-number">11.3</span> Code</h2>
+<p>Text can be formatted as code. Code is displayed using monospaced font. Code formatting that stands by itself as a paragraph is called block code. Block codes are specified using three backticks <code>```</code> followed by code and then three more backticks.</p>
+<p>This text below</p>
+<pre><code>```
+This is generic block code.
+```</code></pre>
+<p>renders like this</p>
+<pre><code>This is generic block code.</code></pre>
+<p>Code formatting can also be included in the middle of a sentence. This is called inline code formatting. Using this <code>`This is an inline formatted code.`</code> renders like this: <code>This is an inline formatted code.</code></p>
+<p>The above codes are not actually executed. They are just text formatted in a different font. Code can be executed by specifying the language along with the backticks. Block code formatted as such:</p>
+<pre><code>```{r}
+str(iris)
+```</code></pre>
+<p>renders like this:</p>
+<pre class="r"><code>str(iris)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<p>Code blocks are called chunks. The chunk is executed when this document is rendered. In the above example, the rendered output has two chunks; input and output chunks. The rendered code output is also given code highlighting based on the language. For example;</p>
+<p>This code chunk</p>
+<pre><code>```{r,eval=FALSE}
+str(iris)
+```</code></pre>
+<p>when rendered (not evaluated) looks like</p>
+<pre class="r"><code>str(iris)</code></pre>
+<p>This rendered and evaluated chunk below</p>
+<pre><code>```{r,eval=TRUE}
+str(iris)
+```</code></pre>
+<p>looks like this</p>
+<pre class="r"><code>str(iris)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<p>The chunk has several options which can be used to control chunk properties.</p>
+<p>Using <code>`{r,eval=FALSE}`</code> prevents that chunk from being executed. <code>`{r,eval=TRUE}`</code> which is the default, executes the chunk. Using <code>`{r,echo=FALSE}`</code> prevents the code from that chunk from being displayed. Using <code>`{r,results=&quot;hide&quot;}`</code> hides the output from that chunk. There are many other <a href="https://yihui.name/knitr/options/">chunk arguments</a>. Here are some of them:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>eval</td>
+<td>TRUE</td>
+<td>Evaluates the code in this chunk</td>
+</tr>
+<tr class="even">
+<td>echo</td>
+<td>TRUE</td>
+<td>Display the code</td>
+</tr>
+<tr class="odd">
+<td>results</td>
+<td>“markup”</td>
+<td>“markup”,“asis”,“hold” or “hide”</td>
+</tr>
+<tr class="even">
+<td>warning</td>
+<td>TRUE</td>
+<td>Display warnings from code execution</td>
+</tr>
+<tr class="odd">
+<td>error</td>
+<td>FALSE</td>
+<td>Display error from code execution</td>
+</tr>
+<tr class="even">
+<td>message</td>
+<td>TRUE</td>
+<td>Display messages from this chunk</td>
+</tr>
+<tr class="odd">
+<td>tidy</td>
+<td>FALSE</td>
+<td>Reformat code in to be tidy</td>
+</tr>
+<tr class="even">
+<td>cache</td>
+<td>FALSE</td>
+<td>Cache results for future renders</td>
+</tr>
+<tr class="odd">
+<td>comment</td>
+<td>“##”</td>
+<td>Character to prefix result output</td>
+</tr>
+</tbody>
+</table>
+<p>Chunk options are specified like this:</p>
+<pre><code>```{r,eval=FALSE,echo=FALSE,fig.height=6,fig.width=7}
+```</code></pre>
+</div>
+<div id="plots" class="section level2">
+<h2><span class="header-section-number">11.4</span> Plots</h2>
+<p>R Plots can be plotted like below:</p>
+<pre><code>```{r,fig.height=5,fig.width=5}
+plot(x=iris$Petal.Length,y=iris$Petal.Width)
+```</code></pre>
+<p><img src="lab_files/figure-html/unnamed-chunk-129-1.svg" width="480" style="display: block; margin: auto auto auto 0;" /></p>
+<p>Below are some of chunk options relating to plots.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>fig.height</td>
+<td>7</td>
+<td>Figure height in inches</td>
+</tr>
+<tr class="even">
+<td>fig.width</td>
+<td>7</td>
+<td>Figure width in inches</td>
+</tr>
+<tr class="odd">
+<td>fig.cap</td>
+<td>&quot;&quot;</td>
+<td>Figure caption</td>
+</tr>
+<tr class="even">
+<td>fig.align</td>
+<td>“center”</td>
+<td>Figure alignment</td>
+</tr>
+<tr class="odd">
+<td>dev</td>
+<td>“png”</td>
+<td>Change png, jpg, pdf, svg etc</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="export" class="section level2">
+<h2><span class="header-section-number">11.5</span> Export</h2>
+<p>The Rmarkdown notebook can be exported into various format. The most common formats are HTML and PDF.</p>
+<p>Rmd files can be exported to HTML using <code>rmarkdown::render(&quot;document.Rmd&quot;)</code>. Alternatively, this can be done interactively by clicking the <strong>Knit</strong> button in RStudio.</p>
+<p><img src="images/knit-button-1.png" /></p>
+<p>When converting to PDF, markdown is converted to TeX format. And the conversion to PDF needs a tool that understands TeX format and converts to PDF. This can be softwares like ‘MacTeX’, ‘MikTeX’ etc. which needs to be installed on the system beforehand. For PDF output, YAML matter must be changed to <code>output::pdf_document</code>. Alternatively <code>rmarkdown::render(&quot;document.Rmd&quot;,output_format=pdf_document())</code> also works.</p>
+</div>
+</div>
+<div id="tidyverse" class="section level1">
+<h1><span class="header-section-number">12</span> Tidyverse</h1>
+<p>Tidyverse is a collection of R packages that share underlying design and grammar to solving data science challenges using R.</p>
+<p><img src="images/tidyverse.png" /></p>
+<p>These are some of the features.</p>
+<ul>
+<li>Modern, consistent and optimised functions</li>
+<li>Additional features compared to base R</li>
+<li>New code structure using new operators (Eg: pipe <code>%&gt;%</code>)</li>
+<li>Tidy data &amp; tidy evaluation</li>
+</ul>
+<p>Tidyverse consists of ~26 packages, all of which can be easily installed by running <code>install.packages(&quot;tidyverse&quot;)</code>. And running <code>library(tidyverse)</code> loads the top 7 most commonly used packages: <code>ggplot2</code>, <code>dplyr</code>, <code>tidyr</code>, <code>readr</code>, <code>purrr</code>, <code>tibble</code>, <code>stringr</code> and <code>forcats</code>.</p>
+<p>We can start with some functions from <code>dplyr</code> which helps us to perform some common data operations. Below is a comparison of base R commands and <code>dplyr</code> commands.</p>
+<p>Here is the base R code.</p>
+<pre class="r"><code># selecting columns from a data.frame
+iris[,c(&quot;Petal.Length&quot;,&quot;Sepal.Length&quot;,&quot;Species&quot;)]
+# add column to a data.frame
+iris$new &lt;- iris$Petal.Length/iris$Sepal.Length
+# filter rows by criteria
+iris[iris$Species==&quot;setosa&quot;,]
+# ordering a data.frame
+iris[order(iris$Sepal.Length),]</code></pre>
+<p>Here is the corresponding code using <code>dplyr</code>.</p>
+<pre class="r"><code># selecting columns from a data.frame
+select(iris,Petal.Length,Sepal.Length,Species)
+# add column to a data.frame
+mutate(iris,new=Petal.Length/Sepal.Length)
+# filter rows by criteria
+filter(iris,Species==&quot;setosa&quot;)
+# ordering a data.frame
+arrange(iris,Sepal.Length)</code></pre>
+<p>Tidyverse functions are designed to be chained together using the pipe (<code>%&gt;%</code>) operator to accomplish tasks. Therefore, the above code can be modified to below</p>
+<pre class="r"><code>iris %&gt;%
+  select(Petal.Length,Sepal.Length,Species) %&gt;%
+  mutate(new=Petal.Length/Sepal.Length) %&gt;%
+  filter(Species==&quot;setosa&quot;) %&gt;%
+  arrange(Sepal.Length)</code></pre>
 </div>
 <div id="help" class="section level1">
-<h1><span class="header-section-number">11</span> Help</h1>
+<h1><span class="header-section-number">13</span> Help</h1>
 <p><img src="images/help.png" style="padding:15px; max-width:200px"></p>
 <ul>
 <li>Use <code>?function</code> to get function documentation</li>
@@ -1109,11 +1580,11 @@ dev.off()</code></pre>
 </ul>
 </div>
 <div id="learning-r" class="section level1">
-<h1><span class="header-section-number">12</span> Learning R</h1>
+<h1><span class="header-section-number">14</span> Learning R</h1>
 <p><img src="images/boy-reads.png" style="padding:15px; max-width:300px"></p>
 <p>There are lots of resources for getting help in R.</p>
 <div id="reference" class="section level2">
-<h2><span class="header-section-number">12.1</span> Reference</h2>
+<h2><span class="header-section-number">14.1</span> Reference</h2>
 <ul>
 <li><a href="http://www.cookbook-r.com/">R Cookbook</a>: General purpose reference.</li>
 <li><a href="https://www.statmethods.net/">Quick R</a>: General purpose reference.</li>
@@ -1123,37 +1594,25 @@ dev.off()</code></pre>
 </ul>
 </div>
 <div id="tutorials" class="section level2">
-<h2><span class="header-section-number">12.2</span> Tutorials</h2>
+<h2><span class="header-section-number">14.2</span> Tutorials</h2>
 <ul>
-<li><a href="https://www.datacamp.com/courses/free-introduction-to-r">Introduction to R</a>: Tutorial by Datacamp with excellent tutorials.</li>
+<li><a href="https://www.datacamp.com/courses/free-introduction-to-r">Introduction to R</a>: Tutorials by Datacamp.</li>
 <li><a href="https://www.youtube.com/watch?v=s3FozVfd7q4">R programming tutorial</a>: Youtube video tutorial by Derek Banas.</li>
 <li><a href="http://r4ds.had.co.nz/">R for data science</a> Data science tutorial by Hadley wickham.</li>
 <li><a href="https://datacarpentry.org/R-ecology-lesson/">Data carpentry</a> Data carpentry R workshop</li>
 </ul>
 </div>
 <div id="links" class="section level2">
-<h2><span class="header-section-number">12.3</span> Links</h2>
+<h2><span class="header-section-number">14.3</span> Links</h2>
 <ul>
-<li><a href="https://www.computerworld.com/article/2497464/business-intelligence/top-r-language-resources-to-improve-your-data-skills.html?page=2">Tutorialspoint List</a>: Good list of resources.</li>
+<li><a href="https://www.computerworld.com/article/2497464/business-intelligence/top-r-language-resources-to-improve-your-data-skills.html?page=2">Tutorialspoint</a>: Good list of resources.</li>
 </ul>
-</div>
-</div>
-<div id="useful-packages" class="section level1">
-<h1><span class="header-section-number">13</span> Useful packages</h1>
-<p>These are some useful packages when starting with data analysis in R.</p>
-<ul>
-<li><a href="https://dplyr.tidyverse.org/">dplyr</a>, <a href="https://tidyr.tidyverse.org/">tidyr</a>: Data manipulation</li>
-<li><a href="https://ggplot2.tidyverse.org/">ggplot2</a>: Data visualisation</li>
-<li><a href="https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html">stringr</a>: String manipulation</li>
-<li><a href="https://lubridate.tidyverse.org/">lubridate</a>: Date/time manipulation</li>
-<li><a href="https://rmarkdown.rstudio.com/">rmarkdown</a>: Reproducible research and report generation</li>
-</ul>
-<p><a href="http://hexb.in/"><img src="images/rlibs.jpg" /></a></p>
 <p style="text-align: left; font-size: small;">
-Built on : <i class='fa fa-calendar' aria-hidden='true'></i> 19-Sep-2018 at <i class='fa fa-clock-o' aria-hidden='true'></i> 11:01:30. Graphics from <img src="images/freepik.jpg" style="max-height:20px; vertical-align:middle;">
+Built on <i class='fa fa-calendar' aria-hidden='true'></i> 07-Nov-2019. Graphics from <img src="images/freepik.jpg" style="max-height:20px; vertical-align:middle;">
 </p>
 <hr>
-<p><b>2018</b> | Roy Francis | <a href="https://www.scilifelab.se/">SciLifeLab</a> | <a href="https://nbis.se/">NBIS</a></p>
+<p><b>2019</b> • Roy Francis • <a href="https://www.scilifelab.se/">SciLifeLab</a> • <a href="https://nbis.se/">NBIS</a></p>
+</div>
 </div>
 
 
@@ -1174,6 +1633,49 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
