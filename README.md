@@ -7,4 +7,4 @@ Slides and practicals/lab for the **Introduction to Bioinformatics** course.
 
 <hr>
 
-<b>2019</b> • Roy Francis • [SciLifeLab](https://www.scilifelab.se/) | [NBIS](https://nbis.se/)
+<b>2019</b> • Roy Francis • [SciLifeLab](https://www.scilifelab.se/) • [NBIS](https://nbis.se/)

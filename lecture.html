@@ -17,7 +17,7 @@ class: center, middle, inverse, title-slide
 # Introduction To R
 ## Introduction to Bioinformatics
 ### <b>Roy Francis</b> • 08-Nov-2019
-### <a href="royfrancis.github.io/course-r">royfrancis.github.io/course-r</a>
+### <a href="https://royfrancis.github.io/course-r">https://royfrancis.github.io/course-r</a>
 
 ---
 
@@ -246,6 +246,12 @@ name: datatype-overview
 ## Data Type • Overview
 
 
+```
+##   dimension    homogenous heterogenous
+## 1        1D Atomic vector         List
+## 2        2D        Matrix   Data.frame
+## 3        nD         Array
+```
 
 - Use `typeof()` to find type of a variable
 
@@ -770,6 +776,13 @@ dfr &lt;- data.frame(x = 1:3, y = c("a", "b", "c"))
 dfr
 ```
 
+```
+##   x y
+## 1 1 a
+## 2 2 b
+## 3 3 c
+```
+
 
 ```r
 str(dfr)
@@ -821,6 +834,11 @@ dfr$y
 
 ```r
 subset(dfr,dfr$y=="a")
+```
+
+```
+##   x y
+## 1 1 a
 ```
 
 ---
@@ -884,7 +902,7 @@ x &lt;- sample(x=1:200,10); x;
 ```
 
 ```
-##  [1]  85 157  87  99  15 165  75 183 162  48
+##  [1]  79   3 158 104 164  42  73 197 148  89
 ```
 
 
@@ -901,18 +919,18 @@ sort(x) # sort
 ```
 
 ```
-## [1] 1076
-## [1] 107.6
-## [1] 93
-## [1] 15
-##  [1] 4.442651 5.056246 4.465908 4.595120 2.708050 5.105945 4.317488
-##  [8] 5.209486 5.087596 3.871201
-##  [1] 8.223013e+36 1.528388e+68 6.076030e+37 9.889030e+42 3.269017e+06
-##  [6] 4.556061e+71 3.733242e+32 2.991508e+79 2.268329e+70 7.016736e+20
-##  [1]  9.219544 12.529964  9.327379  9.949874  3.872983 12.845233  8.660254
-##  [8] 13.527749 12.727922  6.928203
-##  [1]  85 157  87  99  15 165  75 183 162  48
-##  [1]  15  48  75  85  87  99 157 162 165 183
+## [1] 1057
+## [1] 105.7
+## [1] 96.5
+## [1] 3
+##  [1] 4.369448 1.098612 5.062595 4.644391 5.099866 3.737670 4.290459
+##  [8] 5.283204 4.997212 4.488636
+##  [1] 2.038281e+34 2.008554e+01 4.154590e+68 1.467662e+45 1.676081e+71
+##  [6] 1.739275e+18 5.052394e+31 3.597601e+85 1.886181e+64 4.489613e+38
+##  [1]  8.888194  1.732051 12.569805 10.198039 12.806248  6.480741  8.544004
+##  [8] 14.035669 12.165525  9.433981
+##  [1]  79   3 158 104 164  42  73 197 148  89
+##  [1]   3  42  73  79  89 104 148 158 164 197
 ```
 
 ---
@@ -1138,7 +1156,7 @@ dfr &lt;- data.frame(a=sample(1:100,10),b=sample(1:100,10))
 plot(dfr$a,dfr$b)
 ```
 
-&lt;img src="lecture_files/figure-html/unnamed-chunk-62-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="lecture_files/figure-html/unnamed-chunk-61-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
 
 --
 
@@ -1169,7 +1187,7 @@ legend(x="bottomright",legend=c("C1","C2"),
        col=c("red","blue"),pch=c(1,2))
 ```
 
-&lt;img src="lecture_files/figure-html/unnamed-chunk-64-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="lecture_files/figure-html/unnamed-chunk-63-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 name: graphics-base-3
@@ -1184,7 +1202,7 @@ ldr &lt;- data.frame(a=letters[1:10],b=sample(1:50,10))
 barplot(ldr$b,names.arg=ldr$a)
 ```
 
-&lt;img src="lecture_files/figure-html/unnamed-chunk-65-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="lecture_files/figure-html/unnamed-chunk-64-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 name: graphics-ggplot-1
@@ -1200,7 +1218,7 @@ ggplot(dfr,aes(x=a,y=b,colour=cat))+
   labs(x="Variable a",y="Variable b")
 ```
 
-&lt;img src="lecture_files/figure-html/unnamed-chunk-66-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="lecture_files/figure-html/unnamed-chunk-65-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 name: graphics-ggplot-2
@@ -1215,7 +1233,7 @@ ggplot(ldr,aes(x=a,y=b))+
   geom_bar(stat="identity")
 ```
 
-&lt;img src="lecture_files/figure-html/unnamed-chunk-67-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="lecture_files/figure-html/unnamed-chunk-66-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 name: io-text
@@ -1226,6 +1244,16 @@ name: io-text
 ```r
 dfr &lt;- read.table("iris.txt",header=TRUE,stringsAsFactors=F)
 head(dfr)
+```
+
+```
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
 ```
 
 
@@ -1487,7 +1515,7 @@ name: rmd-3
 * R code can be executed inline
 
 Today's date is `` `r date()` ``    
-Today's date is Fri Nov  8 10:10:41 2019  
+Today's date is Fri Nov  8 10:22:54 2019  
 
 
 * R code can be executed in code chunks
@@ -1507,7 +1535,7 @@ date()
 ```
 
 ```
-## [1] "Fri Nov  8 10:10:41 2019"
+## [1] "Fri Nov  8 10:22:54 2019"
 ```
 
 * Many arguments to [customise chunks](https://yihui.name/knitr/options/)
@@ -1578,7 +1606,7 @@ iris %&gt;%
   geom_errorbar(width=0.1)
 ```
 
-&lt;img src="lecture_files/figure-html/unnamed-chunk-80-1.png" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="lecture_files/figure-html/unnamed-chunk-79-1.png" style="display: block; margin: auto auto auto 0;" /&gt;
 ]
 
 .pull-right-50[
@@ -1598,7 +1626,7 @@ iris1$ymax &lt;- iris1$mean+iris1$sd
 arrows(x0=b,y0=iris1$ymin,y1=iris1$ymax, length=0.1, angle=90, code=3)}
 ```
 
-&lt;img src="lecture_files/figure-html/unnamed-chunk-81-1.png" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="lecture_files/figure-html/unnamed-chunk-80-1.png" style="display: block; margin: auto auto auto 0;" /&gt;
 ]
 
 ---
@@ -1678,7 +1706,7 @@ class: spaced
 
 Hands-On exercise/lab material for the contents covered on this course is available here.
 
-.large[[royfrancis.github.io/course-r/lab.html](royfrancis.github.io/course-r/)]
+.large[[https://royfrancis.github.io/course-r/lab.html](https://royfrancis.github.io/course-r/)]
 
 ---
 name: help
