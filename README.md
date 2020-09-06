@@ -7,4 +7,4 @@ Slides and practicals/lab for the **Introduction to Bioinformatics** master cour
 
 <hr>
 
-<b>2019</b> • Roy Francis • [NBIS](https://nbis.se/)
+<b>2020</b> • Roy Francis • [NBIS](https://nbis.se/)
