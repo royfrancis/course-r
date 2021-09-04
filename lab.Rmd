@@ -1,5 +1,7 @@
 ---
 title: "Introduction To R"
+author: "Practise exercises"
+date: "`r paste0('<b>Roy Francis</b> • ',format(Sys.time(),'%d-%b-%Y'))`"
 output:
   bookdown::html_document2:
           toc: true
@@ -16,75 +18,11 @@ output:
           css: "assets/lab.css"
 ---
 
-<link href="https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro:300,400,600|Ubuntu+Mono&amp;subset=latin-ext" rel="stylesheet">
-
-```{r,include=FALSE,eval=knitr::opts_knit$get("rmarkdown.pandoc.to")=="html"}
-# Enables Font Awesome in HTML based bookdown outputs.
-fa <- rmarkdown::html_dependency_font_awesome()
-fa$attachment <- "fonts/fontawesome-webfont.ttf"
-htmltools::tagList(fa)
+```{r,echo=FALSE,child="assets/header-lab.Rmd"}
 ```
-
-```{r,eval=TRUE,include=FALSE}
-# load libraries
-library(knitr) # runs pandoc
-library(bookdown) # for markdown
-library(captioner) # for table and figure captions
-
-# prepare captions
-tc <- captioner::captioner(prefix="<b>Tab. </b>")
-fc <- captioner::captioner(prefix="<b>Fig. </b>")
-
-# knitr options
-
-knitr::opts_knit$set(progress=TRUE,verbose=TRUE)
-knitr::opts_chunk$set(dev="svg",results="hold",fig.show="hold",fig.align="left",
-                      echo=TRUE,warning=FALSE,message=FALSE,accordion=NULL,
-                      block.title=NULL)
-```
-
-```{r,include=FALSE,cache=FALSE}
-# custom hooks
-## collapsible panel
-knitr::knit_hooks$set(accordion=function(before,options,envir) {
-  if(before) {
-    id <- paste0("acc",format(Sys.time(),"%Y%m%d%H%S"),sample(c(0:9),1),sample(c(0:9),1),sample(c(0:9),1),sample(c(0:9),1))
-    if(is.null(options$btntype)) {btntype <- "normal"}else{btntype <- options$btntype}
-    paste0('<p>',
-          '<button class="btn btn-sm btn-primary btn-collapse btn-collapse-',btntype,' collapsed" type="button" data-toggle="collapse" data-target="#',id,'" aria-expanded="false" aria-controls="',id,'">',
-          '</button>',
-          '</p>',
-          '<div class="collapse" id="',id,'">',
-          '<div class="card card-body">')
-  }else{
-    paste0("</div>","</div>")
-  }
-})
-
-## show title for code
-knitr::knit_hooks$set(block.title=function(before,options,envir) {
-
-out_class <- NULL
-if(is.null(options$class.output)) {
-if(options$echo) out_class <- options$engine
-if((!options$echo) & (options$results != "hide")) out_class <- "Output"
-}else{
-  out_class <- options$class.output
-}
-
-  if(before) {
-    paste0('<div class="block-title-parent"><div class="block-title small">',out_class,'</div>')
-  }else{
-    paste0('</div>')
-  }
-})
-```
-
-<h3 class="author">`r paste0('<b>Roy Francis</b> • ',format(Sys.Date(),format='%d-%b-%Y'))`</h3>
 
 <img src="assets/logo.svg" alt="logo" class="trlogo">
 
-<br>
 <br>
 
 # Topics
@@ -160,7 +98,7 @@ Then save the file as, for example **script.R**. All commands in the saved **scr
 
 Variables are used to store values. Variables can store many different kinds of data as will be covered under data types. Variables can be pretty much any string. When creating variables, it is important that they do not override existing variable or function names and this can create issues further on.
 
-- Avoid conflicting variable names like `c`, `t` etc
+- Avoid conflicting variable names like `c`, `t` ,`q` etc
 - Variable names cannot start with a number
 
 ## Basic Operators
@@ -312,7 +250,7 @@ matrix(c(2,2,3,3),nrow=2) %*% matrix(c(4,2,5,3),nrow=2)
 matrix(c(2,2,3,3),nrow=2) %*% c(6,6)
 ```
 
-<div class="instruction">
+<div class="boxy">
 
 <b><i class="fas fa-clipboard-list"></i> Challenge</b>
 
@@ -582,7 +520,7 @@ x["b",]
 x[,"p"]
 ```
 
-<div class="instruction">
+<div class="boxy">
 
 <b><i class="fas fa-clipboard-list"></i> Challenge</b>
 
@@ -606,7 +544,7 @@ typeof(x[3])
 </div>
 </div>
 
-<div class="instruction">
+<div class="boxy">
 <b><i class="fas fa-clipboard-list"></i> Challenge</b>
 
 Create the matrix shown below and extract the third column as a vector.
@@ -788,7 +726,7 @@ str(as.numeric(x))
 
 Notice that characters that cannot be converted to a valid number is converted to NA along with a warning message.
 
-<div class="instruction">
+<div class="boxy">
 <b><i class="fas fa-clipboard-list"></i> Challenge</b>
 
 Here is a data.frame inside a list which is inside a list. How do you extract the *Species* column as a vector?
@@ -977,7 +915,7 @@ my_new_function()
 
 In the example above, variable `foo` used inside the function is not supplied to the function through an argument, yet it still manages to find it. When a function doesn't find a variable inside a function, it searches outside the function.
 
-<div class="instruction">
+<div class="boxy">
 <b><i class="fas fa-clipboard-list"></i> Challenge</b>
 
 R lacks a function to compute coefficient of variation (COV). Create a function to compute the COV. And use the function to compute the COV of these set of values: `c(4,7,2,3,5,4,3)`. The formula for COV is `cov=sd/mean`. Remember to NOT use `cov` as the function name because it already exists (`?cov`). It stands for covariance. So, use another function name.
@@ -990,8 +928,8 @@ R lacks a function to compute coefficient of variation (COV). Create a function 
 <div class="card card-body">
 
 ```{r}
-covfefe <- function(x) sd(x)/mean(x)
-covfefe(c(4,7,2,3,5,4,3))
+cova <- function(x) sd(x)/mean(x)
+cova(c(4,7,2,3,5,4,3))
 ```
 
 </div>
@@ -1070,7 +1008,7 @@ while(i < 5){
 }
 ```
 
-<div class="instruction">
+<div class="boxy">
 <b><i class="fas fa-clipboard-list"></i> Challenge</b>
 
 Below is a [Floyd's triangle](https://en.wikipedia.org/wiki/Floyd%27s_triangle). This is right-angled triangle where the number of elements in each row is the same as the row number. And the numbers increase consecutively top to bottom. For a given number of rows, can you write the code using control structures to generate this result?
@@ -1195,6 +1133,8 @@ barplot(ldr$b,names.arg=ldr$a)
 
 ## Grid graphics
 
+<img src="images/ggplot2-exploratory.png" style="padding:15px; max-width:600px">
+
 Grid graphics have a completely different underlying framework compared to base graphics. Generally, base graphics and grid graphics cannot be plotted together. The most popular grid-graphics based plotting library is **ggplot2**.
 
 Let's create the same plot are before using **ggplot2**. Make sure you have the package installed.
@@ -1230,7 +1170,7 @@ Text files are the most commonly used input. Text files can be read in using the
 write.table(iris,"iris.txt",sep="\t",row.names=FALSE,quote=FALSE)
 ```
 
-Now we can read in this file: **iris.txt**. 
+Now we can read in this file: **iris.txt**.
 
 ```{r}
 dfr <- read.table("iris.txt",header=TRUE,stringsAsFactors=FALSE)
@@ -1337,6 +1277,8 @@ load("workspace.Rdata")
 ```
 
 # Rmarkdown
+
+<img src="images/rmarkdown-wizards.png" style="padding:15px; max-width:600px">
 
 When carrying out data analyses in R, it is desirable to add textual descriptions and/or explanations for the various steps carried out. A convenient way to do this in the RStudio ecosystem is using Rmarkdown in R notebooks.
 
@@ -1627,7 +1569,7 @@ iris %>%
 
 # Help
 
-<img src="images/help.png" style="padding:15px; max-width:200px">
+<img src="images/storyset-helpful-sign.png" style="padding:15px; max-width:300px">
 
 - Use `?function` to get function documentation
 - Use `??name` to search for a function
@@ -1638,7 +1580,7 @@ iris %>%
 
 # Learning R
 
-<img src="images/boy-reads.png" style="padding:15px; max-width:300px">
+<img src="images/storyset-learning.png" style="padding:15px; max-width:300px">
 
 There are lots of resources for getting help in R.
 
@@ -1661,12 +1603,14 @@ There are lots of resources for getting help in R.
 
 - [Tutorialspoint](https://www.computerworld.com/article/2497464/business-intelligence/top-r-language-resources-to-improve-your-data-skills.html?page=2): Good list of resources.
 
-```{r, echo=FALSE, child="assets/build.Rmd"}
-```
+<br>
+<br>
 
-<hr>
-
-<b>`r format(Sys.Date(),"%Y")`</b> • Roy Francis • [SciLifeLab](https://www.scilifelab.se/) • [NBIS](https://nbis.se/)
+<div class="small" style="line-height: 1.2;">
+<span><span class="small">Graphics from </span><img src="./images/freepik.jpg" style="max-height:20px; vertical-align:middle;"></span>
+<hr style="margin-top:2px; margin-bottom:10px;">
+<span><b>`r format(Sys.Date(),"%Y")`</b> • Roy Francis • [SciLifeLab](https://www.scilifelab.se/) • [NBIS](https://nbis.se/)</span>
+</div>
 
 ```{r,eval=FALSE,include=FALSE}
 rmarkdown::render("lab.Rmd")

@@ -1,7 +1,0 @@
-<hr/>
-
-<div style="padding-bottom: 1.5em">
-<span style="float:left; vertical-align:middle">
-<b>2019</b> | [SciLifeLab](https://www.scilifelab.se/) > [NBIS](https://nbis.se/)
-</span>
-</div>
