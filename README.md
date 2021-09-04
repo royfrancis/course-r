@@ -2,7 +2,7 @@
 
 Slides and practicals/lab for R beginners.
 
-- [Slides](https://royfrancis.github.io/course-r/lecture.html)
+- [Slides](https://royfrancis.github.io/course-r/slides.html)
 - [Lab](https://royfrancis.github.io/course-r/lab.html)
 
 
