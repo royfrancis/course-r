@@ -132,7 +132,7 @@ class: spaced
 - Execute commands directly in Console
 - Ready console shows `>`
 - Console shows `+` when waiting for information
-- Press <kbd>Esc</kbd> to escape from `+` to `>`
+- Press .kbd[Esc] to escape from `+` to `>`
 - Save commands by writing scripts
 - Run lines using .kbd[Ctrl]+.kbd[Enter]
 - Run entire script using .kbd[Ctrl]+.kbd[Shift]+.kbd[Enter]
@@ -879,11 +879,7 @@ write.table(iris,"iris.txt",sep="\t",row.names=FALSE,quote=FALSE)
 
 ```{r}
 dfr <- read.table("iris.txt",header=TRUE,stringsAsFactors=F)
-head(dfr)
-```
-
-```{r}
-str(dfr)
+head(dfr); str(dfr)
 ```
 
 ```{r}
@@ -1335,10 +1331,10 @@ background-size: cover
 name: end-slide
 class: end-slide
 
-<div class="small" style="line-height: 1.2;">
-<span><span class="small">Graphics from </span><img src="./images/freepik.jpg" style="max-height:20px; vertical-align:middle;"></span><br>
-<span><b>`r format(Sys.Date(),"%Y")`</b> • Roy Francis • <a href="https://www.scilifelab.se/">SciLifeLab</a> • <a href="https://nbis.se/">NBIS</a></span>
-</div>
+# Thank you! Questions?
+
+```{r, echo=FALSE,child="assets/footer-slide.Rmd"}
+```
 
 ```{r,eval=FALSE,include=FALSE}
 rmarkdown::render("lecture.Rmd")

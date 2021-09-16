@@ -37,11 +37,10 @@ knitr::knit_hooks$set(accordion=function(before,options,envir) {
           '<button class="btn btn-sm btn-primary btn-collapse btn-collapse-',btn.type,' collapsed" type="button" data-toggle="collapse" data-target="#',id,'" aria-expanded="false" aria-controls="',id,'">',
           '</button>',
           '</p>',
-          '<div class="accordion-parent">',
           '<div class="collapse" id="',id,'">',
           '<div class="card card-body">')
   }else{
-    paste0("</div>","</div>","</div>")
+    paste0("</div>","</div>")
   }
 })
 

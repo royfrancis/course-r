@@ -3,7 +3,7 @@
   <head>
     <title>Introduction To R</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Roy Francis • 04-Sep-2021" />
+    <meta name="author" content="Roy Francis • 16-Sep-2021" />
     <meta name="keywords" content="r, bioinformatics, course" />
     <script src="libs/header-attrs-2.10/header-attrs.js"></script>
     <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
@@ -16,7 +16,7 @@
 class: center, middle, inverse, title-slide
 
 # Introduction To R
-### <b>Roy Francis</b> • 04-Sep-2021
+### <b>Roy Francis</b> • 16-Sep-2021
 ### <a href="https://royfrancis.github.io/course-r">https://royfrancis.github.io/course-r</a>
 
 ---
@@ -135,7 +135,7 @@ class: spaced
 - Execute commands directly in Console
 - Ready console shows `&gt;`
 - Console shows `+` when waiting for information
-- Press &lt;kbd&gt;Esc&lt;/kbd&gt; to escape from `+` to `&gt;`
+- Press .kbd[Esc] to escape from `+` to `&gt;`
 - Save commands by writing scripts
 - Run lines using .kbd[Ctrl]+.kbd[Enter]
 - Run entire script using .kbd[Ctrl]+.kbd[Shift]+.kbd[Enter]
@@ -949,7 +949,7 @@ x &lt;- sample(x=1:200,10); x;
 ```
 
 ```
-##  [1] 136 135  52  94  37  98  15 127 134 130
+##  [1] 179 115  46 168 199 171   3  78 178   5
 ```
 
 
@@ -965,18 +965,17 @@ sort(x) # sort
 ```
 
 ```
-## [1] 958
-## [1] 95.8
-## [1] 15
-##  [1] 4.912655 4.905275 3.951244 4.543295 3.610918 4.584967
-##  [7] 2.708050 4.844187 4.897840 4.867534
-##  [1] 1.158910e+59 4.263390e+58 3.831008e+22 6.663176e+40
-##  [5] 1.171914e+16 3.637971e+42 3.269017e+06 1.430208e+55
-##  [9] 1.568414e+58 2.872650e+56
-##  [1] 11.661904 11.618950  7.211103  9.695360  6.082763  9.899495
-##  [7]  3.872983 11.269428 11.575837 11.401754
-##  [1] 136 135  52  94  37  98  15 127 134 130
-##  [1]  15  37  52  94  98 127 130 134 135 136
+## [1] 1142
+## [1] 114.2
+## [1] 3
+##  [1] 5.187386 4.744932 3.828641 5.123964 5.293305 5.141664 1.098612 4.356709
+##  [9] 5.181784 1.609438
+##  [1] 5.479138e+77 8.787502e+49 9.496119e+19 9.151093e+72 2.658287e+86
+##  [6] 1.838046e+74 2.008554e+01 7.498417e+33 2.015662e+77 1.484132e+02
+##  [1] 13.379088 10.723805  6.782330 12.961481 14.106736 13.076697  1.732051
+##  [8]  8.831761 13.341664  2.236068
+##  [1] 179 115  46 168 199 171   3  78 178   5
+##  [1]   3   5  46  78 115 168 171 178 179 199
 ```
 
 ---
@@ -1299,7 +1298,7 @@ name: io-text
 
 ```r
 dfr &lt;- read.table("iris.txt",header=TRUE,stringsAsFactors=F)
-head(dfr)
+head(dfr); str(dfr)
 ```
 
 ```
@@ -1310,14 +1309,6 @@ head(dfr)
 ## 4          4.6         3.1          1.5         0.2  setosa
 ## 5          5.0         3.6          1.4         0.2  setosa
 ## 6          5.4         3.9          1.7         0.4  setosa
-```
-
-
-```r
-str(dfr)
-```
-
-```
 ## 'data.frame':	150 obs. of  5 variables:
 ##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
 ##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
@@ -1559,7 +1550,7 @@ name: rmd-3
 * R code can be executed inline
 
 Today's date is `` `r date()` ``    
-Today's date is Sat Sep  4 19:11:54 2021  
+Today's date is Thu Sep 16 08:34:51 2021  
 
 
 * R code can be executed in code chunks
@@ -1579,7 +1570,7 @@ date()
 ```
 
 ```
-## [1] "Sat Sep  4 19:11:54 2021"
+## [1] "Thu Sep 16 08:34:51 2021"
 ```
 
 * Many arguments to [customise chunks](https://yihui.name/knitr/options/)
@@ -1650,7 +1641,7 @@ iris %&gt;%
   geom_errorbar(width=0.1)
 ```
 
-&lt;img src="slides_files/figure-html/unnamed-chunk-81-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="slides_files/figure-html/unnamed-chunk-80-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
 ]
 
 .pull-right-50[
@@ -1670,7 +1661,7 @@ iris1$ymax &lt;- iris1$mean+iris1$sd
 arrows(x0=b,y0=iris1$ymin,y1=iris1$ymax, length=0.1, angle=90, code=3)}
 ```
 
-&lt;img src="slides_files/figure-html/unnamed-chunk-82-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="slides_files/figure-html/unnamed-chunk-81-1.svg" style="display: block; margin: auto auto auto 0;" /&gt;
 ]
 
 ---
@@ -1799,10 +1790,15 @@ background-size: cover
 name: end-slide
 class: end-slide
 
-&lt;div class="small" style="line-height: 1.2;"&gt;
-&lt;span&gt;&lt;span class="small"&gt;Graphics from &lt;/span&gt;&lt;img src="./images/freepik.jpg" style="max-height:20px; vertical-align:middle;"&gt;&lt;/span&gt;&lt;br&gt;
-&lt;span&gt;&lt;b&gt;2021&lt;/b&gt; • Roy Francis • &lt;a href="https://www.scilifelab.se/"&gt;SciLifeLab&lt;/a&gt; • &lt;a href="https://nbis.se/"&gt;NBIS&lt;/a&gt;&lt;/span&gt;
-&lt;/div&gt;
+# Thank you! Questions?
+
+
+.end-text[
+&lt;p class="smaller"&gt;
+&lt;span class="small" style="line-height: 1.2;"&gt;Graphics from &lt;/span&gt;&lt;img src="./assets/freepik.jpg" style="max-height:20px; vertical-align:middle;"&gt;&lt;br&gt;
+Created: 16-Sep-2021 • Roy Francis • &lt;a href="https://www.scilifelab.se/"&gt;SciLifeLab&lt;/a&gt; • &lt;a href="https://nbis.se/"&gt;NBIS&lt;/a&gt;
+&lt;/p&gt;
+]
 
 
     </textarea>

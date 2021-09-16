@@ -245,7 +245,6 @@ div.tocify {
 
 <h1 class="title toc-ignore">Introduction To R</h1>
 <h4 class="author">Practise exercises</h4>
-<h4 class="date"><b>Roy Francis</b> • 04-Sep-2021</h4>
 
 </div>
 
@@ -304,7 +303,7 @@ div.tocify {
 <p>This command prints the current working directory. When you read or write, this is the path that R looks for.</p>
 <p>Commands written in the <strong>Console</strong> are executed and lost. R commands can be saved as a script. To create a new script, go to <strong>File &gt; New File &gt; R Script</strong>. This text file can be saved to the working directory named <strong>script.R</strong>. Now add some R command to the file. For example try;</p>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Sat Sep  4 19:17:27 2021&quot;</code></pre>
+<pre><code>## [1] &quot;Thu Sep 16 08:34:57 2021&quot;</code></pre>
 <p>While in an R script, select the text or place the cursor on that line and click <strong>Run</strong>. Alternatively use keyboard shortcut <kbd>Ctrl</kbd>+<kbd>Enter</kbd> / <kbd>Command</kbd>+<kbd>Enter</kbd>.</p>
 <p><code>date()</code> prints the current system date. Or you could try <code>SessionInfo()</code> which gives you a summary of the current system setup including R version, operating system and R packages that are loaded/attached.</p>
 <p>Then save the file as, for example <strong>script.R</strong>. All commands in the saved <strong>script.R</strong> can be run as a batch either by selecting all the commands followed by <strong>Run</strong> / <kbd>Ctrl</kbd>+<kbd>Enter</kbd>, or directly sourcing the file from the console like this:</p>
@@ -935,19 +934,18 @@ round(x)
 # sort
 sort(x)</code></pre>
 <pre><code>## [1] 10
-## [1] 1089
-## [1] 108.9
-## [1] 104.5
-## [1] 40
-##  [1] 5.081404 4.615121 3.806662 4.653960 3.688879 5.283204
-##  [7] 4.644391 4.127134 4.934474 4.905275
-##  [1] 8.344716e+69 7.307060e+43 3.493427e+19 3.989520e+45
-##  [5] 2.353853e+17 3.597601e+85 1.467662e+45 8.438357e+26
-##  [9] 2.327732e+60 4.263390e+58
-##  [1] 12.688578 10.049876  6.708204 10.246951  6.324555 14.035669
-##  [7] 10.198039  7.874008 11.789826 11.618950
-##  [1] 161 101  45 105  40 197 104  62 139 135
-##  [1]  40  45  62 101 104 105 135 139 161 197</code></pre>
+## [1] 845
+## [1] 84.5
+## [1] 68.5
+## [1] 10
+##  [1] 5.017280 4.844187 3.970292 3.496508 4.804021 4.094345 2.302585 4.043051
+##  [9] 5.043425 4.343805
+##  [1] 3.788495e+65 1.430208e+55 1.041376e+23 2.146436e+14 9.636666e+52
+##  [6] 1.142007e+26 2.202647e+04 5.685720e+24 2.068448e+67 2.758513e+33
+##  [1] 12.288206 11.269428  7.280110  5.744563 11.045361  7.745967  3.162278
+##  [8]  7.549834 12.449900  8.774964
+##  [1] 151 127  53  33 122  60  10  57 155  77
+##  [1]  10  33  53  57  60  77 122 127 151 155</code></pre>
 <p>Some useful string functions.</p>
 <pre class="r"><code>a &lt;- &quot;sunny&quot;
 b &lt;- &quot;day&quot;
@@ -1105,8 +1103,7 @@ if(grade == &quot;A&quot;){
 <p>This is not to be confused with a function called <code>ifelse()</code>. This is also used for conditional selection and takes the form <code>ifelse(test, return-if-yes, return-if-no)</code>, and this is vectorised. So, for example, here are some ages of persons. Classify them as adults or juveniles.</p>
 <pre class="r"><code>x &lt;- c(6,23,12,10,56,44)
 ifelse(x&gt;18,&quot;Adult&quot;,&quot;Juvenile&quot;)</code></pre>
-<pre><code>## [1] &quot;Juvenile&quot; &quot;Adult&quot;    &quot;Juvenile&quot; &quot;Juvenile&quot; &quot;Adult&quot;   
-## [6] &quot;Adult&quot;</code></pre>
+<pre><code>## [1] &quot;Juvenile&quot; &quot;Adult&quot;    &quot;Juvenile&quot; &quot;Juvenile&quot; &quot;Adult&quot;    &quot;Adult&quot;</code></pre>
 <p>The <code>for()</code> loop is useful to run commands repeatedly over a known number of iterations.</p>
 <pre class="r"><code>for (i in 1:5){
   print(i)
@@ -1622,7 +1619,7 @@ arrange(iris,Sepal.Length)</code></pre>
 <p><br>
 <br></p>
 <div class="small" style="line-height: 1.2;">
-<span><span class="small">Graphics from </span><img src="images/freepik.jpg" style="max-height:20px; vertical-align:middle;"></span>
+<span><span class="small">Graphics from </span><img src="assets/freepik.jpg" style="max-height:20px; vertical-align:middle;"></span>
 <hr style="margin-top:2px; margin-bottom:10px;">
 <span><b>2021</b> • Roy Francis • <a href="https://www.scilifelab.se/">SciLifeLab</a> • <a href="https://nbis.se/">NBIS</a></span>
 </div>
