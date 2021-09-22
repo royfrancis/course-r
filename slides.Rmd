@@ -1,6 +1,7 @@
 ---
 title: "Introduction To R"
 author: "`r paste0('<b>Roy Francis</b> • ',format(Sys.time(),'%d-%b-%Y'))`"
+date: "roy.francis@nbis.se"
 institute: "[https://royfrancis.github.io/course-r](https://royfrancis.github.io/course-r)"
 keywords: r, bioinformatics, course
 output:
