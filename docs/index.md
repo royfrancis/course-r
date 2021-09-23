@@ -4,6 +4,7 @@ Slides and practicals/lab for R beginners.
 
 - [Slides](slides.html)
 - [Lab](lab.html)
+- [ggplot2 slides](ggplot.html)
 
 <hr>
 

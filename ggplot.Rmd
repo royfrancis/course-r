@@ -1,0 +1,463 @@
+---
+title: "Quick intro to ggplot2"
+author: "`r paste0('<b>Roy Francis</b> • ',format(Sys.time(),'%d-%b-%Y'))`"
+date: "roy.francis@nbis.se"
+institute: "[https://royfrancis.github.io/course-r](https://royfrancis.github.io/course-r)"
+keywords: r, bioinformatics, course
+output:
+  xaringan::moon_reader:
+    encoding: 'UTF-8'
+    self_contained: false
+    chakra: 'assets/remark-latest.min.js'
+    css:
+    - "assets/slide.css"
+    lib_dir: libs
+    nature:
+      ratio: '4:3'
+      highlightLanguage: r
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: "%current%/%total%"
+---
+exclude: true
+count: false
+
+```{r,echo=FALSE,child="assets/header-slide.Rmd"}
+```
+
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+# load packages
+library(ggplot2)
+library(dplyr)
+```
+
+---
+name: gvb2
+
+## `ggplot2` vs Base Graphics
+
+.pull-left-50[
+```{r,fig.height=4.2,fig.width=4}
+plot(iris$Petal.Length,iris$Petal.Width,
+     col=c("red","green","blue")[iris$Species],
+     pch=c(0,1,2)[iris$Species])
+legend(x=1,y=2.5,
+       legend=c("setosa","versicolor","virginica"),
+       pch=c(0,1,2),col=c("red","green","blue"))
+```
+]
+
+.pull-right-50[
+```{r,fig.height=4,fig.width=5}
+ggplot(iris,aes(Petal.Length,Sepal.Length,color=Species))+
+  geom_point()
+```
+]
+
+---
+name: gog
+class: spaced
+
+## Grammar Of Graphics
+
+.pull-left-30[
+![](images/gog.jpg)
+![](images/gog.png)
+]
+
+--
+
+.pull-right-70[
+* **Data**: Input data
+* **Geom**: A geometry representing data. Points, Lines etc
+* **Aesthetic**: Visual characteristics of the geometry. Size, Color, Shape etc
+* **Scale**: How visual characteristics are converted to display values
+* **Statistics**: Statistical transformations. Counts, Means etc
+* **Coordinates**: Numeric system to determine position of geometry. Cartesian, Polar etc
+* **Facets**: Split data into subsets
+]
+
+???
+
+`ggplot` was created by Hadley Wickham in 2005 as an implementation of Leland Wilkinson's book Grammar of Graphics.
+
+Different graphs have always been considered as independent entities and also labelled differently such as barplots, scatterplots, boxplots etc. Each graph has it's own function and plotting strategy.
+
+Grammar of graphics (GOG) tries to unify all graphs under a common umbrella. GOG brings the idea that graphs are made up of discrete components which can be mixed and matched to create any plot. This creates a consistent underlying framework to graphing.
+
+---
+name: syntax
+
+## Building A Graph: Syntax
+
+![](images/syntax.png)
+
+---
+## Initialise data
+
+.pull-left-45[
+```{r,fig.height=3.5,fig.width=3.5,eval=FALSE}
+library(ggplot2)
+ggplot(iris)
+```
+]
+
+.pull-right-55[
+```{r,fig.height=3.5,fig.width=3.5,echo=FALSE}
+data(iris)
+ggplot(iris)
+```
+]
+
+
+???
+
+Initialise with a dataframe.
+
+---
+
+## Map variables to axes
+
+.pull-left-45[
+```{r,fig.height=3.5,fig.width=3.5,eval=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width))
+```
+]
+
+.pull-right-55[
+```{r,fig.height=3.5,fig.width=3.5,echo=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width))
+```
+]
+
+
+???
+
+Map variables to x and y axes.
+
+---
+
+## Set geometry
+
+.pull-left-45[
+```{r,fig.height=3.5,fig.width=3.5,eval=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width))+
+  geom_point()
+```
+]
+
+.pull-right-55[
+```{r,fig.height=3.5,fig.width=3.5,echo=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width))+
+  geom_point()
+```
+]
+
+???
+
+Set geometry to be plotted.
+
+---
+
+## Map variable to colour
+
+.pull-left-45[
+```{r,fig.height=3.5,fig.width=3.5,eval=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species))+ #<<
+  geom_point()
+```
+]
+
+.pull-right-55[
+```{r,fig.height=3.5,fig.width=3.5,echo=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species))+
+  geom_point()
+```
+]
+
+
+???
+
+Map the colour of the points to a variable.
+
+---
+
+## Map variable to shape
+
+.pull-left-45[
+```{r,fig.height=3.5,fig.width=3.5,eval=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+ #<<
+  geom_point()
+```
+]
+
+.pull-right-55[
+```{r,fig.height=3.5,fig.width=3.5,echo=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()
+```
+]
+
+???
+
+Change shape of the points based on "Species" variable.
+
+---
+
+## Add more geometries
+
+.pull-left-45[
+```{r,fig.height=3.5,fig.width=3.5,eval=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm") #<<
+```
+]
+
+.pull-right-55[
+```{r,fig.height=3.5,fig.width=3.5,echo=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm")
+```
+]
+
+???
+
+Add a regression line.
+
+---
+
+## Set custom colour scale
+
+.pull-left-45[
+```{r,fig.height=3.5,fig.width=3.5,eval=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  scale_colour_manual(values=c("#bebada","#fb8072","#8dd3c7")) #<<
+```
+]
+
+.pull-right-55[
+```{r,fig.height=3.5,fig.width=3.5,echo=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  scale_colour_manual(values=c("#bebada","#fb8072","#8dd3c7"))
+```
+]
+
+???
+
+Set your own colour scale.
+
+---
+
+## Subplots using facetting
+
+.pull-left-45[
+```{r,fig.height=3.5,fig.width=3.5,eval=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  scale_colour_manual(values=c("#bebada","#fb8072","#8dd3c7"))+
+  facet_wrap(~Species) #<<
+```
+]
+
+.pull-right-55[
+```{r,fig.height=3.5,fig.width=3.5,echo=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  scale_colour_manual(values=c("#bebada","#fb8072","#8dd3c7"))+
+  facet_wrap(~Species)
+```
+]
+
+???
+
+Split your plot into sub plots.
+
+---
+
+## Set labels
+
+.pull-left-45[
+```{r,fig.height=3.5,fig.width=3.5,eval=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  scale_colour_manual(values=c("#bebada","#fb8072","#8dd3c7"))+
+  facet_wrap(~Species)+
+  labs(x="Sepal length",y="Sepal width", #<<
+       title="Scatterplot of flower characteristics", #<<
+       subtitle="Relationship between length and width of sepals.", #<<
+       caption="Credit: iris dataset") #<<
+```
+]
+
+.pull-right-55[
+```{r,fig.height=3.5,fig.width=3.5,echo=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  scale_colour_manual(values=c("#bebada","#fb8072","#8dd3c7"))+
+  facet_wrap(~Species)+
+  labs(x="Sepal length",y="Sepal width",
+       title="Scatterplot of flower characteristics",
+       subtitle="Relationship between length and width of sepals.",
+       caption="Credit: iris dataset")
+```
+]
+
+???
+
+Add axes labels, plot title, plot subtitle and caption.
+
+---
+
+## Change theme
+
+.pull-left-45[
+```{r,fig.height=3.5,fig.width=3.5,eval=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  scale_colour_manual(values=c("#bebada","#fb8072","#8dd3c7"))+
+  facet_wrap(~Species)+
+  labs(x="Sepal length",y="Sepal width",
+       title="Scatterplot of flower characteristics",
+       subtitle="Relationship between length and width of sepals.",
+       caption="Credit: iris dataset")+
+       theme_bw() #<<
+```
+]
+
+.pull-right-55[
+```{r,fig.height=3.5,fig.width=3.5,echo=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  scale_colour_manual(values=c("#bebada","#fb8072","#8dd3c7"))+
+  facet_wrap(~Species)+
+  labs(x="Sepal length",y="Sepal width",
+       title="Scatterplot of flower characteristics",
+       subtitle="Relationship between length and width of sepals.",
+       caption="Credit: iris dataset")+
+       theme_bw()
+```
+]
+
+???
+
+Change theme.
+
+---
+
+## Customise theme elements
+
+.pull-left-45[
+```{r,fig.height=3.5,fig.width=3.5,eval=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  scale_colour_manual(values=c("#bebada","#fb8072","#8dd3c7"))+
+  facet_wrap(~Species)+
+  labs(x="Sepal length",y="Sepal width",
+       title="Scatterplot of flower characteristics",
+       subtitle="Relationship between length and width of sepals.",
+       caption="Credit: iris dataset")+
+       theme_bw()+
+       theme(legend.position="top", #<<
+             plot.caption=element_text(hjust=0)) #<<
+```
+]
+
+.pull-right-55[
+```{r,fig.height=3.5,fig.width=3.5,echo=FALSE}
+ggplot(iris,aes(x=Sepal.Length,
+                y=Sepal.Width,
+                colour=Species,
+                shape=Species))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  scale_colour_manual(values=c("#bebada","#fb8072","#8dd3c7"))+
+  facet_wrap(~Species)+
+  labs(x="Sepal length",y="Sepal width",
+       title="Scatterplot of flower characteristics",
+       subtitle="Relationship between length and width of sepals.",
+       caption="Credit: iris dataset")+
+       theme_bw()+
+       theme(legend.position="top",
+             plot.caption=element_text(hjust=0))
+```
+]
+
+???
+
+Customise theme elements. Legend is positioned on the top and credit text has been moved to the left.
+
+---
+name: end-slide
+class: end-slide
+
+# Thank you! Questions?
+
+```{r, echo=FALSE,child="assets/footer-slide.Rmd"}
+```
+
+```{r,eval=FALSE,include=FALSE}
+rmarkdown::render("lecture.Rmd")
+#pagedown::chrome_print("lecture.html")
+```
